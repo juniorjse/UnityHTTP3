@@ -1,5 +1,0 @@
-<linker>
-    <assembly fullname="QuicNet" preserve="all"/>
-    <assembly fullname="QuicNet.Infrastructure" preserve="all"/>
-    <assembly fullname="QuicNet.Utilities" preserve="all"/>
-</linker>
