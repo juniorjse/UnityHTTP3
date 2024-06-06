@@ -1,74 +1,93 @@
 using System;
+using System.Text;
+using QuicNet;
+using QuicNet.Connections;
+using QuicNet.Streams;
 using UnityEngine;
 using UnityEngine.UI;
-using StirlingLabs.MsQuic;
-using StirlingLabs.Utilities;
-using System.Collections;
 
 public class script : MonoBehaviour
 {
-    private QuicClientConnection _clientSide;
+    private QuicClient client;
+    private QuicConnection connection;
+
     public Text _text;
 
-    void Start()
+    private void Start()
+    {
+        InitializeClient();
+    }
+
+    private void InitializeClient()
     {
         try
         {
-            Debug.Log("Criando registro...");
-            QuicRegistration registration = new("UnityClient");
-            Debug.Log("Registro criado.");
+            client = new QuicClient();
 
-            bool reliableDatagrams = true;
-            SizedUtf8String[] alpns = new SizedUtf8String[] { SizedUtf8String.Create("h3-29") };
+            connection = client.Connect("127.0.0.1", 11000);
 
-            Debug.Log("Criando configuração...");
-            QuicClientConfiguration config = new(registration, reliableDatagrams, alpns);
-            Debug.Log("Configuração criada.");
-
-            Debug.Log("Criando conexão do cliente...");
-            _clientSide = new QuicClientConnection(config);
-            Debug.Log("Conexão do cliente criada.");
+            Debug.Log("Connected to the server.");
         }
         catch (Exception ex)
         {
-            Debug.Log($"Erro ao iniciar: {ex.Message}");
+            Debug.LogError($"Error connecting: {ex.Message}");
+        }
+    }
+
+    public string ConnectToQuic()
+    {
+        try
+        {
+            QuicStream stream = connection.CreateStream(QuickNet.Utilities.StreamType.ClientBidirectional);
+
+            stream.Send(Encoding.UTF8.GetBytes("Hello from UnityClient!"));
+
+            byte[] data = stream.Receive();
+
+            return Encoding.UTF8.GetString(data);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error sending/receiving data: {ex.Message}");
+            return "Communication error with the server.";
         }
     }
 
     public void ButtonFunction()
     {
-        ConnectAsync(4244); // Substitua com a porta correta
+        try
+        {
+            string response = ConnectToQuic();
+            _text.text = response;
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error in ButtonFunction: {ex.Message}");
+        }
     }
 
-    public void ButtonFunction2()
+    private static string GenerateData(int kb)
     {
-        ConnectAsync(443); // Substitua com a porta correta
+        StringBuilder res = new StringBuilder();
+        for (int i = 0; i < kb; i++)
+        {
+            for (int j = 0; j < 100; j++)
+            {
+                res.Append("!!!!!!!!!!");
+            }
+        }
+
+        return res.ToString();
     }
 
-    private void ConnectAsync(ushort port)
+    private static string GenerateBytes(int bytes)
     {
-        StartCoroutine(ConnectCoroutine(port));
-    }
-
-    private IEnumerator ConnectCoroutine(ushort port)
-    {
-        Debug.Log("Tentando conectar...");
-        var connectTask = _clientSide.ConnectAsync(SizedUtf8String.Create("127.0.0.1"), port); // Substitua com o IP correto (www.google.com, pode ser  usado para testar)
-
-        while (!connectTask.IsCompleted)
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < bytes; i++)
         {
-            yield return null;
+            result.Append("!");
         }
 
-        if (connectTask.Exception != null)
-        {
-            _text.text = $"Erro ao conectar: {connectTask.Exception.Message}";
-            Debug.Log($"Erro ao conectar: {connectTask.Exception.Message}");
-        }
-        else
-        {
-            _text.text = "Conexão bem sucedida!";
-            Debug.Log("Conexão bem sucedida!");
-        }
+        return result.ToString();
     }
 }
