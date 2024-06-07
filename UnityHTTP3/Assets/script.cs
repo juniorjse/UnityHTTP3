@@ -22,8 +22,10 @@ public class script : MonoBehaviour
     {
         try
         {
+            Debug.Log("Initializing client...");
             client = new QuicClient();
 
+            Debug.Log("Attempting to connect to server...");
             connection = client.Connect("127.0.0.1", 11000);
 
             Debug.Log("Connected to the server.");
@@ -38,12 +40,16 @@ public class script : MonoBehaviour
     {
         try
         {
+            Debug.Log("Creating stream...");
             QuicStream stream = connection.CreateStream(QuickNet.Utilities.StreamType.ClientBidirectional);
 
+            Debug.Log("Sending data...");
             stream.Send(Encoding.UTF8.GetBytes("Hello from UnityClient!"));
 
+            Debug.Log("Receiving data...");
             byte[] data = stream.Receive();
 
+            Debug.Log("Data received.");
             return Encoding.UTF8.GetString(data);
         }
         catch (Exception ex)
@@ -57,6 +63,7 @@ public class script : MonoBehaviour
     {
         try
         {
+            Debug.Log("Button clicked, connecting to QUIC...");
             string response = ConnectToQuic();
             _text.text = response;
         }
