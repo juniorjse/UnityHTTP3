@@ -6,13 +6,13 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v6.0": {
-      "QuicClient/1.0.0": {
+      "QuicServer/1.0.0": {
         "dependencies": {
           "QuicNet": "1.0.0.0",
           "QuicNet.Utilities": "1.0.0.0"
         },
         "runtime": {
-          "QuicClient.dll": {}
+          "QuicServer.dll": {}
         }
       },
       "QuicNet/1.0.0.0": {
@@ -42,7 +42,7 @@
     }
   },
   "libraries": {
-    "QuicClient/1.0.0": {
+    "QuicServer/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
