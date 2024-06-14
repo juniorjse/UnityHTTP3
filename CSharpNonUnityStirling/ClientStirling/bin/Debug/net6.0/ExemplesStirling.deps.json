@@ -1,0 +1,652 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "ExemplesStirling/1.0.0": {
+        "dependencies": {
+          "StirlingLabs.MsQuic": "23.7.1",
+          "StirlingLabs.Utilities": "23.3.7"
+        },
+        "runtime": {
+          "ExemplesStirling.dll": {}
+        }
+      },
+      "Microsoft.Win32.SystemEvents/6.0.0": {
+        "runtime": {
+          "lib/net6.0/Microsoft.Win32.SystemEvents.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net6.0/Microsoft.Win32.SystemEvents.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          }
+        }
+      },
+      "Portable.BouncyCastle/1.9.0": {
+        "runtime": {
+          "lib/netstandard2.0/BouncyCastle.Crypto.dll": {
+            "assemblyVersion": "1.9.0.0",
+            "fileVersion": "1.9.0.1"
+          }
+        }
+      },
+      "StirlingLabs.BigSpans/23.3.1": {
+        "dependencies": {
+          "StirlingLabs.Utilities.Magic": "22.9.1"
+        },
+        "runtime": {
+          "lib/net6.0/StirlingLabs.BigSpans.dll": {
+            "assemblyVersion": "23.3.1.0",
+            "fileVersion": "23.3.1.0"
+          }
+        }
+      },
+      "StirlingLabs.MsQuic/23.7.1": {
+        "dependencies": {
+          "Portable.BouncyCastle": "1.9.0",
+          "StirlingLabs.BigSpans": "23.3.1",
+          "StirlingLabs.MsQuic.Bindings": "2.2.2",
+          "StirlingLabs.Utilities": "23.3.7",
+          "StirlingLabs.Utilities.Magic": "22.9.1",
+          "StirlingLabs.XKCP.NET": "22.10.0",
+          "StirlingLabs.sockaddr.Net": "22.10.0",
+          "System.Collections.Immutable": "6.0.0",
+          "System.Runtime.Caching": "6.0.0",
+          "System.Security.Cryptography.Pkcs": "6.0.3",
+          "ZString": "2.4.4"
+        },
+        "runtime": {
+          "lib/net6.0/StirlingLabs.MsQuic.dll": {
+            "assemblyVersion": "23.7.1.0",
+            "fileVersion": "23.7.1.0"
+          }
+        }
+      },
+      "StirlingLabs.MsQuic.Bindings/2.2.2": {
+        "dependencies": {
+          "Portable.BouncyCastle": "1.9.0",
+          "StirlingLabs.MsQuic.Bindings.runtime.linux-x64.openssl": "2.2.2",
+          "StirlingLabs.MsQuic.Bindings.runtime.osx.openssl": "2.2.2",
+          "StirlingLabs.MsQuic.Bindings.runtime.win-x64.openssl": "2.2.2",
+          "StirlingLabs.Utilities.NativeLibrary": "22.9.1",
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/StirlingLabs.MsQuic.Bindings.dll": {
+            "assemblyVersion": "2.2.2.0",
+            "fileVersion": "2.2.2.0"
+          }
+        }
+      },
+      "StirlingLabs.MsQuic.Bindings.runtime.linux-x64.openssl/2.2.2": {
+        "runtimeTargets": {
+          "runtimes/linux-x64/native/libmsquic-openssl.so": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "StirlingLabs.MsQuic.Bindings.runtime.osx.openssl/2.2.2": {
+        "runtimeTargets": {
+          "runtimes/osx/native/libmsquic-openssl.dylib": {
+            "rid": "osx",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "StirlingLabs.MsQuic.Bindings.runtime.win-x64.openssl/2.2.2": {
+        "runtimeTargets": {
+          "runtimes/win-x64/native/msquic-openssl.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "StirlingLabs.sockaddr.Net/22.10.0": {
+        "dependencies": {
+          "StirlingLabs.BigSpans": "23.3.1",
+          "StirlingLabs.Utilities": "23.3.7",
+          "StirlingLabs.Utilities.Magic": "22.9.1",
+          "StirlingLabs.sockaddr.Net.runtime.linux-x64.libsa": "22.9.0",
+          "StirlingLabs.sockaddr.Net.runtime.osx.libsa": "22.9.0",
+          "StirlingLabs.sockaddr.Net.runtime.win-x64.libsa": "22.9.0"
+        },
+        "runtime": {
+          "lib/net6.0/StirlingLabs.sockaddr.Net.dll": {
+            "assemblyVersion": "22.10.0.0",
+            "fileVersion": "22.10.0.0"
+          }
+        }
+      },
+      "StirlingLabs.sockaddr.Net.runtime.linux-x64.libsa/22.9.0": {
+        "runtimeTargets": {
+          "runtimes/linux-x64/native/libsa.so": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "StirlingLabs.sockaddr.Net.runtime.osx.libsa/22.9.0": {
+        "runtimeTargets": {
+          "runtimes/osx/native/libsa.dylib": {
+            "rid": "osx",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "StirlingLabs.sockaddr.Net.runtime.win-x64.libsa/22.9.0": {
+        "runtimeTargets": {
+          "runtimes/win-x64/native/sa.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "StirlingLabs.Utilities/23.3.7": {
+        "dependencies": {
+          "StirlingLabs.BigSpans": "23.3.1",
+          "StirlingLabs.Utilities.Magic": "22.9.1",
+          "StirlingLabs.XKCP.NET": "22.10.0",
+          "System.Reflection.Emit.Lightweight": "4.7.0"
+        },
+        "runtime": {
+          "lib/net6.0/StirlingLabs.Utilities.dll": {
+            "assemblyVersion": "23.3.7.0",
+            "fileVersion": "23.3.7.0"
+          }
+        }
+      },
+      "StirlingLabs.Utilities.Magic/22.9.1": {
+        "runtime": {
+          "lib/net6.0/StirlingLabs.Utilities.Magic.dll": {
+            "assemblyVersion": "22.9.1.0",
+            "fileVersion": "22.9.1.0"
+          }
+        }
+      },
+      "StirlingLabs.Utilities.NativeLibrary/22.9.1": {
+        "runtime": {
+          "lib/net6.0/StirlingLabs.Utilities.NativeLibrary.dll": {
+            "assemblyVersion": "22.9.1.0",
+            "fileVersion": "22.9.1.0"
+          }
+        }
+      },
+      "StirlingLabs.XKCP.NET/22.10.0": {
+        "runtime": {
+          "lib/net6.0/StirlingLabs.XKCP.NET.dll": {
+            "assemblyVersion": "22.10.0.0",
+            "fileVersion": "22.10.0.0"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/linux-x64/native/libXKCP-AVX.so": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-x64/native/libXKCP-AVX2.so": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-x64/native/libXKCP-AVX512.so": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-x64/native/libXKCP-SSE42.so": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-x64/native/libXKCP-SSSE3.so": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-x64/native/libXKCP.so": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx/native/libXKCP-AVX.dylib": {
+            "rid": "osx",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx/native/libXKCP-AVX2.dylib": {
+            "rid": "osx",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx/native/libXKCP-AVX512.dylib": {
+            "rid": "osx",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx/native/libXKCP-SSE42.dylib": {
+            "rid": "osx",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx/native/libXKCP-SSSE3.dylib": {
+            "rid": "osx",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx/native/libXKCP.dylib": {
+            "rid": "osx",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/XKCP-AVX.DLL": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/XKCP-AVX2.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/XKCP-AVX512.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/XKCP-SSE42.DLL": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/XKCP-SSSE3.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/XKCP.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "System.Collections.Immutable/6.0.0": {
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        }
+      },
+      "System.Configuration.ConfigurationManager/6.0.0": {
+        "dependencies": {
+          "System.Security.Cryptography.ProtectedData": "6.0.0",
+          "System.Security.Permissions": "6.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/System.Configuration.ConfigurationManager.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          }
+        }
+      },
+      "System.Drawing.Common/6.0.0": {
+        "dependencies": {
+          "Microsoft.Win32.SystemEvents": "6.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/System.Drawing.Common.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/unix/lib/net6.0/System.Drawing.Common.dll": {
+            "rid": "unix",
+            "assetType": "runtime",
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          },
+          "runtimes/win/lib/net6.0/System.Drawing.Common.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          }
+        }
+      },
+      "System.Formats.Asn1/6.0.0": {},
+      "System.Memory/4.5.3": {},
+      "System.Reflection.Emit.Lightweight/4.7.0": {},
+      "System.Runtime.Caching/6.0.0": {
+        "dependencies": {
+          "System.Configuration.ConfigurationManager": "6.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/System.Runtime.Caching.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net6.0/System.Runtime.Caching.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          }
+        }
+      },
+      "System.Runtime.CompilerServices.Unsafe/6.0.0": {},
+      "System.Security.AccessControl/6.0.0": {},
+      "System.Security.Cryptography.Pkcs/6.0.3": {
+        "dependencies": {
+          "System.Formats.Asn1": "6.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/System.Security.Cryptography.Pkcs.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.1823.26907"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net6.0/System.Security.Cryptography.Pkcs.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.1823.26907"
+          }
+        }
+      },
+      "System.Security.Cryptography.ProtectedData/6.0.0": {
+        "runtime": {
+          "lib/net6.0/System.Security.Cryptography.ProtectedData.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net6.0/System.Security.Cryptography.ProtectedData.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          }
+        }
+      },
+      "System.Security.Permissions/6.0.0": {
+        "dependencies": {
+          "System.Security.AccessControl": "6.0.0",
+          "System.Windows.Extensions": "6.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/System.Security.Permissions.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          }
+        }
+      },
+      "System.Windows.Extensions/6.0.0": {
+        "dependencies": {
+          "System.Drawing.Common": "6.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/System.Windows.Extensions.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net6.0/System.Windows.Extensions.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          }
+        }
+      },
+      "ZString/2.4.4": {
+        "dependencies": {
+          "System.Memory": "4.5.3"
+        },
+        "runtime": {
+          "lib/netstandard2.1/ZString.dll": {
+            "assemblyVersion": "2.4.4.0",
+            "fileVersion": "2.4.4.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ExemplesStirling/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Win32.SystemEvents/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-hqTM5628jSsQiv+HGpiq3WKBl2c8v1KZfby2J6Pr7pEPlK9waPdgEO6b8A/+/xn/yZ9ulv8HuqK71ONy2tg67A==",
+      "path": "microsoft.win32.systemevents/6.0.0",
+      "hashPath": "microsoft.win32.systemevents.6.0.0.nupkg.sha512"
+    },
+    "Portable.BouncyCastle/1.9.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-eZZBCABzVOek+id9Xy04HhmgykF0wZg9wpByzrWN7q8qEI0Qen9b7tfd7w8VA3dOeesumMG7C5ZPy0jk7PSRHw==",
+      "path": "portable.bouncycastle/1.9.0",
+      "hashPath": "portable.bouncycastle.1.9.0.nupkg.sha512"
+    },
+    "StirlingLabs.BigSpans/23.3.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-47YPOFcinIDHPUSmmP67uMjLG3ljxtUuRE1uZzDVl2wRYmILCfC/pI7AClyhNi5UDA1L6tTeQAkNJQ6Nk+faHQ==",
+      "path": "stirlinglabs.bigspans/23.3.1",
+      "hashPath": "stirlinglabs.bigspans.23.3.1.nupkg.sha512"
+    },
+    "StirlingLabs.MsQuic/23.7.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3D4/97dKrkaLmPcrtU42JJbSZkZsD/B0UYGSwhgWYSqszm3IUfk07xGBckmI8eE1NzesC4T7pWQwHbSa0QVoiw==",
+      "path": "stirlinglabs.msquic/23.7.1",
+      "hashPath": "stirlinglabs.msquic.23.7.1.nupkg.sha512"
+    },
+    "StirlingLabs.MsQuic.Bindings/2.2.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-a/kGlWfsOdljJRXKL7Mj7dxiBiIav89p1mKep7Wz9xFBWU1wq7+kgw9O9QYmrGAJmJi6DaKCP3OGF0G9U7yKMA==",
+      "path": "stirlinglabs.msquic.bindings/2.2.2",
+      "hashPath": "stirlinglabs.msquic.bindings.2.2.2.nupkg.sha512"
+    },
+    "StirlingLabs.MsQuic.Bindings.runtime.linux-x64.openssl/2.2.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-4p16TSZLjAluJqxELbSD/wS0WfrAeQlH4idgIvhq895R04XSpToKCGm4C7HDOzLJPNecpI9uKapAIwvJWuQtng==",
+      "path": "stirlinglabs.msquic.bindings.runtime.linux-x64.openssl/2.2.2",
+      "hashPath": "stirlinglabs.msquic.bindings.runtime.linux-x64.openssl.2.2.2.nupkg.sha512"
+    },
+    "StirlingLabs.MsQuic.Bindings.runtime.osx.openssl/2.2.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ukyy+bkXbKbYnzes+g+KXjwykkM3AWmBmLu9b31EJZZgzUpU9fDCf6NFNWNcjPvOUJKuibdFrJ3uHo4Ju8zoPA==",
+      "path": "stirlinglabs.msquic.bindings.runtime.osx.openssl/2.2.2",
+      "hashPath": "stirlinglabs.msquic.bindings.runtime.osx.openssl.2.2.2.nupkg.sha512"
+    },
+    "StirlingLabs.MsQuic.Bindings.runtime.win-x64.openssl/2.2.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-GALDCy0VPCHFv8AMMSyQOw38WtbHXktLdWdSiE7TSK2MPUXCxJlrW8PK9TqixT6BL2ffmnz8gAyKRP8u3sVnbA==",
+      "path": "stirlinglabs.msquic.bindings.runtime.win-x64.openssl/2.2.2",
+      "hashPath": "stirlinglabs.msquic.bindings.runtime.win-x64.openssl.2.2.2.nupkg.sha512"
+    },
+    "StirlingLabs.sockaddr.Net/22.10.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-5XzUvERQYBxT1tW7DTtnxW1Q2YE4F9IVvCTtqnWPdcxStwlOXjSg9uGP7H+/3kqGOEmbLze/NDF0Zg489rJWVw==",
+      "path": "stirlinglabs.sockaddr.net/22.10.0",
+      "hashPath": "stirlinglabs.sockaddr.net.22.10.0.nupkg.sha512"
+    },
+    "StirlingLabs.sockaddr.Net.runtime.linux-x64.libsa/22.9.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-xvgu+VMtxl5soywfd9m4MY5H7aNRb6yV1+U7zV+ZOr10sU+vKnjf6rOXtc9WyXVwTUv2H452QMF6fYzQR2SADA==",
+      "path": "stirlinglabs.sockaddr.net.runtime.linux-x64.libsa/22.9.0",
+      "hashPath": "stirlinglabs.sockaddr.net.runtime.linux-x64.libsa.22.9.0.nupkg.sha512"
+    },
+    "StirlingLabs.sockaddr.Net.runtime.osx.libsa/22.9.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-hVjMtpf/rSsWP/wws+EZ46P7KWH+ADnyAYcxBb06prUJhJPH8W0zu6rvFzptQO6dFQ4tDfjmDQWYRGa/KM/vhA==",
+      "path": "stirlinglabs.sockaddr.net.runtime.osx.libsa/22.9.0",
+      "hashPath": "stirlinglabs.sockaddr.net.runtime.osx.libsa.22.9.0.nupkg.sha512"
+    },
+    "StirlingLabs.sockaddr.Net.runtime.win-x64.libsa/22.9.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-dS51ZCcRMim4TCaNBYAgBfGCY0i/WrSYeM7CSpt9Vhf60MBy+js7QmRNFRjBNFF1njrhx/trjnXm4g6VWoSH8Q==",
+      "path": "stirlinglabs.sockaddr.net.runtime.win-x64.libsa/22.9.0",
+      "hashPath": "stirlinglabs.sockaddr.net.runtime.win-x64.libsa.22.9.0.nupkg.sha512"
+    },
+    "StirlingLabs.Utilities/23.3.7": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-dPJ40SUH/k+axIrLvAofcJw48+1jCv6c/u2IHOrCvrwKqDAVv+6dlUdexUfOi+0FfIFlLrJCjvhGl2oiElIMTQ==",
+      "path": "stirlinglabs.utilities/23.3.7",
+      "hashPath": "stirlinglabs.utilities.23.3.7.nupkg.sha512"
+    },
+    "StirlingLabs.Utilities.Magic/22.9.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-xgh195gqsc1CUKldSQeG3eD8+ZIhtK1GZ7gKmh30B7N3zYBm7Wvlr8PkU84PYMQkyvRc5PzLGdM8578gNc33Yg==",
+      "path": "stirlinglabs.utilities.magic/22.9.1",
+      "hashPath": "stirlinglabs.utilities.magic.22.9.1.nupkg.sha512"
+    },
+    "StirlingLabs.Utilities.NativeLibrary/22.9.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-DgJwuQ/o46RcX9yqKRlulDJy2Lszd6c/RFakteWIgtGTMQDvp+mUAdsNl7Cingfk2sKmCm/Ufwx68/vLdOub/A==",
+      "path": "stirlinglabs.utilities.nativelibrary/22.9.1",
+      "hashPath": "stirlinglabs.utilities.nativelibrary.22.9.1.nupkg.sha512"
+    },
+    "StirlingLabs.XKCP.NET/22.10.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-paBBoI7p58/iO7I7tyA9FwQX5G0UXlz5At7iqvwMxuALYyq3285I7t8+voCWoth6+ZfO7ovWd00iWRBhPJSnRg==",
+      "path": "stirlinglabs.xkcp.net/22.10.0",
+      "hashPath": "stirlinglabs.xkcp.net.22.10.0.nupkg.sha512"
+    },
+    "System.Collections.Immutable/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-l4zZJ1WU2hqpQQHXz1rvC3etVZN+2DLmQMO79FhOTZHMn8tDRr+WU287sbomD0BETlmKDn0ygUgVy9k5xkkJdA==",
+      "path": "system.collections.immutable/6.0.0",
+      "hashPath": "system.collections.immutable.6.0.0.nupkg.sha512"
+    },
+    "System.Configuration.ConfigurationManager/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7T+m0kDSlIPTHIkPMIu6m6tV6qsMqJpvQWW2jIc2qi7sn40qxFo0q+7mEQAhMPXZHMKnWrnv47ntGlM/ejvw3g==",
+      "path": "system.configuration.configurationmanager/6.0.0",
+      "hashPath": "system.configuration.configurationmanager.6.0.0.nupkg.sha512"
+    },
+    "System.Drawing.Common/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-NfuoKUiP2nUWwKZN6twGqXioIe1zVD0RIj2t976A+czLHr2nY454RwwXs6JU9Htc6mwqL6Dn/nEL3dpVf2jOhg==",
+      "path": "system.drawing.common/6.0.0",
+      "hashPath": "system.drawing.common.6.0.0.nupkg.sha512"
+    },
+    "System.Formats.Asn1/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-T6fD00dQ3NTbPDy31m4eQUwKW84s03z0N2C8HpOklyeaDgaJPa/TexP4/SkORMSOwc7WhKifnA6Ya33AkzmafA==",
+      "path": "system.formats.asn1/6.0.0",
+      "hashPath": "system.formats.asn1.6.0.0.nupkg.sha512"
+    },
+    "System.Memory/4.5.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3oDzvc/zzetpTKWMShs1AADwZjQ/36HnsufHRPcOjyRAAMLDlu2iD33MBI2opxnezcVUtXyqDXXjoFMOU9c7SA==",
+      "path": "system.memory/4.5.3",
+      "hashPath": "system.memory.4.5.3.nupkg.sha512"
+    },
+    "System.Reflection.Emit.Lightweight/4.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-a4OLB4IITxAXJeV74MDx49Oq2+PsF6Sml54XAFv+2RyWwtDBcabzoxiiJRhdhx+gaohLh4hEGCLQyBozXoQPqA==",
+      "path": "system.reflection.emit.lightweight/4.7.0",
+      "hashPath": "system.reflection.emit.lightweight.4.7.0.nupkg.sha512"
+    },
+    "System.Runtime.Caching/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-E0e03kUp5X2k+UAoVl6efmI7uU7JRBWi5EIdlQ7cr0NpBGjHG4fWII35PgsBY9T4fJQ8E4QPsL0rKksU9gcL5A==",
+      "path": "system.runtime.caching/6.0.0",
+      "hashPath": "system.runtime.caching.6.0.0.nupkg.sha512"
+    },
+    "System.Runtime.CompilerServices.Unsafe/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/iUeP3tq1S0XdNNoMz5C9twLSrM/TH+qElHkXWaPvuNOt+99G75NrV0OS2EqHx5wMN7popYjpc8oTjC1y16DLg==",
+      "path": "system.runtime.compilerservices.unsafe/6.0.0",
+      "hashPath": "system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+    },
+    "System.Security.AccessControl/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-AUADIc0LIEQe7MzC+I0cl0rAT8RrTAKFHl53yHjEUzNVIaUlhFY11vc2ebiVJzVBuOzun6F7FBA+8KAbGTTedQ==",
+      "path": "system.security.accesscontrol/6.0.0",
+      "hashPath": "system.security.accesscontrol.6.0.0.nupkg.sha512"
+    },
+    "System.Security.Cryptography.Pkcs/6.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-18UT1BdZ4TYFBHk/wuq7JzCdE3X75z81X+C2rXqIlmEnC21Pm60spGV/dKQSzbyomstqYE33EuN5hfnC86VFxA==",
+      "path": "system.security.cryptography.pkcs/6.0.3",
+      "hashPath": "system.security.cryptography.pkcs.6.0.3.nupkg.sha512"
+    },
+    "System.Security.Cryptography.ProtectedData/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-rp1gMNEZpvx9vP0JW0oHLxlf8oSiQgtno77Y4PLUBjSiDYoD77Y8uXHr1Ea5XG4/pIKhqAdxZ8v8OTUtqo9PeQ==",
+      "path": "system.security.cryptography.protecteddata/6.0.0",
+      "hashPath": "system.security.cryptography.protecteddata.6.0.0.nupkg.sha512"
+    },
+    "System.Security.Permissions/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-T/uuc7AklkDoxmcJ7LGkyX1CcSviZuLCa4jg3PekfJ7SU0niF0IVTXwUiNVP9DSpzou2PpxJ+eNY2IfDM90ZCg==",
+      "path": "system.security.permissions/6.0.0",
+      "hashPath": "system.security.permissions.6.0.0.nupkg.sha512"
+    },
+    "System.Windows.Extensions/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-IXoJOXIqc39AIe+CIR7koBtRGMiCt/LPM3lI+PELtDIy9XdyeSrwXFdWV9dzJ2Awl0paLWUaknLxFQ5HpHZUog==",
+      "path": "system.windows.extensions/6.0.0",
+      "hashPath": "system.windows.extensions.6.0.0.nupkg.sha512"
+    },
+    "ZString/2.4.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3ETG/AE0wR+Uo1CPwzSIYLMvDak5i8stKR/DdxOTyj8EKD9bKPTbftv/YhMbbjfR04gA2xK0PX3mPj7BRGDlew==",
+      "path": "zstring/2.4.4",
+      "hashPath": "zstring.2.4.4.nupkg.sha512"
+    }
+  }
+}
