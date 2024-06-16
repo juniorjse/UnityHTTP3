@@ -8,7 +8,7 @@ public class SimpleHttpServer
 {
     public static async Task Main(string[] args)
     {
-        string url = "http://localhost:8080/";
+        string url = "http://127.0.0.1:8080/";
 
         HttpListener listener = new HttpListener();
         listener.Prefixes.Add(url);
