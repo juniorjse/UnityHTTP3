@@ -26,7 +26,7 @@ public class script : MonoBehaviour
             client = new QuicClient();
 
             Debug.Log("Attempting to connect to server...");
-            connection = client.Connect("127.0.0.1", 11000);
+            connection = client.Connect("127.0.0.1", 11001);
 
             Debug.Log("Connected to the server.");
         }
