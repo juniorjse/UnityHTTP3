@@ -1,20 +1,45 @@
 ﻿using System;
+using System.Text;
 using QuicNet;
+using QuicNet.Streams;
 using QuicNet.Connections;
 
-namespace QuicServer
+namespace QuickNet.Tests.ConsoleServer
 {
     class Program
     {
+        // Fired when a client is connected
+        static void ClientConnected(QuicConnection connection)
+        {
+            connection.OnStreamOpened += StreamOpened;
+            Console.WriteLine("Client connected.");
+        }
+
+        // Fired when a new stream has been opened (It does not carry data with it)
+        static void StreamOpened(QuicStream stream)
+        {
+            stream.OnStreamDataReceived += StreamDataReceived;
+        }
+
+        // Fired when a stream received full batch of data
+        static void StreamDataReceived(QuicStream stream, byte[] data)
+        {
+            string decoded = Encoding.UTF8.GetString(data);
+            Console.WriteLine($"Received: {decoded}");
+
+            // Send back data to the client on the same stream
+            stream.Send(Encoding.UTF8.GetBytes("Ping back from server."));
+        }
+
         static void Main(string[] args)
         {
-            //O servidor atual utiliza no Listerner apenas a porta, porém, o servidor externo utiliza adrrs e porta. Caso inicie ambos servidores na mesma porta nao ocorre erro de uso.
-            //Isso acima ocorre em servidor TCP, porém, se eu tentar iniciar um servidor UDP na mesma porta ocorre erro de uso.
             QuicListener listener = new QuicListener(11001);
-            Console.WriteLine("Server started.");
+            Console.WriteLine("QUIC Server started on port 11001");
+            listener.OnClientConnected += ClientConnected;
+
             listener.Start();
+
+            Console.ReadKey();
         }
     }
 }
-
-//Um client que usa UDP talvez nao conisga se conectar com servidor TLS.

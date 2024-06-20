@@ -36,6 +36,19 @@ public class script : MonoBehaviour
         }
     }
 
+    public void ButtonFunction()
+    {
+        try
+        {
+            Debug.Log("Button clicked, connecting to QUIC...");
+            string response = ConnectToQuic();
+            _text.text = response;
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error in ButtonFunction: {ex.Message}");
+        }
+    }
     public string ConnectToQuic()
     {
         try
@@ -57,44 +70,5 @@ public class script : MonoBehaviour
             Debug.LogError($"Error sending/receiving data: {ex.Message}");
             return "Communication error with the server.";
         }
-    }
-
-    public void ButtonFunction()
-    {
-        try
-        {
-            Debug.Log("Button clicked, connecting to QUIC...");
-            string response = ConnectToQuic();
-            _text.text = response;
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError($"Error in ButtonFunction: {ex.Message}");
-        }
-    }
-
-    private static string GenerateData(int kb)
-    {
-        StringBuilder res = new StringBuilder();
-        for (int i = 0; i < kb; i++)
-        {
-            for (int j = 0; j < 100; j++)
-            {
-                res.Append("!!!!!!!!!!");
-            }
-        }
-
-        return res.ToString();
-    }
-
-    private static string GenerateBytes(int bytes)
-    {
-        StringBuilder result = new StringBuilder();
-        for (int i = 0; i < bytes; i++)
-        {
-            result.Append("!");
-        }
-
-        return result.ToString();
     }
 }

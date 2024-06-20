@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Text;
 using QuicNet;
+using QuicNet.Streams;
 using QuicNet.Connections;
 
 namespace QuicClientApp
@@ -15,6 +17,26 @@ namespace QuicClientApp
 
                 QuicConnection connection = client.Connect("127.0.0.1", 11001);
                 Console.WriteLine("Client connected: " + connection); // QuicNet.Connections.QuicConnection ele fica aguardando um objeto QuicConnection por  isso nao finaliza ao se conectar com um outro servidor UDP.
+
+                /*
+                // Create a data stream
+                QuicStream stream = connection.CreateStream(QuickNet.Utilities.StreamType.ClientBidirectional);
+                // Send Data
+                stream.Send(Encoding.UTF8.GetBytes("Hello from Client!"));
+                // Wait reponse back from the server (Blocks)
+                byte[] data = stream.Receive();
+                Console.WriteLine(Encoding.UTF8.GetString(data));
+
+                // Create a new data stream
+                stream = connection.CreateStream(QuickNet.Utilities.StreamType.ClientBidirectional);
+                // Send Data
+                stream.Send(Encoding.UTF8.GetBytes("Hello from Client2!"));
+                // Wait reponse back from the server (Blocks)
+                data = stream.Receive();
+
+                Console.WriteLine(Encoding.UTF8.GetString(data));
+
+                Console.ReadKey();*/
 
             }
             catch (Exception ex)
