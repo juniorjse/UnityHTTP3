@@ -26,7 +26,7 @@ public class UDPListener
                 // Echo back the message to the client using a stream
                 using (MemoryStream memStream = new MemoryStream(bytes))
                 {
-                    listener.Send(memStream.ToArray(), memStream.ToArray().Length, groupEP);
+                    listener.Send(memStream.ToArray(), groupEP);
                 }
             }
         }
