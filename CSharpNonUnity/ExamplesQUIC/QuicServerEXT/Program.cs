@@ -13,15 +13,15 @@ public class UDPListener
         UdpClient listener = new UdpClient(listenPort);
         IPEndPoint groupEP = new IPEndPoint(IPAddress.Any, listenPort);
 
+        Console.WriteLine("Server started on port 11001\n");
+
         try
         {
             while (true)
             {
-                Console.WriteLine("Waiting for broadcast");
                 byte[] bytes = listener.Receive(ref groupEP);
 
-                Console.WriteLine($"Received broadcast from {groupEP} :");
-                Console.WriteLine($" {Encoding.UTF8.GetString(bytes, 0, bytes.Length)}");
+                Console.WriteLine($"Received: {Encoding.UTF8.GetString(bytes)}");
 
                 // Echo back the message to the client using a stream
                 using (MemoryStream memStream = new MemoryStream(bytes))

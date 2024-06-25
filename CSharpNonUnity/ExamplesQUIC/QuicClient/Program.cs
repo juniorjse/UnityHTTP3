@@ -18,7 +18,7 @@ namespace QuicClientApp
                 QuicConnection connection = client.Connect("127.0.0.1", 11001);
                 Console.WriteLine("Client connected: " + connection); // QuicNet.Connections.QuicConnection ele fica aguardando um objeto QuicConnection por  isso nao finaliza ao se conectar com um outro servidor UDP.
 
-                /*
+                
                 // Create a data stream
                 QuicStream stream = connection.CreateStream(QuickNet.Utilities.StreamType.ClientBidirectional);
                 // Send Data
@@ -36,7 +36,7 @@ namespace QuicClientApp
 
                 Console.WriteLine(Encoding.UTF8.GetString(data));
 
-                Console.ReadKey();*/
+                Console.ReadKey();
 
             }
             catch (Exception ex)
@@ -46,18 +46,3 @@ namespace QuicClientApp
         }
     }
 }
-
-
-/*
-  public QuicConnection Connect(string ip, int port)
-    {
-        _peerIp = new IPEndPoint(IPAddress.Parse(ip), port);
-        _pwt = new PacketWireTransfer(_client, _peerIp);
-        InitialPacket packet = _packetCreator.CreateInitialPacket(0uL, 0uL);
-        _pwt.SendPacket(packet);
-        InitialPacket initialPacket = (InitialPacket)_pwt.ReadPacket();
-        HandleInitialFrames(initialPacket);
-        EstablishConnection(initialPacket.SourceConnectionId, initialPacket.SourceConnectionId);
-        return _connection;
-    }
-*/
