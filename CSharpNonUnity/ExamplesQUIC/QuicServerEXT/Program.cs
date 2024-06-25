@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -20,7 +21,13 @@ public class UDPListener
                 byte[] bytes = listener.Receive(ref groupEP);
 
                 Console.WriteLine($"Received broadcast from {groupEP} :");
-                Console.WriteLine($" {Encoding.ASCII.GetString(bytes, 0, bytes.Length)}");
+                Console.WriteLine($" {Encoding.UTF8.GetString(bytes, 0, bytes.Length)}");
+
+                // Echo back the message to the client using a stream
+                using (MemoryStream memStream = new MemoryStream(bytes))
+                {
+                    listener.Send(memStream.ToArray(), memStream.ToArray().Length, groupEP);
+                }
             }
         }
         catch (SocketException e)
