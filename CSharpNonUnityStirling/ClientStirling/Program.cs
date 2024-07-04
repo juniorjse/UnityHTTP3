@@ -5,28 +5,30 @@ using StirlingLabs.Utilities;
 
 public class Program
 {
-    private static QuicClientConnection _clientSide = null!;
+    private static QuicClientConnection connection = null!;
+    private static QuicClientConfiguration configuration = null!;
+    private static QuicRegistration registration = null!;
 
     public static void Main()
     {
-        QuicRegistration registration = new QuicRegistration("ClientTest");
+        registration = new QuicRegistration("ClientTest");
         PrintObjectProperties(registration, "QuicRegistration");
         Console.WriteLine("Registrado!\n");
         bool reliableDatagrams = false;
         SizedUtf8String[] alpns = new SizedUtf8String[] { SizedUtf8String.Create("sample") };
 
-        QuicClientConfiguration config = new QuicClientConfiguration(registration, reliableDatagrams, alpns);
-        PrintObjectProperties(config, "QuicClientConfiguration");
+        configuration = new QuicClientConfiguration(registration, reliableDatagrams, alpns);
+        PrintObjectProperties(configuration, "QuicClientConfiguration");
         Console.WriteLine("Configurado!\n");
 
-        _clientSide = new QuicClientConnection(config);
-        PrintObjectProperties(_clientSide, "QuicClientConnection");
+        connection = new QuicClientConnection(configuration);
+        PrintObjectProperties(connection, "QuicClientConnection");
         Console.WriteLine("Conexão criada!\n");
 
         ushort port = 11001;
         try
         {
-            _clientSide.ConnectAsync(SizedUtf8String.Create("127.0.0.1"), port).Wait();
+            connection.ConnectAsync(SizedUtf8String.Create("127.0.0.1"), port).Wait();
 
             Console.WriteLine("Conexão bem sucedida!");
         }

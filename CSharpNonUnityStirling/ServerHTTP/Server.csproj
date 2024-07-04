@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="QuicNet">
+      <HintPath>../../../UnityHTTP3/Assets/Plugins/Quic.NET/libs/netstandard2.1/QuicNet.dll</HintPath>
+    </Reference>
+    <Reference Include="QuicNet.Utilities">
+      <HintPath>../../../UnityHTTP3/Assets/Plugins/Quic.NET/libs/netstandard2.1/QuicNet.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="QuicNet.Infrastructure">
+      <HintPath>../../../UnityHTTP3/Assets/Plugins/Quic.NET/libs/netstandard2.1/QuicNet.Infrastructure.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
+

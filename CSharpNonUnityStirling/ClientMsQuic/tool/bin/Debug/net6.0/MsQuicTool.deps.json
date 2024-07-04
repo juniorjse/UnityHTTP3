@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "MsQuicTool/1.0.0": {
+        "dependencies": {
+          "msquic": "1.0.0"
+        },
+        "runtime": {
+          "MsQuicTool.dll": {}
+        }
+      },
+      "msquic/1.0.0": {
+        "runtime": {
+          "msquic.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "MsQuicTool/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "msquic/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
