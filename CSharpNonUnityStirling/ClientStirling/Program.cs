@@ -51,7 +51,7 @@ public class Program
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Erro ao conectar: {ex.Message}");
+                Console.WriteLine($"::ERROR:: connection - {ex.Message}\n");
             }
 
             // Reimprimir propriedades após tentativa de conexão
