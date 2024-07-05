@@ -5,36 +5,43 @@ using StirlingLabs.Utilities;
 
 public class Program
 {
-    private static QuicClientConnection connection = null!;
-    private static QuicClientConfiguration configuration = null!;
-    private static QuicRegistration registration = null!;
+    private static QuicClientConnection? connection;
+    private static QuicClientConfiguration? configuration;
+    private static QuicRegistration? registration;
 
     public static void Main()
     {
-        registration = new QuicRegistration("ClientTest");
-        PrintObjectProperties(registration, "QuicRegistration");
-        Console.WriteLine("Registrado!\n");
-        bool reliableDatagrams = false;
-        SizedUtf8String[] alpns = new SizedUtf8String[] { SizedUtf8String.Create("sample") };
-
-        configuration = new QuicClientConfiguration(registration, reliableDatagrams, alpns);
-        PrintObjectProperties(configuration, "QuicClientConfiguration");
-        Console.WriteLine("Configurado!\n");
-
-        connection = new QuicClientConnection(configuration);
-        PrintObjectProperties(connection, "QuicClientConnection");
-        Console.WriteLine("Conexão criada!\n");
-
-        ushort port = 11001;
         try
         {
-            connection.ConnectAsync(SizedUtf8String.Create("127.0.0.1"), port).Wait();
+            registration = new QuicRegistration("ClientTest");
+            PrintObjectProperties(registration, "QuicRegistration");
+            Console.WriteLine("Registrado!\n");
 
-            Console.WriteLine("Conexão bem sucedida!");
+            bool reliableDatagrams = false;
+            SizedUtf8String[] alpns = new SizedUtf8String[] { SizedUtf8String.Create("sample") };
+
+            configuration = new QuicClientConfiguration(registration, reliableDatagrams, alpns);
+            PrintObjectProperties(configuration, "QuicClientConfiguration");
+            Console.WriteLine("Configurado!\n");
+
+            connection = new QuicClientConnection(configuration);
+            PrintObjectProperties(connection, "QuicClientConnection");
+            Console.WriteLine("Conexão criada!\n");
+
+            ushort port = 11001;
+            try
+            {
+                connection.ConnectAsync(SizedUtf8String.Create("127.0.0.1"), port).Wait();
+                Console.WriteLine("Conexão bem sucedida!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro ao conectar: {ex.Message}");
+            }
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Erro ao conectar: {ex.Message}");
+            Console.WriteLine($"Erro na inicialização: {ex.Message}");
         }
     }
 
@@ -44,10 +51,14 @@ public class Program
         PropertyInfo[] properties = obj.GetType().GetProperties();
         foreach (PropertyInfo property in properties)
         {
-            object value = property.GetValue(obj);
-            if (value == null)
+            try
             {
-                Console.WriteLine($"{property.Name}: NULL");
+                object? value = property.GetValue(obj);
+                Console.WriteLine($"{property.Name}: {(value ?? "NULL")}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"{property.Name}: Erro ao obter valor ({ex.Message})");
             }
         }
     }

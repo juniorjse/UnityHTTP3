@@ -1,47 +1,92 @@
 ﻿using System;
-using System.Net;
-using System.Net.Sockets;
-using System.Text;
+using StirlingLabs.MsQuic;
+using StirlingLabs.Utilities;
+using System.Threading.Tasks;
 
-public class UDPListener
+public class Program
 {
-    private const int listenPort = 8081;
+    private static QuicClientConnection? connection;
+    private static QuicClientConfiguration? configuration;
+    private static QuicRegistration? registration;
 
-    private static void StartListener()
+    public static async Task Main()
     {
-        UdpClient listener = new UdpClient(listenPort);
-        IPEndPoint groupEP = new IPEndPoint(IPAddress.Any, listenPort);
-
         try
         {
-            while (true)
+            // Step 1: Registration
+            registration = new QuicRegistration("ClientTest");
+            PrintObjectProperties(registration, "QuicRegistration");
+            Console.WriteLine("Registrado!\n");
+
+            // Step 2: Configuration
+            bool reliableDatagrams = false;
+            SizedUtf8String[] alpns = new SizedUtf8String[] { SizedUtf8String.Create("h3") }; // Ajuste ALPN para "h3"
+
+            configuration = new QuicClientConfiguration(registration, reliableDatagrams, alpns);
+            PrintObjectProperties(configuration, "QuicClientConfiguration");
+            Console.WriteLine("Configurado!\n");
+
+            // Step 3: Configure credentials
+            var credentialConfig = new QuicClientCredentialConfig
             {
-                Console.WriteLine("Waiting for broadcast");
-                byte[] bytes = listener.Receive(ref groupEP);
+                Flags = QuicClientCredentialFlags.Client | QuicClientCredentialFlags.NoCertificateValidation
+            };
+            configuration.ConfigureCredentials(credentialConfig);
+            PrintObjectProperties(credentialConfig, "QuicClientCredentialConfig");
+            Console.WriteLine("Credenciais configuradas!\n");
 
-                //string receivedMessage = Encoding.Unicode.GetString(bytes);
-                string receivedMessage = BitConverter.ToString(bytes);
-                int length = receivedMessage.Length;
-                Console.WriteLine($"Received broadcast from {groupEP} : {length}");
+            // Step 4: Connection
+            connection = new QuicClientConnection(configuration);
+            PrintObjectProperties(connection, "QuicClientConnection");
+            Console.WriteLine("Conexão criada!\n");
 
-                // Enviar a mensagem "oi" de volta para o cliente
-                byte[] responseBytes = Encoding.UTF8.GetBytes("oi");
-                Console.WriteLine($"Sending response to {groupEP}");
-                listener.Send(responseBytes, responseBytes.Length, groupEP);
+            // Step 5: Connect
+            ushort port = 443; // Porta padrão para HTTPS
+            try
+            {
+                using (var serverAddress = SizedUtf8String.Create("google.com"))
+                {
+                    Console.WriteLine($"Tentando conectar ao servidor {serverAddress} na porta {port}...");
+                    await connection.ConnectAsync(serverAddress, port);
+                }
+                Console.WriteLine("Conexão bem sucedida!");
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro ao conectar: {ex.Message}");
+            }
+
+            // Reimprimir propriedades após tentativa de conexão
+            PrintObjectProperties(connection, "QuicClientConnection Pós-Conexão");
         }
-        catch (SocketException e)
+        catch (Exception ex)
         {
-            Console.WriteLine(e);
+            Console.WriteLine($"Erro na inicialização: {ex.Message}");
         }
         finally
         {
-            listener.Close();
+            // Step 6: Cleanup
+            connection?.Dispose();
+            configuration?.Dispose();
+            registration?.Dispose();
         }
     }
 
-    public static void Main()
+    public static void PrintObjectProperties(object obj, string objName)
     {
-        StartListener();
+        Console.WriteLine($"Propriedades do objeto {objName}:");
+        PropertyInfo[] properties = obj.GetType().GetProperties();
+        foreach (PropertyInfo property in properties)
+        {
+            try
+            {
+                object? value = property.GetValue(obj);
+                Console.WriteLine($"{property.Name}: {(value ?? "NULL")}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"{property.Name}: Erro ao obter valor ({ex.Message})");
+            }
+        }
     }
 }
