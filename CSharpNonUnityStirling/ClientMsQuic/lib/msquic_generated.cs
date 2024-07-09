@@ -18,7 +18,7 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.Quic
 {
-    internal partial struct QUIC_HANDLE
+    public partial struct QUIC_HANDLE
     {
     }
 
@@ -44,7 +44,7 @@ namespace Microsoft.Quic
         COUNT,
     }
 
-    internal enum QUIC_TLS_ALERT_CODES
+    public enum QUIC_TLS_ALERT_CODES
     {
         SUCCESS = 0xFFFF,
         UNEXPECTED_MESSAGE = 10,
@@ -166,7 +166,7 @@ namespace Microsoft.Quic
     }
 
     [System.Flags]
-    internal enum QUIC_STREAM_SHUTDOWN_FLAGS
+    public enum QUIC_STREAM_SHUTDOWN_FLAGS
     {
         NONE = 0x0000,
         GRACEFUL = 0x0001,
@@ -396,7 +396,7 @@ namespace Microsoft.Quic
         internal byte MaterialLength;
     }
 
-    internal unsafe partial struct QUIC_BUFFER
+    public unsafe partial struct QUIC_BUFFER
     {
         [NativeTypeName("uint32_t")]
         internal uint Length;
@@ -411,10 +411,10 @@ namespace Microsoft.Quic
         internal uint QuicVersion;
 
         [NativeTypeName("const QUIC_ADDR *")]
-        internal QuicAddr* LocalAddress;
+        public QuicAddr* LocalAddress;
 
         [NativeTypeName("const QUIC_ADDR *")]
-        internal QuicAddr* RemoteAddress;
+        public QuicAddr* RemoteAddress;
 
         [NativeTypeName("uint32_t")]
         internal uint CryptoBufferLength;
@@ -1062,7 +1062,7 @@ namespace Microsoft.Quic
         }
     }
 
-    internal partial struct QUIC_SETTINGS
+    public partial struct QUIC_SETTINGS
     {
         [NativeTypeName("QUIC_SETTINGS::(anonymous union)")]
         internal _Anonymous1_e__Union Anonymous1;
@@ -2363,7 +2363,7 @@ namespace Microsoft.Quic
         NETWORK_STATISTICS = 18,
     }
 
-    internal partial struct QUIC_CONNECTION_EVENT
+    public partial struct QUIC_CONNECTION_EVENT
     {
         internal QUIC_CONNECTION_EVENT_TYPE Type;
 
@@ -2678,13 +2678,13 @@ namespace Microsoft.Quic
             internal unsafe partial struct _LOCAL_ADDRESS_CHANGED_e__Struct
             {
                 [NativeTypeName("const QUIC_ADDR *")]
-                internal QuicAddr* Address;
+                public QuicAddr* Address;
             }
 
             internal unsafe partial struct _PEER_ADDRESS_CHANGED_e__Struct
             {
                 [NativeTypeName("const QUIC_ADDR *")]
-                internal QuicAddr* Address;
+                public QuicAddr* Address;
             }
 
             internal unsafe partial struct _PEER_STREAM_STARTED_e__Struct
@@ -2731,7 +2731,7 @@ namespace Microsoft.Quic
             internal unsafe partial struct _DATAGRAM_RECEIVED_e__Struct
             {
                 [NativeTypeName("const QUIC_BUFFER *")]
-                internal QUIC_BUFFER* Buffer;
+                public QUIC_BUFFER* Buffer;
 
                 internal QUIC_RECEIVE_FLAGS Flags;
             }
@@ -2995,7 +2995,7 @@ namespace Microsoft.Quic
                 internal ulong TotalBufferLength;
 
                 [NativeTypeName("const QUIC_BUFFER *")]
-                internal QUIC_BUFFER* Buffers;
+                public QUIC_BUFFER* Buffers;
 
                 [NativeTypeName("uint32_t")]
                 internal uint BufferCount;
@@ -3113,7 +3113,7 @@ namespace Microsoft.Quic
         }
     }
 
-    internal unsafe partial struct QUIC_API_TABLE
+    public unsafe partial struct QUIC_API_TABLE
     {
         [NativeTypeName("QUIC_SET_CONTEXT_FN")]
         internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void*, void> SetContext;
@@ -3140,7 +3140,7 @@ namespace Microsoft.Quic
         internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, QUIC_CONNECTION_SHUTDOWN_FLAGS, ulong, void> RegistrationShutdown;
 
         [NativeTypeName("QUIC_CONFIGURATION_OPEN_FN")]
-        internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, QUIC_BUFFER*, uint, QUIC_SETTINGS*, uint, void*, QUIC_HANDLE**, int> ConfigurationOpen;
+        public delegate* unmanaged[Cdecl]<QUIC_HANDLE*, QUIC_BUFFER*, uint, QUIC_SETTINGS*, uint, void*, QUIC_HANDLE**, int> ConfigurationOpen;
 
         [NativeTypeName("QUIC_CONFIGURATION_CLOSE_FN")]
         internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void> ConfigurationClose;
@@ -3188,7 +3188,7 @@ namespace Microsoft.Quic
         internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, QUIC_STREAM_START_FLAGS, int> StreamStart;
 
         [NativeTypeName("QUIC_STREAM_SHUTDOWN_FN")]
-        internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, QUIC_STREAM_SHUTDOWN_FLAGS, ulong, int> StreamShutdown;
+        public delegate* unmanaged[Cdecl]<QUIC_HANDLE*, QUIC_STREAM_SHUTDOWN_FLAGS, ulong, int> StreamShutdown;
 
         [NativeTypeName("QUIC_STREAM_SEND_FN")]
         internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, QUIC_BUFFER*, uint, QUIC_SEND_FLAGS, void*, int> StreamSend;
@@ -3197,7 +3197,7 @@ namespace Microsoft.Quic
         internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, ulong, void> StreamReceiveComplete;
 
         [NativeTypeName("QUIC_STREAM_RECEIVE_SET_ENABLED_FN")]
-        internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, byte, int> StreamReceiveSetEnabled;
+        public delegate* unmanaged[Cdecl]<QUIC_HANDLE*, byte, int> StreamReceiveSetEnabled;
 
         [NativeTypeName("QUIC_DATAGRAM_SEND_FN")]
         internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, QUIC_BUFFER*, uint, QUIC_SEND_FLAGS, void*, int> DatagramSend;
@@ -3206,10 +3206,10 @@ namespace Microsoft.Quic
         internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, byte, int> ConnectionResumptionTicketValidationComplete;
 
         [NativeTypeName("QUIC_CONNECTION_COMP_CERT_FN")]
-        internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, byte, QUIC_TLS_ALERT_CODES, int> ConnectionCertificateValidationComplete;
+        public delegate* unmanaged[Cdecl]<QUIC_HANDLE*, byte, QUIC_TLS_ALERT_CODES, int> ConnectionCertificateValidationComplete;
     }
 
-    internal static unsafe partial class MsQuic
+    public static unsafe partial class MsQuic
     {
         [DllImport("msquic", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("HRESULT")]

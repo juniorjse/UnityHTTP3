@@ -18,12 +18,12 @@ using OperatingSystem = System.OperatingSystem;
 
 namespace Microsoft.Quic
 {
-    internal unsafe partial struct QUIC_BUFFER
+    public unsafe partial struct QUIC_BUFFER
     {
         public Span<byte> Span => new(Buffer, (int)Length);
     }
 
-    internal partial class MsQuic
+    public partial class MsQuic
     {
         public static unsafe QUIC_API_TABLE* Open()
         {

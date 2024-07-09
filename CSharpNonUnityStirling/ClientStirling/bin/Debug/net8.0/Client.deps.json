@@ -9,7 +9,8 @@
       "Client/1.0.0": {
         "dependencies": {
           "StirlingLabs.MsQuic": "23.7.1",
-          "StirlingLabs.Utilities": "23.3.7"
+          "StirlingLabs.Utilities": "23.3.7",
+          "StirlingLabs.Utilities.Magic": "23.3.7"
         },
         "runtime": {
           "Client.dll": {}
@@ -41,7 +42,7 @@
       },
       "StirlingLabs.BigSpans/23.3.1": {
         "dependencies": {
-          "StirlingLabs.Utilities.Magic": "22.9.1"
+          "StirlingLabs.Utilities.Magic": "23.3.7"
         },
         "runtime": {
           "lib/net7.0/StirlingLabs.BigSpans.dll": {
@@ -56,7 +57,7 @@
           "StirlingLabs.BigSpans": "23.3.1",
           "StirlingLabs.MsQuic.Bindings": "2.2.2",
           "StirlingLabs.Utilities": "23.3.7",
-          "StirlingLabs.Utilities.Magic": "22.9.1",
+          "StirlingLabs.Utilities.Magic": "23.3.7",
           "StirlingLabs.XKCP.NET": "22.10.0",
           "StirlingLabs.sockaddr.Net": "22.10.0",
           "System.Collections.Immutable": "6.0.0",
@@ -110,7 +111,7 @@
           "runtimes/win-x64/native/msquic-openssl.dll": {
             "rid": "win-x64",
             "assetType": "native",
-            "fileVersion": "0.0.0.0"
+            "fileVersion": "2.2.2.0"
           }
         }
       },
@@ -118,7 +119,7 @@
         "dependencies": {
           "StirlingLabs.BigSpans": "23.3.1",
           "StirlingLabs.Utilities": "23.3.7",
-          "StirlingLabs.Utilities.Magic": "22.9.1",
+          "StirlingLabs.Utilities.Magic": "23.3.7",
           "StirlingLabs.sockaddr.Net.runtime.linux-x64.libsa": "22.9.0",
           "StirlingLabs.sockaddr.Net.runtime.osx.libsa": "22.9.0",
           "StirlingLabs.sockaddr.Net.runtime.win-x64.libsa": "22.9.0"
@@ -160,7 +161,7 @@
       "StirlingLabs.Utilities/23.3.7": {
         "dependencies": {
           "StirlingLabs.BigSpans": "23.3.1",
-          "StirlingLabs.Utilities.Magic": "22.9.1",
+          "StirlingLabs.Utilities.Magic": "23.3.7",
           "StirlingLabs.XKCP.NET": "22.10.0",
           "System.Reflection.Emit.Lightweight": "4.7.0"
         },
@@ -171,11 +172,11 @@
           }
         }
       },
-      "StirlingLabs.Utilities.Magic/22.9.1": {
+      "StirlingLabs.Utilities.Magic/23.3.7": {
         "runtime": {
-          "lib/net6.0/StirlingLabs.Utilities.Magic.dll": {
-            "assemblyVersion": "22.9.1.0",
-            "fileVersion": "22.9.1.0"
+          "lib/net7.0/StirlingLabs.Utilities.Magic.dll": {
+            "assemblyVersion": "23.3.7.0",
+            "fileVersion": "23.3.7.0"
           }
         }
       },
@@ -529,12 +530,12 @@
       "path": "stirlinglabs.utilities/23.3.7",
       "hashPath": "stirlinglabs.utilities.23.3.7.nupkg.sha512"
     },
-    "StirlingLabs.Utilities.Magic/22.9.1": {
+    "StirlingLabs.Utilities.Magic/23.3.7": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-xgh195gqsc1CUKldSQeG3eD8+ZIhtK1GZ7gKmh30B7N3zYBm7Wvlr8PkU84PYMQkyvRc5PzLGdM8578gNc33Yg==",
-      "path": "stirlinglabs.utilities.magic/22.9.1",
-      "hashPath": "stirlinglabs.utilities.magic.22.9.1.nupkg.sha512"
+      "sha512": "sha512-KJMTWJAUZGekISrcn4I8+Vx3NdzNq77Invw+KgXn//KkXFAF/PDRda49fj0g9fF5g5rI8dB5226biA20Pkbfww==",
+      "path": "stirlinglabs.utilities.magic/23.3.7",
+      "hashPath": "stirlinglabs.utilities.magic.23.3.7.nupkg.sha512"
     },
     "StirlingLabs.Utilities.NativeLibrary/22.9.1": {
       "type": "package",

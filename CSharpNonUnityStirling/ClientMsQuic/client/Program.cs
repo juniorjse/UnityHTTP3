@@ -1,14 +1,10 @@
-﻿//
-// Copyright (c) Microsoft Corporation.
-// Licensed under the MIT License.
-//
-
-using System;
+﻿using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using Microsoft.Quic;
+using System.Numerics;
 
 namespace MsQuicTool
 {
@@ -37,12 +33,13 @@ namespace MsQuicTool
             QUIC_HANDLE* connection = null;
             try
             {
-
                 MsQuic.ThrowIfFailure(ApiTable->RegistrationOpen(null, &registration));
                 byte* alpn = stackalloc byte[] { (byte)'h', (byte)'3' };
-                QUIC_BUFFER buffer = new();
-                buffer.Buffer = alpn;
-                buffer.Length = 2;
+                QUIC_BUFFER buffer = new QUIC_BUFFER
+                {
+                    Buffer = alpn,
+                    Length = 2
+                };
                 QUIC_SETTINGS settings = new();
                 settings.IsSetFlags = 0;
                 settings.IsSet.PeerBidiStreamCount = 1;
