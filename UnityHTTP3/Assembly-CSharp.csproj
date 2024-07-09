@@ -419,16 +419,16 @@
       <HintPath>Assets/Plugins/StirlingLabs.Utilities.NativeLibrary.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="msquic">
+      <HintPath>Assets/Plugins/msquic.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="StirlingLabs.Utilities">
       <HintPath>Assets/Plugins/StirlingLabs.Utilities.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="StirlingLabs.MsQuic">
       <HintPath>Assets/Plugins/StirlingLabs.MsQuic.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="msquic">
-      <HintPath>Assets/Plugins/msquic.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="StirlingLabs.sockaddr.Net">
