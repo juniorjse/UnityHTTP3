@@ -71,7 +71,7 @@ public class MsQuicUnity : MonoBehaviour
                     {
                         ApiTable->RegistrationClose(registration);
                     }
-                    MsQuic.Close(ApiTable);
+                    //MsQuic.Close(ApiTable);
                 }
             }
         }
