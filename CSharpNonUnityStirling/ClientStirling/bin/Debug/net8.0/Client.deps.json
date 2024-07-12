@@ -111,7 +111,7 @@
           "runtimes/win-x64/native/msquic-openssl.dll": {
             "rid": "win-x64",
             "assetType": "native",
-            "fileVersion": "2.2.2.0"
+            "fileVersion": "0.0.0.0"
           }
         }
       },
