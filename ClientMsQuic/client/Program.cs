@@ -55,7 +55,7 @@ namespace MsQuicTool
                 int written = Encoding.UTF8.GetBytes("google.com", new Span<byte>(google, 50));
                 google[written] = 0;
                 MsQuic.ThrowIfFailure(ApiTable->ConnectionStart(connection, configuration, 0, google, 443));
-                Thread.Sleep(1000);
+                Thread.Sleep(2000);
             }
             finally
             {
