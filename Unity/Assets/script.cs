@@ -14,9 +14,10 @@ public unsafe delegate int NativeCallbackDelegate(QUIC_HANDLE* handle, void* con
 public class MsQuicUnity : MonoBehaviour
 {
     public Text _text;
+    public Text _request;
     private GCHandle _callbackHandle;
 
-    public void ButtonFunction()
+    public void ConnectToQUIC()
     {
         try
         {
@@ -71,7 +72,7 @@ public class MsQuicUnity : MonoBehaviour
 
                     MsQuic.ThrowIfFailure(ApiTable->ConnectionStart(connection, configuration, 0, google, 443));
                     Thread.Sleep(1000);
-                    _text.text = "Conexão bem sucedida!";
+                    _text.text = "Status: connected";
                 }
                 finally
                 {
@@ -99,9 +100,19 @@ public class MsQuicUnity : MonoBehaviour
         }
         catch (Exception ex)
         {
-            _text.text = $"Erro: {ex.Message}";
+            _text.text = $"Status: {ex.Message}";
             Debug.Log("Erro: " + ex.Message);
         }
+    }
+    
+    public void DisconnectToQUIC()
+    {
+        _text.text = "Status: disconnected";   
+    }
+
+    public void Request()
+    {
+        _request.text = "Response: thing";   
     }
 
     private static unsafe int NativeCallback(QUIC_HANDLE* handle, void* context, QUIC_CONNECTION_EVENT* evnt)

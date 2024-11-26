@@ -286,7 +286,7 @@
       "url": "https://packages.unity.com"
     },
     "msquic": {
-      "version": "file:../../ClientMsQuic/lib",
+      "version": "file:/Users/junior.silva/Documents/GitHub/QUIC/quic-client/ClientMsQuic/lib",
       "depth": 0,
       "source": "local",
       "dependencies": {}

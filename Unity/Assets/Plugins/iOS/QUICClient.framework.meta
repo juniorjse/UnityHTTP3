@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5c78f91f0809d4d1abf18d88bc4d2991
+guid: 6b8b6a1b28b074751a64c4b68e6f5f83
 PluginImporter:
   externalObjects: {}
   serializedVersion: 2
@@ -23,17 +23,11 @@ PluginImporter:
       settings:
         DefaultValueInitialized: true
   - first:
-      Windows Store Apps: WindowsStoreApps
-    second:
-      enabled: 0
-      settings:
-        CPU: AnyCPU
-  - first:
       iPhone: iOS
     second:
       enabled: 1
       settings:
-        AddToEmbeddedBinaries: false
+        AddToEmbeddedBinaries: true
   userData: 
   assetBundleName: 
   assetBundleVariant: 
