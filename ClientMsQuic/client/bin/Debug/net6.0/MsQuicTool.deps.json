@@ -8,12 +8,14 @@
     ".NETCoreApp,Version=v6.0": {
       "MsQuicTool/1.0.0": {
         "dependencies": {
+          "System.Core": "3.5.21022.801",
           "msquic": "1.0.0"
         },
         "runtime": {
           "MsQuicTool.dll": {}
         }
       },
+      "System.Core/3.5.21022.801": {},
       "msquic/1.0.0": {
         "runtime": {
           "msquic.dll": {}
@@ -26,6 +28,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "System.Core/3.5.21022.801": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-QPzEPxDOY7zdWl4hpGcTCuMiTZa83YER1MO99l3pbj+Rn3Wp47kCTJBEUsoYu1ohiUdxsbjVENNP77Qr1MLvZQ==",
+      "path": "system.core/3.5.21022.801",
+      "hashPath": "system.core.3.5.21022.801.nupkg.sha512"
     },
     "msquic/1.0.0": {
       "type": "project",
