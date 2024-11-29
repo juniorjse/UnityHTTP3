@@ -1,23 +1,97 @@
 using System;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 using Microsoft.Quic;
+using System.Text;
+using System.Threading;
 
-// Defina o delegate fora da classe
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 public unsafe delegate int NativeCallbackDelegate(QUIC_HANDLE* handle, void* context, QUIC_CONNECTION_EVENT* evnt);
 
-public class MsQuicUnity : MonoBehaviour
+public class QUICClient : MonoBehaviour
 {
-    public Text _text;
+    public Text _statusconnection;
     public Text _request;
     private GCHandle _callbackHandle;
 
-    public void ConnectToQUIC()
+    public void ConnectVerify()
+    {
+#if UNITY_IOS
+        ConnectToQUIC("www.google.com", 443);
+#else
+        ConnectToQUICUnity();
+#endif
+    }
+
+    public void DisconnectVerify()
+    {
+#if UNITY_IOS
+        DisconnectFromQUIC();
+#else
+        DisconnectFromUnityQUIC();
+#endif
+    }
+
+    public void RequestVerify()
+    {
+#if UNITY_IOS
+        GetRequestToServer($"https://www.google.com/search?q=WildlifeStudios&tbm=nws");
+#else
+        Request();
+#endif
+    }
+
+#if UNITY_IOS
+    [DllImport("__Internal", EntryPoint = "connectToQUIC")]
+    private static extern void connectToQUIC(string host, int port);
+
+    [DllImport("__Internal", EntryPoint = "disconnectFromQUIC")]
+    private static extern void disconnectFromQUIC();
+
+    [DllImport("__Internal", EntryPoint = "getRequestToServer")]
+    private static extern void getRequestToServer(string url);
+
+    public void ConnectToQUIC(string host, int port)
+    {
+        try
+        {
+            connectToQUIC(host, port);
+            Debug.Log("Status: connected");
+        }
+        catch (Exception ex)
+        {
+            Debug.Log($"Error: {ex.Message}");
+        }
+    }
+
+    public void DisconnectFromQUIC()
+    {
+        try
+        {
+            disconnectFromQUIC();
+            Debug.Log("Status: disconnected");
+        }
+        catch (Exception ex)
+        {
+            Debug.Log($"Error: {ex.Message}");
+        }
+    }
+
+    public void GetRequestToServer(string url)
+    {
+        try
+        {
+            getRequestToServer(url);
+            Debug.Log("Request sent. Waiting for response...");
+        }
+        catch (Exception ex)
+        {
+            Debug.Log($"Error: {ex.Message}");
+        }
+    }
+#else
+    public void ConnectToQUICUnity()
     {
         try
         {
@@ -72,7 +146,7 @@ public class MsQuicUnity : MonoBehaviour
 
                     MsQuic.ThrowIfFailure(ApiTable->ConnectionStart(connection, configuration, 0, google, 443));
                     Thread.Sleep(1000);
-                    _text.text = "Status: connected";
+                    _statusconnection.text = "Status: connected";
                 }
                 finally
                 {
@@ -100,24 +174,19 @@ public class MsQuicUnity : MonoBehaviour
         }
         catch (Exception ex)
         {
-            _text.text = $"Status: {ex.Message}";
+            _statusconnection.text = $"Status: {ex.Message}";
             Debug.Log("Erro: " + ex.Message);
         }
     }
-    
-    public void DisconnectToQUIC()
-    {
-        _text.text = "Status: disconnected";   
-    }
 
-    public void Request()
+    public void DisconnectFromUnityQUIC()
     {
-        _request.text = "Response: thing";   
+        _statusconnection.text = "Status: disconnected";
     }
 
     private static unsafe int NativeCallback(QUIC_HANDLE* handle, void* context, QUIC_CONNECTION_EVENT* evnt)
     {
-        Debug.Log($"Evento de conexão recebido: {evnt->Type}");
+        Debug.Log($"Connection event received: {evnt->Type}");
         if (evnt->Type == QUIC_CONNECTION_EVENT_TYPE.CONNECTED)
         {
             QUIC_API_TABLE* ApiTable = (QUIC_API_TABLE*)context;
@@ -140,4 +209,10 @@ public class MsQuicUnity : MonoBehaviour
         }
         return MsQuic.QUIC_STATUS_SUCCESS;
     }
+
+    public void Request()
+    {
+        _request.text = "Response: Request sent!";
+    }
+#endif
 }
