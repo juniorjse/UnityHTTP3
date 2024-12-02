@@ -63,7 +63,7 @@
     <Analyzer Include="/Applications/Unity/Hub/Editor/2022.3.23f1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets/script.cs" />
+    <Compile Include="Assets/QUICClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -399,7 +399,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="msquic">
-      <HintPath>/Users/junior.silva/Documents/GitHub/QUIC/quic-client/ClientMsQuic/lib/bin/Release/netstandard2.1/msquic.dll</HintPath>
+      <HintPath>/Users/junior.silva/Documents/GitHub/QUIC/quic-client/dotnet/ClientMsQuic/lib/bin/Release/netstandard2.1/msquic.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Collections.LowLevel.ILSupport">

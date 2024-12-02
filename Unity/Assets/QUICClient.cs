@@ -43,13 +43,13 @@ public class QUICClient : MonoBehaviour
     }
 
 #if UNITY_IOS
-    [DllImport("__Internal", EntryPoint = "connectToQUIC")]
+    [DllImport("__Internal")]
     private static extern void connectToQUIC(string host, int port);
 
-    [DllImport("__Internal", EntryPoint = "disconnectFromQUIC")]
+    [DllImport("__Internal")]
     private static extern void disconnectFromQUIC();
 
-    [DllImport("__Internal", EntryPoint = "getRequestToServer")]
+    [DllImport("__Internal")]
     private static extern void getRequestToServer(string url);
 
     public void ConnectToQUIC(string host, int port)
