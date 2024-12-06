@@ -2,23 +2,16 @@ using System;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UI;
-using Microsoft.Quic;
-using System.Text;
-using System.Threading;
-
-[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public unsafe delegate int NativeCallbackDelegate(QUIC_HANDLE* handle, void* context, QUIC_CONNECTION_EVENT* evnt);
 
 public class QUICClient : MonoBehaviour
 {
     public Text _statusconnection;
     public Text _request;
-    private GCHandle _callbackHandle;
 
     public void ConnectVerify()
     {
 #if UNITY_IOS
-        ConnectToQUIC("www.google.com", 443);
+        connectToQUIC();
 #else
         ConnectToQUICUnity();
 #endif
@@ -27,7 +20,7 @@ public class QUICClient : MonoBehaviour
     public void DisconnectVerify()
     {
 #if UNITY_IOS
-        DisconnectFromQUIC();
+        disconnectFromQUIC();
 #else
         DisconnectFromUnityQUIC();
 #endif
@@ -36,7 +29,7 @@ public class QUICClient : MonoBehaviour
     public void RequestVerify()
     {
 #if UNITY_IOS
-        GetRequestToServer($"https://www.google.com/search?q=WildlifeStudios&tbm=nws");
+        getRequestToServer();
 #else
         Request();
 #endif
@@ -44,52 +37,13 @@ public class QUICClient : MonoBehaviour
 
 #if UNITY_IOS
     [DllImport("__Internal")]
-    private static extern void connectToQUIC(string host, int port);
+    private static extern void connectToQUIC();
 
     [DllImport("__Internal")]
     private static extern void disconnectFromQUIC();
 
     [DllImport("__Internal")]
-    private static extern void getRequestToServer(string url);
-
-    public void ConnectToQUIC(string host, int port)
-    {
-        try
-        {
-            connectToQUIC(host, port);
-            Debug.Log("Status: connected");
-        }
-        catch (Exception ex)
-        {
-            Debug.Log($"Error: {ex.Message}");
-        }
-    }
-
-    public void DisconnectFromQUIC()
-    {
-        try
-        {
-            disconnectFromQUIC();
-            Debug.Log("Status: disconnected");
-        }
-        catch (Exception ex)
-        {
-            Debug.Log($"Error: {ex.Message}");
-        }
-    }
-
-    public void GetRequestToServer(string url)
-    {
-        try
-        {
-            getRequestToServer(url);
-            Debug.Log("Request sent. Waiting for response...");
-        }
-        catch (Exception ex)
-        {
-            Debug.Log($"Error: {ex.Message}");
-        }
-    }
+    private static extern void getRequestToServer();
 #else
     public void ConnectToQUICUnity()
     {

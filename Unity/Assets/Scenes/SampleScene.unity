@@ -451,7 +451,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -544,10 +544,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 521718692}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a28e19542e2f24f3eb022d88739a3f66, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a064d3bcac04493b8f63d126bc541b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _text: {fileID: 589941030}
+  _statusconnection: {fileID: 589941030}
   _request: {fileID: 1180583837}
 --- !u!4 &521718694
 Transform:
@@ -733,11 +733,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 589941029}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a28e19542e2f24f3eb022d88739a3f66, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a064d3bcac04493b8f63d126bc541b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _text: {fileID: 0}
-  _request: {fileID: 0}
+  _statusconnection: {fileID: 589941030}
+  _request: {fileID: 1180583837}
 --- !u!222 &589941032
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -849,8 +849,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 521718693}
-        m_TargetAssemblyTypeName: MsQuicUnity, Assembly-CSharp
-        m_MethodName: ConnectToQUIC
+        m_TargetAssemblyTypeName: QUICClient, Assembly-CSharp
+        m_MethodName: ConnectVerify
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -957,11 +957,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1180583834}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a28e19542e2f24f3eb022d88739a3f66, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a064d3bcac04493b8f63d126bc541b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _text: {fileID: 0}
-  _request: {fileID: 0}
+  _statusconnection: {fileID: 589941030}
+  _request: {fileID: 1180583837}
 --- !u!114 &1180583837
 MonoBehaviour:
   m_ObjectHideFlags: 0
