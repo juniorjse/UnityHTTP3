@@ -1,12 +1,19 @@
 using System;
 using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
+using Microsoft.Quic;
+
+[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+public unsafe delegate int NativeCallbackDelegate(QUIC_HANDLE* handle, void* context, QUIC_CONNECTION_EVENT* evnt);
 
 public class QUICClient : MonoBehaviour
 {
     public Text _statusconnection;
     public Text _request;
+    private GCHandle _callbackHandle;
 
     public void ConnectVerify()
     {
