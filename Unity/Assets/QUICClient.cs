@@ -91,6 +91,12 @@ public class QUICClient : MonoBehaviour
         }
     }
 #else
+
+    public void AndroidConnectQuic()
+    {   
+        AndroidJavaObject instance = new AndroidJavaObject("com.example.quicconnectionwrapper.QuicInstructions");
+        _statusconnection.text = instance.Call<string>("QuicAndroidConnect");
+    }
     public void ConnectToQUICUnity()
     {
         try
