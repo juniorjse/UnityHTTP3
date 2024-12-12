@@ -399,7 +399,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="msquic">
-      <HintPath>/Users/junior.silva/Documents/GitHub/QUIC/quic-client/dotnet/ClientMsQuic/lib/bin/Release/netstandard2.1/msquic.dll</HintPath>
+      <HintPath>/Users/victor/Documents/teste/quic_jr/UnityHTTP3/dotnet/ClientMsQuic/lib/bin/Release/netstandard2.1/msquic.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Collections.LowLevel.ILSupport">
@@ -416,18 +416,6 @@
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Common">
       <HintPath>/Applications/Unity/Hub/Editor/2022.3.23f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Common.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Android.Types">
-      <HintPath>/Applications/Unity/Hub/Editor/2022.3.23f1/PlaybackEngines/AndroidPlayer/Unity.Android.Types.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Android.Gradle">
-      <HintPath>/Applications/Unity/Hub/Editor/2022.3.23f1/PlaybackEngines/AndroidPlayer/Unity.Android.Gradle.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Android.GradleProject">
-      <HintPath>/Applications/Unity/Hub/Editor/2022.3.23f1/PlaybackEngines/AndroidPlayer/Unity.Android.GradleProject.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">

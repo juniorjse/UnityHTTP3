@@ -2,13 +2,16 @@ using System.Net.Http;
 using System;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Net;
 using UnityEngine;
 using UnityEngine.UI;
 using Microsoft.Quic;
 using System.Threading;
+using UnityEditor.MemoryProfiler;
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 public unsafe delegate int NativeCallbackDelegate(QUIC_HANDLE* handle, void* context, QUIC_CONNECTION_EVENT* evnt);
+public unsafe delegate int StreamCallbackDelegate(QUIC_HANDLE* streamHandle, void* context, QUIC_STREAM_EVENT* streamEvent);
 public class QUICClient : MonoBehaviour
 {
     public Text _statusconnection;
@@ -17,6 +20,7 @@ public class QUICClient : MonoBehaviour
     private unsafe QUIC_HANDLE* connection = null;
     private unsafe QUIC_HANDLE* registration = null;
     private unsafe QUIC_HANDLE* configuration = null;
+    private unsafe QUIC_HANDLE* stream = null;
     private unsafe QUIC_API_TABLE* ApiTable;
 
     public void ConnectVerify()
@@ -80,8 +84,10 @@ public class QUICClient : MonoBehaviour
 
                 QUIC_SETTINGS settings = new()
                 {
-                    IsSetFlags = 0
+                    IsSetFlags = 0,
+                    IdleTimeoutMs = 1000
                 };
+                settings.IsSet.IdleTimeoutMs = 1;
                 settings.IsSet.PeerBidiStreamCount = 1;
                 settings.PeerBidiStreamCount = 1;
                 settings.IsSet.PeerUnidiStreamCount = 1;
@@ -93,29 +99,37 @@ public class QUICClient : MonoBehaviour
                     MsQuic.ThrowIfFailure(ApiTable->ConfigurationOpen(registration, &buffer, 1, &settings, (uint)sizeof(QUIC_SETTINGS), null, pConfiguration));
                 }
 
-                QUIC_CREDENTIAL_CONFIG config = new()
+                QUIC_CREDENTIAL_CONFIG credConfig = new()
                 {
-                    Flags = QUIC_CREDENTIAL_FLAGS.CLIENT
+                    Type = QUIC_CREDENTIAL_TYPE.NONE,
+                    Flags = QUIC_CREDENTIAL_FLAGS.CLIENT | QUIC_CREDENTIAL_FLAGS.NO_CERTIFICATE_VALIDATION
                 };
-                MsQuic.ThrowIfFailure(ApiTable->ConfigurationLoadCredential(configuration, &config));
+                MsQuic.ThrowIfFailure(ApiTable->ConfigurationLoadCredential(configuration, &credConfig));
 
                 // Callback
-                NativeCallbackDelegate callbackDelegate = NativeCallback;
-                _callbackHandle = GCHandle.Alloc(callbackDelegate);
-                IntPtr callbackPtr = Marshal.GetFunctionPointerForDelegate(callbackDelegate);
+                NativeCallbackDelegate clientConnectionCallback = ClientConnectionCallback;
+                _callbackHandle = GCHandle.Alloc(clientConnectionCallback);
+                IntPtr clientConnectionCallbackPtr = Marshal.GetFunctionPointerForDelegate(clientConnectionCallback);
 
                 // Fixando o ponteiro para conexão
                 fixed (QUIC_HANDLE** pConnection = &connection)
                 {
-                    MsQuic.ThrowIfFailure(ApiTable->ConnectionOpen(registration, (delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void*, QUIC_CONNECTION_EVENT*, int>)callbackPtr.ToPointer(), null, pConnection));
+                    MsQuic.ThrowIfFailure(ApiTable->ConnectionOpen(registration, (delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void*, QUIC_CONNECTION_EVENT*, int>)clientConnectionCallbackPtr.ToPointer(), null, pConnection));
+                }
+
+                // Resolve DNS para "google.com" antes de se conectar
+                var ipAddresses = Dns.GetHostAddresses("google.com");
+                if (ipAddresses.Length == 0)
+                {
+                    throw new Exception("Falha ao resolver DNS.");
                 }
 
                 // Inicia a conexão
-                sbyte* google = stackalloc sbyte[50];
-                int written = Encoding.UTF8.GetBytes("google.com", new Span<byte>(google, 50));
-                google[written] = 0;
+                sbyte* target = stackalloc sbyte[50];
+                int written = Encoding.UTF8.GetBytes(ipAddresses[0].ToString(), new Span<byte>(target, 50));
+                target[written] = 0;
 
-                MsQuic.ThrowIfFailure(ApiTable->ConnectionStart(connection, configuration, 0, google, 443));
+                MsQuic.ThrowIfFailure(ApiTable->ConnectionStart(connection, configuration, (ushort)MsQuic.QUIC_ADDRESS_FAMILY_UNSPEC, target, 4567));
                 Thread.Sleep(1000);
                 _statusconnection.text = "Status: connected";
                 Debug.Log("Connection started to google.com");
@@ -172,8 +186,66 @@ public class QUICClient : MonoBehaviour
         }
     }
 
-    private static unsafe int NativeCallback(QUIC_HANDLE* handle, void* context, QUIC_CONNECTION_EVENT* evnt)
+    public unsafe int StreamEventCallback(QUIC_HANDLE* streamHandle, void* context, QUIC_STREAM_EVENT* streamEvent)
     {
+        switch (streamEvent->Type)
+        {
+            case QUIC_STREAM_EVENT_TYPE.RECEIVE:
+                Debug.Log("Data received on stream.");
+                break;
+            case QUIC_STREAM_EVENT_TYPE.SEND_COMPLETE:
+                Debug.Log("Data Sent.");
+                break;
+            case QUIC_STREAM_EVENT_TYPE.PEER_SEND_ABORTED:
+                Debug.Log("Peer aborted!");
+                break;
+            case QUIC_STREAM_EVENT_TYPE.PEER_SEND_SHUTDOWN:
+                Debug.Log("Peer shutdown.");
+                break;
+            case QUIC_STREAM_EVENT_TYPE.SHUTDOWN_COMPLETE:
+                Debug.Log("All done!");
+                if (streamEvent->SHUTDOWN_COMPLETE.AppCloseInProgress == 0)
+                {
+                    ApiTable->StreamClose(stream);
+                }
+                break;
+            default:
+                Debug.Log("Other stream event.");
+                break;
+        }
+
+        return 0;
+    }
+
+    private unsafe int ClientConnectionCallback(QUIC_HANDLE* handle, void* context, QUIC_CONNECTION_EVENT* evnt)
+    {
+        switch (evnt->Type)
+        {
+            case QUIC_CONNECTION_EVENT_TYPE.CONNECTED:
+                Debug.Log("Connection established!");
+                break;
+            case QUIC_CONNECTION_EVENT_TYPE.SHUTDOWN_INITIATED_BY_TRANSPORT:
+                if (evnt->SHUTDOWN_INITIATED_BY_TRANSPORT.Status == MsQuic.QUIC_STATUS_CONNECTION_IDLE)
+                {
+                    Debug.Log("Successfully shut down on idle.");
+                }
+                else
+                {
+                    Debug.Log("Shut down by transport, " + evnt->SHUTDOWN_INITIATED_BY_TRANSPORT.Status);
+                }
+                break;
+            case QUIC_CONNECTION_EVENT_TYPE.SHUTDOWN_INITIATED_BY_PEER:
+                Debug.Log("Shut down by peer, " + (ulong)evnt->SHUTDOWN_INITIATED_BY_PEER.ErrorCode);
+                break;
+            case QUIC_CONNECTION_EVENT_TYPE.SHUTDOWN_COMPLETE:
+                Debug.Log("All done!");
+                if (evnt->SHUTDOWN_COMPLETE.AppCloseInProgress == 0)
+                {
+                    ApiTable->ConnectionClose(connection);
+                }
+                break;
+
+        }
         if (evnt->Type == QUIC_CONNECTION_EVENT_TYPE.CONNECTED)
         {
             Debug.Log("Connection established.");
@@ -187,41 +259,62 @@ public class QUICClient : MonoBehaviour
         return MsQuic.QUIC_STATUS_SUCCESS;
     }
 
-    public async void Request()
+    // Send the HTTP/3 request over QUIC
+    private unsafe void Request()
     {
-        string url = "https://www.google.com/search?q=WildlifeStudios&tbm=nws";
-        Debug.Log($"🌐 GET request sent to {url}");
         try
         {
-            using (HttpClient client = new HttpClient())
+            string url = "www.google.com/search?q=WildlifeStudios";
+            byte[] requestBytes = Encoding.ASCII.GetBytes(url);
+
+            // Callback
+            StreamCallbackDelegate streamEventCallback = StreamEventCallback;
+            _callbackHandle = GCHandle.Alloc(streamEventCallback);
+            IntPtr streamEventCallbackPtr = Marshal.GetFunctionPointerForDelegate(streamEventCallback);
+
+
+            fixed (QUIC_HANDLE** pStream = &stream)
             {
-                HttpResponseMessage response = await client.GetAsync(url);
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    _request.text = $"Request failed: {response.StatusCode}";
-                    Debug.Log($"Request failed: {response.StatusCode}");
-                    return;
-                }
-
-                string htmlString = await response.Content.ReadAsStringAsync();
-
-                string truncatedResponse = htmlString.Length > 300 ? htmlString.Substring(0, 300) + "..." : htmlString;
-
-                _request.text = $"Response: {truncatedResponse}";
-                Debug.Log($"Response: {truncatedResponse}");
+                MsQuic.ThrowIfFailure(ApiTable->StreamOpen(connection, QUIC_STREAM_OPEN_FLAGS.NONE, (delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void*, QUIC_STREAM_EVENT*, int>)streamEventCallbackPtr.ToPointer(), null, pStream));
             }
-        }
-        catch (HttpRequestException ex)
-        {
-            _request.text = $"Request failed: {ex.Message}";
-            Debug.Log($"Request failed: {ex.Message}");
+
+            Debug.Log("Starting...");
+
+            MsQuic.ThrowIfFailure(ApiTable->StreamStart(stream, QUIC_STREAM_START_FLAGS.NONE));
+
+
+            // Send the HTTP GET request through the QUIC stream
+            QUIC_BUFFER buffer = new()
+            {
+                Buffer = (byte*)Marshal.UnsafeAddrOfPinnedArrayElement(requestBytes, 0),
+                Length = (uint)requestBytes.Length
+            };
+
+            Debug.Log("Sending data...");
+
+            // Send the data through the QUIC stream
+            MsQuic.ThrowIfFailure(ApiTable->StreamSend(stream, &buffer, 1, QUIC_SEND_FLAGS.FIN, &buffer));
+
+            Debug.Log("Request sent");
         }
         catch (Exception ex)
         {
-            _request.text = $"Unexpected error: {ex.Message}";
-            Debug.Log($"Unexpected error: {ex.Message}");
+            _statusconnection.text = $"Error sending request: {ex.Message}";
+            Debug.LogError($"Error sending request: {ex.Message}");
         }
+    }
+
+    // Prepare HTTP/3 GET request headers
+    private byte[] PrepareHttp3RequestHeaders(string host, string path)
+    {
+        // HTTP/3 headers for a simple GET request
+        string requestHeaders = $"GET {path} HTTP/3\r\n" +
+                                $":method: GET\r\n" +
+                                $":scheme: https\r\n" +
+                                $":authority: {host}\r\n" +
+                                "accept: text/html\r\n\r\n";
+
+        return Encoding.UTF8.GetBytes(requestHeaders);
     }
 #endif
 }
