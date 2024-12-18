@@ -336,7 +336,7 @@ public class QUICClient : MonoBehaviour
     {
         try
         {
-            string url = "GET /search?q=WildlifeStudios HTTP/3.0\r\nHost: google.com\r\n\r\n";  // A more valid HTTP request
+            string url = "GET /search?q=WildlifeStudios HTTP/3.0\r\nHost: 127.0.0.1\r\n\r\n";  // A more valid HTTP request
             byte[] requestBytes = Encoding.ASCII.GetBytes(url);
 
             // Callback
