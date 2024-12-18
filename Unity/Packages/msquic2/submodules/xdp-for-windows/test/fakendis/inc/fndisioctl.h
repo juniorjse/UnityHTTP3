@@ -1,0 +1,28 @@
+//
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+//
+
+#pragma once
+
+#include <ntdef.h>
+
+#define FNDIS_DEVICE_NAME L"\\Device\\fndis"
+
+#define IOCTL_FNDIS_POLL_GET_BACKCHANNEL \
+    CTL_CODE(FILE_DEVICE_NETWORK, 0x0, METHOD_BUFFERED, FILE_ANY_ACCESS)
+
+#define IOCTL_FNDIS_POLL_GET_ROUTINE_ADDRESS \
+    CTL_CODE(FILE_DEVICE_NETWORK, 0x1, METHOD_BUFFERED, FILE_ANY_ACCESS)
+
+typedef struct _FNDIS_POLL_GET_BACKCHANNEL {
+    VOID *Dispatch;
+} FNDIS_POLL_GET_BACKCHANNEL;
+
+typedef struct _FNDIS_POLL_GET_ROUTINE_ADDRESS_IN {
+    UNICODE_STRING *RoutineName;
+} FNDIS_POLL_GET_ROUTINE_ADDRESS_IN;
+
+typedef struct _FNDIS_POLL_GET_ROUTINE_ADDRESS_OUT {
+    VOID *Routine;
+} FNDIS_POLL_GET_ROUTINE_ADDRESS_OUT;

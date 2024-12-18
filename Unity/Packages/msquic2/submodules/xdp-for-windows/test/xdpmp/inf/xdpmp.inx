@@ -1,0 +1,175 @@
+; Copyright (c) 2020, Microsoft
+
+[Version]
+ CatalogFile = xdpmp.cat
+ Signature  = "$Windows NT$"
+ Class      = Net
+ ClassGUID  = {4d36e972-e325-11ce-bfc1-08002be10318}
+ Provider   = %Msft%
+ DriverVer  = 05/28/2020,1.0.0.0
+ PnpLockdown = 1
+
+[Manufacturer]
+%Msft%=Microsoft, NT$ARCH$
+[Microsoft.NT$ARCH$]
+%xdpmp.DeviceDesc%  = xdpmp.ndi,   ms_xdpmp
+
+[xdpmp.ndi.NT]
+ AddReg            = xdpmp.ndi.params, xdpmp.ndi.reg
+ BusType           = 15
+ Characteristics   = 0x4           ; NCF_PHYSICAL
+ CopyFiles         = xdpmp.CopyFiles
+*IfType            = 6             ; IF_TYPE_ETHERNET_CSMACD
+*MediaType         = 0             ; NdisMedium802_3
+*PhysicalMediaType = 0             ; NdisPhysicalMediumUnspecified
+
+[xdpmp.ndi.reg]
+ HKR, Ndi,                              Service,           0, "xdpmp"
+ HKR, Ndi\Interfaces,                   LowerRange,        0, "ethernet"
+ HKR, Ndi\Interfaces,                   UpperRange,        0, "ndis5"
+
+[xdpmp.ndi.params]
+; RSS
+ HKR, Ndi\Params\*RSS,                  ParamDesc,         0, "Receive Side Scaling"
+ HKR, Ndi\Params\*RSS,                  default,           0, "1"
+ HKR, Ndi\Params\*RSS,                  type,              0, "enum"
+ HKR, Ndi\Params\*RSS\Enum,             "0",               0, %DISABLED_STR%
+ HKR, Ndi\Params\*RSS\Enum,             "1",               0, %ENABLED_STR%
+
+; NumRssQueues
+ HKR, Ndi\Params\*NumRssQueues,         ParamDesc,         0, "NumRSSQueues"
+ HKR, Ndi\Params\*NumRssQueues,         default,           0, "4"
+ HKR, Ndi\Params\*NumRssQueues,         type,              0, "enum"
+ HKR, Ndi\Params\*NumRssQueues\Enum,    "1",               0, "1"
+ HKR, Ndi\Params\*NumRssQueues\Enum,    "2",               0, "2"
+ HKR, Ndi\Params\*NumRssQueues\Enum,    "4",               0, "4"
+ HKR, Ndi\Params\*NumRssQueues\Enum,    "8",               0, "8"
+ HKR, Ndi\Params\*NumRssQueues\Enum,    "16",              0, "16"
+ HKR, Ndi\Params\*NumRssQueues\Enum,    "32",              0, "32"
+ HKR, Ndi\Params\*NumRssQueues\Enum,    "64",              0, "64"
+
+; RssProfile
+ HKR, Ndi\Params\*RSSProfile,           ParamDesc,         0, "RSSProfile"
+ HKR, Ndi\Params\*RSSProfile,           default,           0, "2"
+ HKR, Ndi\Params\*RSSProfile,           type,              0, "enum"
+ HKR, Ndi\Params\*RSSProfile\Enum,      "1",               0, "Closest"
+ HKR, Ndi\Params\*RSSProfile\Enum,      "2",               0, "ClosestStatic"
+ HKR, Ndi\Params\*RSSProfile\Enum,      "3",               0, "NUMA"
+ HKR, Ndi\Params\*RSSProfile\Enum,      "4",               0, "NUMAStatic"
+ HKR, Ndi\Params\*RSSProfile\Enum,      "5",               0, "Conservative"
+
+; MTU
+ HKR, Ndi\Params\MTU,                   ParamDesc,         0, "MTU"
+ HKR, Ndi\Params\MTU,                   default,           0, "16777216"
+ HKR, Ndi\Params\MTU,                   type,              0, "dword"
+ HKR, Ndi\Params\MTU,                   base,              0, "10"
+ HKR, Ndi\Params\MTU,                   min,               0, "1500"
+ HKR, Ndi\Params\MTU,                   max,               0, "4294967295"
+ HKR, Ndi\Params\MTU,                   step,              0, "1"
+
+; TxRingSize
+ HKR, Ndi\Params\TxRingSize,            ParamDesc,         0, "TxRingSize"
+ HKR, Ndi\Params\TxRingSize,            default,           0, "256"
+ HKR, Ndi\Params\TxRingSize,            type,              0, "int"
+ HKR, Ndi\Params\TxRingSize,            min,               0, "1"
+ HKR, Ndi\Params\TxRingSize,            max,               0, "8192"
+ HKR, Ndi\Params\TxRingSize,            step,              0, "1"
+ HKR, Ndi\Params\TxRingSize,            Optional,          0, "0"
+
+; TxXdpQosPct
+ HKR, Ndi\Params\TxXdpQosPct,           ParamDesc,         0, "TxXdpQosPct"
+ HKR, Ndi\Params\TxXdpQosPct,           default,           0, "90"
+ HKR, Ndi\Params\TxXdpQosPct,           type,              0, "int"
+ HKR, Ndi\Params\TxXdpQosPct,           min,               0, "1"
+ HKR, Ndi\Params\TxXdpQosPct,           max,               0, "99"
+ HKR, Ndi\Params\TxXdpQosPct,           step,              0, "1"
+ HKR, Ndi\Params\TxXdpQosPct,           Optional,          0, "0"
+
+; NumRxBuffers
+ HKR, Ndi\Params\NumRxBuffers,          ParamDesc,         0, "NumRxBuffers"
+ HKR, Ndi\Params\NumRxBuffers,          default,           0, "256"
+ HKR, Ndi\Params\NumRxBuffers,          type,              0, "int"
+ HKR, Ndi\Params\NumRxBuffers,          min,               0, "1"
+ HKR, Ndi\Params\NumRxBuffers,          max,               0, "8192"
+ HKR, Ndi\Params\NumRxBuffers,          step,              0, "1"
+ HKR, Ndi\Params\NumRxBuffers,          Optional,          0, "0"
+
+; RxBufferLength
+ HKR, Ndi\Params\RxBufferLength,        ParamDesc,         0, "RxBufferLength"
+ HKR, Ndi\Params\RxBufferLength,        default,           0, "2048"
+ HKR, Ndi\Params\RxBufferLength,        type,              0, "dword"
+ HKR, Ndi\Params\RxBufferLength,        min,               0, "64"
+ HKR, Ndi\Params\RxBufferLength,        max,               0, "65536"
+ HKR, Ndi\Params\RxBufferLength,        step,              0, "64"
+ HKR, Ndi\Params\RxBufferLength,        Optional,          0, "0"
+
+; RxDataLength
+ HKR, Ndi\Params\RxDataLength,          ParamDesc,         0, "RxDataLength"
+ HKR, Ndi\Params\RxDataLength,          default,           0, "64"
+ HKR, Ndi\Params\RxDataLength,          type,              0, "dword"
+ HKR, Ndi\Params\RxDataLength,          min,               0, "64"
+ HKR, Ndi\Params\RxDataLength,          max,               0, "65536"
+ HKR, Ndi\Params\RxDataLength,          step,              0, "1"
+ HKR, Ndi\Params\RxDataLength,          Optional,          0, "0"
+
+; RxPattern
+ HKR, Ndi\Params\RxPattern,             ParamDesc,         0, "RxPattern"
+ HKR, Ndi\Params\RxPattern,             default,           0, ""
+ HKR, Ndi\Params\RxPattern,             type,              0, "edit"
+ HKR, Ndi\Params\RxPattern,             LimitText,         0, "256"
+ HKR, Ndi\Params\RxPattern,             Optional,          0, "1"
+
+; RxPatternCopy
+ HKR, Ndi\Params\RxPatternCopy,         ParamDesc,         0, "RxPatternCopy"
+ HKR, Ndi\Params\RxPatternCopy,         default,           0, "0"
+ HKR, Ndi\Params\RxPatternCopy,         type,              0, "enum"
+ HKR, Ndi\Params\RxPatternCopy\Enum,   "0",               0, %DISABLED_STR%
+ HKR, Ndi\Params\RxPatternCopy\Enum,   "1",               0, %ENABLED_STR%
+
+; PollProvider
+ HKR, Ndi\Params\PollProvider,          ParamDesc,         0, "PollProvider"
+ HKR, Ndi\Params\PollProvider,          default,           0, "0"
+ HKR, Ndi\Params\PollProvider,          type,              0, "enum"
+ HKR, Ndi\Params\PollProvider\Enum,     "0",               0, %POLL_PROVIDER_NDIS%
+ HKR, Ndi\Params\PollProvider\Enum,     "1",               0, %POLL_PROVIDER_FNDIS%
+
+
+[SourceDisksNames]
+ ; diskid = description[, [tagfile] [, <unused>, subdir]]
+ 1 = %xdpmp.DeviceDesc%,,,
+
+[SourceDisksFiles]
+ xdpmp.Sys  = 1,,
+
+[xdpmp.CopyFiles]
+ xdpmp.sys,,,2
+
+[xdpmp.ndi.NT.Services]
+ AddService = xdpmp, 2, xdpmp.Service, xdpmp.AddEventLog
+
+[xdpmp.Service]
+ DisplayName    = %xdpmp.Service.DispName%
+ ServiceType    = 1    ;SERVICE_KERNEL_DRIVER
+ StartType      = 3    ;SERVICE_DEMAND_START
+ ErrorControl   = 1    ;NORMAL
+ ServiceBinary  = %13%\xdpmp.sys
+
+[xdpmp.AddEventLog]
+ AddReg =  xdpmp.AddEventLog.Reg
+
+[xdpmp.AddEventLog.Reg]
+ HKR, , EventMessageFile, 0x00020000, "%%SystemRoot%%\System32\netevent.dll"
+ HKR, , TypesSupported,   0x00010001, 7
+
+[DestinationDirs]
+ DefaultDestDir   = 13 ; Driver Store directory
+ xdpmp.CopyFiles  = 13
+
+[Strings]
+Msft = "Microsoft"
+xdpmp.DeviceDesc         = "XDPMP"
+xdpmp.Service.DispName   = "XDP Test Miniport Adapter Driver"
+ENABLED_STR              = "Enabled"
+DISABLED_STR             = "Disabled"
+POLL_PROVIDER_NDIS       = "NDIS"
+POLL_PROVIDER_FNDIS      = "FNDIS"

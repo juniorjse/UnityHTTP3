@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>library</OutputType>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <NoWarn>1701;1702;3026</NoWarn>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\defaults\defaults.clog.cs" Link="defaults.clog.cs" />
+    <EmbeddedResource Include="..\..\defaults\clog.h" Link="clog.h" />
+    <EmbeddedResource Include="..\..\defaults\defaults.clog_config" Link="defaults.clog_config" />
+    <EmbeddedResource Include="..\..\defaults\CLog.cmake" Link="CLog.cmake" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.8.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Basic.Reference.Assemblies" Version="1.0.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis" Version="3.8.0" />
+    <PackageReference Include="System.CodeDom" Version="4.7.0" />
+  </ItemGroup>
+</Project>

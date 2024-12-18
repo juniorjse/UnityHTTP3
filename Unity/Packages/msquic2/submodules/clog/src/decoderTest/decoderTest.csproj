@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>net6.0</TargetFrameworks>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <NoWarn>1701;1702;3026</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\defaults\defaults.clog.cs" Link="defaults.clog.cs" />
+  </ItemGroup>
+
+</Project>

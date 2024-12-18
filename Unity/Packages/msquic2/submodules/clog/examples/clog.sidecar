@@ -1,0 +1,616 @@
+{
+  "Version": 2,
+  "EventBundlesV2": {
+    "DATA_STRING": {
+      "ModuleProperites": {
+        "MANIFESTED_ETW": {
+          "EventID": "4",
+          "ETWManifestFile": ".\\clogsample\\clog_examples.man",
+          "ETW_Provider": "7EBE92EB-B7AE-4720-B842-FA8798950838",
+          "Level": "win:Informational"
+        }
+      },
+      "TraceString": "2. I am string %s=hello",
+      "UniqueId": "DATA_STRING",
+      "splitArgs": [
+        {
+          "DefinationEncoding": "s",
+          "MacroVariableName": "arg2"
+        }
+      ],
+      "macroName": "TraceInfo"
+    },
+    "DATABYTEARRAY": {
+      "ModuleProperites": {
+        "MANIFESTED_ETW": {
+          "EventID": "5",
+          "ETWManifestFile": ".\\clogsample\\clog_examples.man",
+          "ETW_Provider": "7EBE92EB-B7AE-4720-B842-FA8798950838",
+          "Level": "win:Informational"
+        }
+      },
+      "TraceString": "3. This is a byte array with a custom decoder = %!BYTEARRAY!",
+      "UniqueId": "DATABYTEARRAY",
+      "splitArgs": [
+        {
+          "DefinationEncoding": "!BYTEARRAY!",
+          "MacroVariableName": "arg2"
+        }
+      ],
+      "macroName": "TraceInfo"
+    },
+    "DATACHAR": {
+      "ModuleProperites": {
+        "MANIFESTED_ETW": {
+          "EventID": "6",
+          "ETWManifestFile": ".\\clogsample\\clog_examples.man",
+          "ETW_Provider": "7EBE92EB-B7AE-4720-B842-FA8798950838",
+          "Level": "win:Informational"
+        }
+      },
+      "TraceString": "4. This is a char: %c; it should equal a",
+      "UniqueId": "DATACHAR",
+      "splitArgs": [
+        {
+          "DefinationEncoding": "c",
+          "MacroVariableName": "arg2"
+        }
+      ],
+      "macroName": "TraceInfo"
+    },
+    "DATAINT": {
+      "ModuleProperites": {
+        "MANIFESTED_ETW": {
+          "EventID": "7",
+          "ETWManifestFile": ".\\clogsample\\clog_examples.man",
+          "ETW_Provider": "7EBE92EB-B7AE-4720-B842-FA8798950838",
+          "Level": "win:Informational"
+        }
+      },
+      "TraceString": "5. This is an int: %d;  it should be 1234",
+      "UniqueId": "DATAINT",
+      "splitArgs": [
+        {
+          "DefinationEncoding": "d",
+          "MacroVariableName": "arg2"
+        }
+      ],
+      "macroName": "TraceInfo"
+    },
+    "DATAINT5": {
+      "ModuleProperites": {
+        "MANIFESTED_ETW": {
+          "EventID": "8",
+          "ETWManifestFile": ".\\clogsample\\clog_examples.man",
+          "ETW_Provider": "7EBE92EB-B7AE-4720-B842-FA8798950838",
+          "Level": "win:Informational"
+        }
+      },
+      "TraceString": "6. This is an int: %d;  it should be 1234",
+      "UniqueId": "DATAINT5",
+      "splitArgs": [
+        {
+          "DefinationEncoding": "d",
+          "MacroVariableName": "arg2"
+        }
+      ],
+      "macroName": "TraceInfo"
+    },
+    "INSTANCE_TEST": {
+      "ModuleProperites": {
+        "MANIFESTED_ETW": {
+          "EventID": "9",
+          "ETWManifestFile": ".\\clogsample\\clog_examples.man",
+          "ETW_Provider": "7EBE92EB-B7AE-4720-B842-FA8798950838",
+          "Level": "win:Informational"
+        }
+      },
+      "TraceString": "[%p] 1. 1:%d 2:%s 3:%c 4:%u 5:%hd 6:%lld - you should see 1 2 3 4 5 6",
+      "UniqueId": "INSTANCE_TEST",
+      "splitArgs": [
+        {
+          "DefinationEncoding": "p",
+          "MacroVariableName": "arg1"
+        },
+        {
+          "DefinationEncoding": "d",
+          "MacroVariableName": "arg3"
+        },
+        {
+          "DefinationEncoding": "s",
+          "MacroVariableName": "arg4"
+        },
+        {
+          "DefinationEncoding": "c",
+          "MacroVariableName": "arg5"
+        },
+        {
+          "DefinationEncoding": "u",
+          "MacroVariableName": "arg6"
+        },
+        {
+          "DefinationEncoding": "hd",
+          "MacroVariableName": "arg7"
+        },
+        {
+          "DefinationEncoding": "lld",
+          "MacroVariableName": "arg8"
+        }
+      ],
+      "macroName": "TraceInstanceInfo"
+    },
+    "INT_ERROR": {
+      "ModuleProperites": {},
+      "TraceString": "7. this is an error %d",
+      "UniqueId": "INT_ERROR",
+      "splitArgs": [
+        {
+          "DefinationEncoding": "d",
+          "MacroVariableName": "arg2"
+        }
+      ],
+      "macroName": "TraceError"
+    },
+    "INT_ERROR_2": {
+      "ModuleProperites": {},
+      "TraceString": "8. this is an error %d with a string %s",
+      "UniqueId": "INT_ERROR_2",
+      "splitArgs": [
+        {
+          "DefinationEncoding": "d",
+          "MacroVariableName": "arg2"
+        },
+        {
+          "DefinationEncoding": "s",
+          "MacroVariableName": "arg3"
+        }
+      ],
+      "macroName": "TraceError"
+    },
+    "DATA_NAMED_INT": {
+      "ModuleProperites": {
+        "MANIFESTED_ETW": {
+          "EventID": "11",
+          "ETWManifestFile": ".\\clogsample\\clog_examples.man",
+          "ETW_Provider": "7EBE92EB-B7AE-4720-B842-FA8798950838",
+          "Level": "win:Informational"
+        }
+      },
+      "TraceString": "5. This is a named int: %{myInt,d};  it should be 1234",
+      "UniqueId": "DATA_NAMED_INT",
+      "splitArgs": [
+        {
+          "DefinationEncoding": "d",
+          "MacroVariableName": "arg2",
+          "EventVariableName": "myInt"
+        }
+      ],
+      "macroName": "TraceInfo"
+    },
+    "NO_ARGS": {
+      "ModuleProperites": {},
+      "TraceString": "9. This trace has no args",
+      "UniqueId": "NO_ARGS",
+      "splitArgs": [],
+      "macroName": "TraceError"
+    }
+  },
+  "ConfigFile": {
+    "MacroConfigurations": {
+      "lttng": {
+        "Modules": [
+          {
+            "ExportModule": "LTTNG",
+            "CustomSettings": {}
+          }
+        ]
+      },
+      "etw_info": {
+        "Modules": [
+          {
+            "ExportModule": "MANIFESTED_ETW",
+            "CustomSettings": {
+              "ETWManifestFile": ".\\clogsample\\clog_examples.man",
+              "ETW_Provider": "7EBE92EB-B7AE-4720-B842-FA8798950838",
+              "Level": "win:Informational"
+            }
+          }
+        ]
+      },
+      "etw_errors": {
+        "Modules": [
+          {
+            "ExportModule": "TRACELOGGING",
+            "CustomSettings": {}
+          }
+        ]
+      },
+      "printf": {
+        "Modules": [
+          {
+            "ExportModule": "STDOUT",
+            "CustomSettings": {}
+          }
+        ]
+      },
+      "empty": {
+        "Modules": []
+      }
+    },
+    "Version": 0,
+    "CustomTypeClogCSharpFile": null,
+    "MaximumVariableLength": 20,
+    "TypeEncoders": {
+      "Version": 0,
+      "TypeEncoder": []
+    },
+    "SourceCodeMacros": [
+      {
+        "MacroName": "TraceInfo",
+        "EncodedPrefix": null,
+        "EncodedArgNumber": 1,
+        "MacroConfiguration": {
+          "linux": "lttng",
+          "windows": "etw_info",
+          "printf": "printf"
+        },
+        "CustomSettings": null
+      },
+      {
+        "MacroName": "TraceInstanceInfo",
+        "EncodedPrefix": "[%p] ",
+        "EncodedArgNumber": 2,
+        "MacroConfiguration": {
+          "linux": "lttng",
+          "windows": "etw_info",
+          "printf": "printf"
+        },
+        "CustomSettings": null
+      },
+      {
+        "MacroName": "TraceError",
+        "EncodedPrefix": null,
+        "EncodedArgNumber": 1,
+        "MacroConfiguration": {
+          "linux": "lttng",
+          "windows": "etw_errors",
+          "printf": "printf"
+        },
+        "CustomSettings": null
+      },
+      {
+        "MacroName": "TraceInstanceError",
+        "EncodedPrefix": "[%p] ",
+        "EncodedArgNumber": 2,
+        "MacroConfiguration": {
+          "linux": "lttng",
+          "windows": "etw_errors",
+          "printf": "printf"
+        },
+        "CustomSettings": null
+      }
+    ],
+    "ChainedConfigFiles": [
+      "DEFAULTS"
+    ],
+    "ChainedConfigurations": [
+      {
+        "MacroConfigurations": {},
+        "Version": 1,
+        "CustomTypeClogCSharpFile": "DEFAULTS",
+        "CustomTypeClogCSharpFileContents": "/*++\n\n    Copyright (c) Microsoft Corporation.\n    Licensed under the MIT License.\n\n--*/\n\nnamespace defaults.clog_config\n{\n    public class Types\n    {\n        public static string DecodePointer(ulong pointer)\n        {\n            return \"0x\" + pointer.ToString(\"x\");\n        }\n\n        public static string DecodeChar(byte value)\n        {\n            return ((char)value).ToString();\n        }\n\n        public static string DecodeUInt32(uint value)\n        {\n            return value.ToString();\n        }\n\n        public static string DecodeInt32(int value)\n        {\n            return value.ToString();\n        }\n\n        public static string DecodeInt8(byte value)\n        {\n            return value.ToString();\n        }\n    }\n}\n",
+        "MaximumVariableLength": 20,
+        "TypeEncoders": {
+          "Version": 0,
+          "TypeEncoder": [
+            {
+              "EncodingType": "ByteArray",
+              "CType": "CLOG_PTR",
+              "JavaType": null,
+              "DefinationEncoding": "!BYTEARRAY!"
+            },
+            {
+              "EncodingType": "Int32",
+              "CType": "int",
+              "JavaType": null,
+              "DefinationEncoding": "d"
+            },
+            {
+              "EncodingType": "Int8",
+              "CType": "signed char",
+              "JavaType": null,
+              "DefinationEncoding": "hhd"
+            },
+            {
+              "EncodingType": "Int8",
+              "CType": "signed char",
+              "JavaType": null,
+              "DefinationEncoding": "hhi"
+            },
+            {
+              "EncodingType": "UInt8",
+              "CType": "unsigned char",
+              "JavaType": null,
+              "DefinationEncoding": "hhu"
+            },
+            {
+              "EncodingType": "UInt8",
+              "CType": "unsigned char",
+              "JavaType": null,
+              "DefinationEncoding": "hhx"
+            },
+            {
+              "EncodingType": "UInt8",
+              "CType": "unsigned char",
+              "JavaType": null,
+              "DefinationEncoding": "hhX"
+            },
+            {
+              "EncodingType": "UInt16",
+              "CType": "unsigned short",
+              "JavaType": null,
+              "DefinationEncoding": "hu"
+            },
+            {
+              "EncodingType": "UInt16",
+              "CType": "unsigned short",
+              "JavaType": null,
+              "DefinationEncoding": "hx"
+            },
+            {
+              "EncodingType": "Int16",
+              "CType": "short",
+              "JavaType": null,
+              "DefinationEncoding": "hd"
+            },
+            {
+              "EncodingType": "UInt16",
+              "CType": "unsigned short",
+              "JavaType": null,
+              "DefinationEncoding": "hX"
+            },
+            {
+              "EncodingType": "Int32",
+              "CType": "long int",
+              "JavaType": null,
+              "DefinationEncoding": "ld"
+            },
+            {
+              "EncodingType": "Int64",
+              "CType": "long long int",
+              "JavaType": null,
+              "DefinationEncoding": "lld"
+            },
+            {
+              "EncodingType": "Int64",
+              "CType": "long long int",
+              "JavaType": null,
+              "DefinationEncoding": "lli"
+            },
+            {
+              "EncodingType": "UInt64",
+              "CType": "unsigned long long int",
+              "JavaType": null,
+              "DefinationEncoding": "llu"
+            },
+            {
+              "EncodingType": "UInt64",
+              "CType": "unsigned long long int",
+              "JavaType": null,
+              "DefinationEncoding": "llx"
+            },
+            {
+              "EncodingType": "UInt64",
+              "CType": "unsigned long long int",
+              "JavaType": null,
+              "DefinationEncoding": "llX"
+            },
+            {
+              "EncodingType": "Int32",
+              "CType": "long int",
+              "JavaType": null,
+              "DefinationEncoding": "li"
+            },
+            {
+              "EncodingType": "UInt32",
+              "CType": "unsigned long int",
+              "JavaType": null,
+              "DefinationEncoding": "lu"
+            },
+            {
+              "EncodingType": "UInt32",
+              "CType": "unsigned long int",
+              "JavaType": null,
+              "DefinationEncoding": "lx"
+            },
+            {
+              "EncodingType": "UInt32",
+              "CType": "unsigned long int",
+              "JavaType": null,
+              "DefinationEncoding": "lX"
+            },
+            {
+              "EncodingType": "UNICODE_String",
+              "CType": "const wchar_t *",
+              "JavaType": null,
+              "DefinationEncoding": "ls"
+            },
+            {
+              "EncodingType": "Int64",
+              "CType": "size_t",
+              "JavaType": null,
+              "DefinationEncoding": "zd"
+            },
+            {
+              "EncodingType": "Int64",
+              "CType": "size_t",
+              "JavaType": null,
+              "DefinationEncoding": "zi"
+            },
+            {
+              "EncodingType": "UInt64",
+              "CType": "size_t",
+              "JavaType": null,
+              "DefinationEncoding": "zu"
+            },
+            {
+              "EncodingType": "UInt64",
+              "CType": "size_t",
+              "JavaType": null,
+              "DefinationEncoding": "zx"
+            },
+            {
+              "EncodingType": "UInt64",
+              "CType": "size_t",
+              "JavaType": null,
+              "DefinationEncoding": "zX"
+            },
+            {
+              "EncodingType": "Int64",
+              "CType": "ptrdiff_t",
+              "JavaType": null,
+              "DefinationEncoding": "td"
+            },
+            {
+              "EncodingType": "Int64",
+              "CType": "ptrdiff_t",
+              "JavaType": null,
+              "DefinationEncoding": "ti"
+            },
+            {
+              "EncodingType": "UInt64",
+              "CType": "ptrdiff_t",
+              "JavaType": null,
+              "DefinationEncoding": "tu"
+            },
+            {
+              "EncodingType": "UInt64",
+              "CType": "ptrdiff_t",
+              "JavaType": null,
+              "DefinationEncoding": "tx"
+            },
+            {
+              "EncodingType": "UInt64",
+              "CType": "ptrdiff_t",
+              "JavaType": null,
+              "DefinationEncoding": "tX"
+            },
+            {
+              "EncodingType": "Int32",
+              "CType": "int",
+              "JavaType": null,
+              "DefinationEncoding": "i"
+            },
+            {
+              "EncodingType": "UInt32",
+              "CType": "unsigned int",
+              "JavaType": null,
+              "DefinationEncoding": "u"
+            },
+            {
+              "EncodingType": "UInt32",
+              "CType": "unsigned int",
+              "JavaType": null,
+              "DefinationEncoding": "x"
+            },
+            {
+              "EncodingType": "UInt32",
+              "CType": "unsigned int",
+              "JavaType": null,
+              "DefinationEncoding": "4.4x"
+            },
+            {
+              "EncodingType": "UInt32",
+              "CType": "unsigned int",
+              "JavaType": null,
+              "DefinationEncoding": "X"
+            },
+            {
+              "EncodingType": "UInt8",
+              "CType": "char",
+              "JavaType": null,
+              "DefinationEncoding": "c",
+              "CustomDecoder": "defaults.clog_config.Types.DecodeChar"
+            },
+            {
+              "EncodingType": "ANSI_String",
+              "CType": "const char *",
+              "JavaType": null,
+              "DefinationEncoding": "s"
+            },
+            {
+              "EncodingType": "UNICODE_String",
+              "CType": "const wchar_t *",
+              "JavaType": null,
+              "DefinationEncoding": "S"
+            },
+            {
+              "EncodingType": "Pointer",
+              "CType": "CLOG_PTR",
+              "JavaType": null,
+              "DefinationEncoding": "p",
+              "CustomDecoder": "defaults.clog_config.Types.DecodePointer"
+            }
+          ]
+        },
+        "SourceCodeMacros": [],
+        "ChainedConfigFiles": [],
+        "ChainedConfigurations": []
+      }
+    ]
+  },
+  "ModuleUniqueness": {
+    "TraceInformation": [
+      {
+        "UniquenessHash": "cd0737ad-4546-9d2c-6890-1132b9b30214",
+        "TraceID": "DATA_STRING",
+        "EncodingString": "2. I am string %s=hello"
+      },
+      {
+        "UniquenessHash": "32847a97-a325-9319-c339-fe21e3428571",
+        "TraceID": "DATABYTEARRAY",
+        "EncodingString": "3. This is a byte array with a custom decoder = %!BYTEARRAY!"
+      },
+      {
+        "UniquenessHash": "231b0811-0852-d02c-e48d-01554d92d7d6",
+        "TraceID": "DATACHAR",
+        "EncodingString": "4. This is a char: %c; it should equal a"
+      },
+      {
+        "UniquenessHash": "94b6f09a-1a05-c2da-82ea-8cca90a2fd12",
+        "TraceID": "DATAINT",
+        "EncodingString": "5. This is an int: %d;  it should be 1234"
+      },
+      {
+        "UniquenessHash": "30926746-3fa4-1934-c3dc-5c25217666dd",
+        "TraceID": "DATAINT5",
+        "EncodingString": "6. This is an int: %d;  it should be 1234"
+      },
+      {
+        "UniquenessHash": "7c626bda-19d6-8240-ec6e-0271f541602b",
+        "TraceID": "INSTANCE_TEST",
+        "EncodingString": "[%p] 1. 1:%d 2:%s 3:%c 4:%u 5:%hd 6:%lld - you should see 1 2 3 4 5 6"
+      },
+      {
+        "UniquenessHash": "0df07de0-3380-500a-02b5-85c45e74d3a3",
+        "TraceID": "INT_ERROR",
+        "EncodingString": "7. this is an error %d"
+      },
+      {
+        "UniquenessHash": "7aff5a89-7dec-e219-e250-098606338503",
+        "TraceID": "INT_ERROR_2",
+        "EncodingString": "8. this is an error %d with a string %s"
+      },
+      {
+        "UniquenessHash": "00e55ab5-2581-5789-25d5-069f2b00c9bb",
+        "TraceID": "DATA_NAMED_INT",
+        "EncodingString": "5. This is a named int: %{myInt,d};  it should be 1234"
+      },
+      {
+        "UniquenessHash": "047bd97d-e78c-6e56-2f56-512c2382056e",
+        "TraceID": "NO_ARGS",
+        "EncodingString": "9. This trace has no args"
+      }
+    ]
+  }
+}

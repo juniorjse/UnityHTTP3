@@ -1,0 +1,30 @@
+name: WINDOWS_TEST_BUILD_ETW
+
+on:
+  push:
+    branches:
+    - main
+    - release/*
+
+  pull_request:
+    branches:
+    - main
+    - release/*
+
+jobs:
+  validate:
+    name: Validate(Windows)
+    runs-on: windows-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+
+    - name: Build CLOG and run Tests
+      run: ./runTests.ps1
+      working-directory: ./examples
+      shell: pwsh

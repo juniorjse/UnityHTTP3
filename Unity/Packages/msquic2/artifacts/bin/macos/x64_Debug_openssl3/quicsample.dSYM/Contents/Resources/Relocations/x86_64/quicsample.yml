@@ -1,0 +1,31 @@
+---
+triple:          'x86_64-apple-darwin'
+binary-path:     '/Users/victor/Documents/teste/quic_jr/msquic/artifacts/bin/macos/x64_Debug_openssl3/quicsample'
+relocations:
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _PrintUsage, symObjAddr: 0x0, symBinAddr: 0x100002320, symSize: 0x20 }
+  - { offsetInCU: 0x4D, offset: 0x4D, size: 0x8, addend: 0x0, symName: _RegConfig, symObjAddr: 0x1B58, symBinAddr: 0x100004010, symSize: 0x0 }
+  - { offsetInCU: 0xD8, offset: 0xD8, size: 0x8, addend: 0x0, symName: _Alpn, symObjAddr: 0x1B68, symBinAddr: 0x100004020, symSize: 0x0 }
+  - { offsetInCU: 0x144, offset: 0x144, size: 0x8, addend: 0x0, symName: _UdpPort, symObjAddr: 0x1B78, symBinAddr: 0x100003F48, symSize: 0x0 }
+  - { offsetInCU: 0x170, offset: 0x170, size: 0x8, addend: 0x0, symName: _IdleTimeoutMs, symObjAddr: 0x1B80, symBinAddr: 0x100003F50, symSize: 0x0 }
+  - { offsetInCU: 0x19C, offset: 0x19C, size: 0x8, addend: 0x0, symName: _SendBufferLength, symObjAddr: 0x1B88, symBinAddr: 0x100003F58, symSize: 0x0 }
+  - { offsetInCU: 0x1B6, offset: 0x1B6, size: 0x8, addend: 0x0, symName: _MsQuic, symBinAddr: 0x100005070, symSize: 0x0 }
+  - { offsetInCU: 0x1BDD, offset: 0x1BDD, size: 0x8, addend: 0x0, symName: _Registration, symBinAddr: 0x100005078, symSize: 0x0 }
+  - { offsetInCU: 0x1BF2, offset: 0x1BF2, size: 0x8, addend: 0x0, symName: _Configuration, symBinAddr: 0x100005068, symSize: 0x0 }
+  - { offsetInCU: 0x1C11, offset: 0x1C11, size: 0x8, addend: 0x0, symName: _PrintUsage, symObjAddr: 0x0, symBinAddr: 0x100002320, symSize: 0x20 }
+  - { offsetInCU: 0x1C24, offset: 0x1C24, size: 0x8, addend: 0x0, symName: _GetFlag, symObjAddr: 0x20, symBinAddr: 0x100002340, symSize: 0xB0 }
+  - { offsetInCU: 0x1C73, offset: 0x1C73, size: 0x8, addend: 0x0, symName: _GetValue, symObjAddr: 0xD0, symBinAddr: 0x1000023F0, symSize: 0xA0 }
+  - { offsetInCU: 0x1CC2, offset: 0x1CC2, size: 0x8, addend: 0x0, symName: _DecodeHexChar, symObjAddr: 0x170, symBinAddr: 0x100002490, symSize: 0x40 }
+  - { offsetInCU: 0x1CF7, offset: 0x1CF7, size: 0x8, addend: 0x0, symName: _DecodeHexBuffer, symObjAddr: 0x1B0, symBinAddr: 0x1000024D0, symSize: 0xE0 }
+  - { offsetInCU: 0x1D72, offset: 0x1D72, size: 0x8, addend: 0x0, symName: _ServerSend, symObjAddr: 0x290, symBinAddr: 0x1000025B0, symSize: 0xB0 }
+  - { offsetInCU: 0x1E08, offset: 0x1E08, size: 0x8, addend: 0x0, symName: _ServerStreamCallback, symObjAddr: 0x340, symBinAddr: 0x100002660, symSize: 0xE0 }
+  - { offsetInCU: 0x1E8D, offset: 0x1E8D, size: 0x8, addend: 0x0, symName: _ServerConnectionCallback, symObjAddr: 0x420, symBinAddr: 0x100002740, symSize: 0x140 }
+  - { offsetInCU: 0x1F18, offset: 0x1F18, size: 0x8, addend: 0x0, symName: _ServerListenerCallback, symObjAddr: 0x560, symBinAddr: 0x100002880, symSize: 0x60 }
+  - { offsetInCU: 0x2037, offset: 0x2037, size: 0x8, addend: 0x0, symName: _ServerLoadConfiguration, symObjAddr: 0x5C0, symBinAddr: 0x1000028E0, symSize: 0x470 }
+  - { offsetInCU: 0x22D2, offset: 0x22D2, size: 0x8, addend: 0x0, symName: _RunServer, symObjAddr: 0xA30, symBinAddr: 0x100002D50, symSize: 0xC0 }
+  - { offsetInCU: 0x2400, offset: 0x2400, size: 0x8, addend: 0x0, symName: _ClientStreamCallback, symObjAddr: 0xAF0, symBinAddr: 0x100002E10, symSize: 0xB0 }
+  - { offsetInCU: 0x2459, offset: 0x2459, size: 0x8, addend: 0x0, symName: _ClientSend, symObjAddr: 0xBA0, symBinAddr: 0x100002EC0, symSize: 0x150 }
+  - { offsetInCU: 0x254D, offset: 0x254D, size: 0x8, addend: 0x0, symName: _ClientConnectionCallback, symObjAddr: 0xCF0, symBinAddr: 0x100003010, symSize: 0x170 }
+  - { offsetInCU: 0x25D8, offset: 0x25D8, size: 0x8, addend: 0x0, symName: _ClientLoadConfiguration, symObjAddr: 0xE60, symBinAddr: 0x100003180, symSize: 0x100 }
+  - { offsetInCU: 0x26CB, offset: 0x26CB, size: 0x8, addend: 0x0, symName: _RunClient, symObjAddr: 0xF60, symBinAddr: 0x100003280, symSize: 0x460 }
+  - { offsetInCU: 0x298C, offset: 0x298C, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x13C0, symBinAddr: 0x1000036E0, symSize: 0x21F }
+...

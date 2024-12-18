@@ -1,0 +1,96 @@
+{
+  "MacroConfigurations": {
+    "lttng": {
+      "Modules": [
+        {
+          "ExportModule": "LTTNG",
+          "CustomSettings": {}
+        }
+      ]
+    },
+    "etw_info": {
+      "Modules": [
+        {
+          "ExportModule": "MANIFESTED_ETW",
+          "CustomSettings": {
+            "ETWManifestFile": ".\\clogsample\\clog_examples.man",
+            "ETW_Provider": "7EBE92EB-B7AE-4720-B842-FA8798950838",
+            "Level": "win:Informational"
+          }
+        }
+      ]
+    },
+    "etw_errors": {
+      "Modules": [
+        {
+          "ExportModule": "TRACELOGGING",
+          "CustomSettings": {
+          }
+        }
+      ]
+    },
+    "printf": {
+      "Modules": [
+        {
+          "ExportModule": "STDOUT",
+          "CustomSettings": {
+          }
+        }
+      ]
+    },
+    "empty": {
+      "Modules": []
+    },
+  },
+  "Version": 0,
+  "CustomTypeClogCSharpFile": null,
+  "TypeEncoders": {
+    "Version": 0,
+    "TypeEncoder": []
+  },
+  "SourceCodeMacros": [
+    {
+      "MacroName": "TraceInfo",
+      "EncodedPrefix": null,
+      "EncodedArgNumber": 1,
+      "MacroConfiguration": {
+        "linux": "lttng",
+        "windows": "etw_info",
+        "printf": "printf"
+      }
+    },
+    {
+      "MacroName": "TraceInstanceInfo",
+      "EncodedPrefix": "[%p] ",
+      "EncodedArgNumber": 2,
+      "MacroConfiguration": {
+        "linux": "lttng",
+        "windows": "etw_info",
+        "printf": "printf"
+      }
+    },
+     {
+      "MacroName": "TraceError",
+      "EncodedPrefix": null,
+      "EncodedArgNumber": 1,
+      "MacroConfiguration": {
+        "linux": "lttng",
+        "windows": "etw_errors",
+        "printf": "printf"
+      }
+    },
+    {
+      "MacroName": "TraceInstanceError",
+      "EncodedPrefix": "[%p] ",
+      "EncodedArgNumber": 2,
+      "MacroConfiguration": {
+        "linux": "lttng",
+        "windows": "etw_errors",
+        "printf": "printf"
+      }
+    }
+  ],
+  "ChainedConfigFiles": [
+    "DEFAULTS"
+  ]
+}

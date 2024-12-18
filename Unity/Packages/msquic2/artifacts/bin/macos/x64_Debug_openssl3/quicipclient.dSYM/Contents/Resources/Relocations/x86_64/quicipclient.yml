@@ -1,0 +1,11 @@
+---
+triple:          'x86_64-apple-darwin'
+binary-path:     '/Users/victor/Documents/teste/quic_jr/msquic/artifacts/bin/macos/x64_Debug_openssl3/quicipclient'
+relocations:
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100001EF0, symSize: 0x590 }
+  - { offsetInCU: 0x5748, offset: 0x5748, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100001EF0, symSize: 0x590 }
+  - { offsetInCU: 0x5BBF, offset: 0x5BBF, size: 0x8, addend: 0x0, symName: _QuicAddrFromString, symObjAddr: 0x590, symBinAddr: 0x100002480, symSize: 0x1B0 }
+  - { offsetInCU: 0x5E69, offset: 0x5E69, size: 0x8, addend: 0x0, symName: __Z19MsQuicGetPublicIPExPK14QUIC_API_TABLEP11QUIC_HANDLEPKchP9QUIC_ADDRS7_, symObjAddr: 0x740, symBinAddr: 0x100002630, symSize: 0x390 }
+  - { offsetInCU: 0x6534, offset: 0x6534, size: 0x8, addend: 0x0, symName: __Z24ClientConnectionCallbackP11QUIC_HANDLEPvP21QUIC_CONNECTION_EVENT, symObjAddr: 0xAD0, symBinAddr: 0x1000029C0, symSize: 0xE0 }
+  - { offsetInCU: 0x6625, offset: 0x6625, size: 0x8, addend: 0x0, symName: __Z20ClientStreamCallbackP11QUIC_HANDLEPvP17QUIC_STREAM_EVENT, symObjAddr: 0xBB0, symBinAddr: 0x100002AA0, symSize: 0x138 }
+...
