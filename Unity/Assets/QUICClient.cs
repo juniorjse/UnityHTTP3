@@ -17,11 +17,12 @@ public class QUICClient : MonoBehaviour
     public Text _statusconnection;
     public Text _request;
     private GCHandle _callbackHandle;
-    private unsafe QUIC_HANDLE* connection = null;
-    private unsafe QUIC_HANDLE* registration = null;
-    private unsafe QUIC_HANDLE* configuration = null;
+    private unsafe QUIC_HANDLE* _connection = null;
+    private unsafe QUIC_HANDLE* _registration = null;
+    private unsafe QUIC_HANDLE* _configuration = null;
     private unsafe QUIC_HANDLE* stream = null;
     private unsafe QUIC_API_TABLE* ApiTable;
+    ushort _port = 443;
 
     public void ConnectVerify()
     {
@@ -60,61 +61,95 @@ public class QUICClient : MonoBehaviour
     [DllImport("__Internal")]
     private static extern void getRequestToServer();
 #else
+
+    unsafe void LoadConfiguration(bool isUnsecureConnection)
+    {
+        QUIC_SETTINGS settings = new();
+
+        //
+        // Configures the client's idle timeout.
+        //
+        settings.IdleTimeoutMs = 30000;
+        settings.IsSet.IdleTimeoutMs = 1;
+
+        settings.PeerBidiStreamCount = 1;
+        settings.IsSet.PeerBidiStreamCount = 1;
+
+        //
+        // Configures a default client configuration, optionally disabling
+        // server certificate validation.
+        //
+        QUIC_CREDENTIAL_CONFIG credConfig = new()
+        {
+            Type = QUIC_CREDENTIAL_TYPE.NONE,
+            Flags = QUIC_CREDENTIAL_FLAGS.CLIENT
+        };
+
+        if (isUnsecureConnection)
+        {
+            credConfig.Flags |= QUIC_CREDENTIAL_FLAGS.NO_CERTIFICATE_VALIDATION;
+        }
+
+        // Configures ALPN
+        byte* alpn = stackalloc byte[] { (byte)'h', (byte)'3' }; // Usando HTTP/3
+
+        QUIC_BUFFER buffer = new()
+        {
+            Buffer = alpn,
+            Length = 2
+        };
+
+        //
+        // Allocate/initialize the configuration object, with the configured ALPN
+        // and settings.
+        //
+        fixed (QUIC_HANDLE** pConfiguration = &_configuration)
+        {
+            MsQuic.ThrowIfFailure(ApiTable->ConfigurationOpen(_registration, &buffer, 1, &settings, (uint)sizeof(QUIC_SETTINGS), null, pConfiguration));
+        }
+
+        //
+        // Loads the TLS credential part of the configuration. This is required even
+        // on client side, to indicate if a certificate is required or not.
+        //
+        MsQuic.ThrowIfFailure(ApiTable->ConfigurationLoadCredential(_configuration, &credConfig));
+    }
+
     public void ConnectToQUICUnity()
     {
         try
         {
             unsafe
             {
+                //
+                // Open a handle to the library and get the API function table.
+                //
                 ApiTable = MsQuic.Open();
 
-                // Fixando o ponteiro para registro
-                fixed (QUIC_HANDLE** pRegistration = &registration)
+                //
+                // Create a registration for the app's connections.
+                //
+                fixed (QUIC_HANDLE** pRegistration = &_registration)
                 {
                     MsQuic.ThrowIfFailure(ApiTable->RegistrationOpen(null, pRegistration));
                 }
 
-                // Configurando ALPN
-                byte* alpn = stackalloc byte[] { (byte)'h', (byte)'3' }; // Usando HTTP/3
-                QUIC_BUFFER buffer = new()
-                {
-                    Buffer = alpn,
-                    Length = 2
-                };
-
-                QUIC_SETTINGS settings = new()
-                {
-                    IsSetFlags = 0,
-                    IdleTimeoutMs = 1000
-                };
-                settings.IsSet.IdleTimeoutMs = 1;
-                settings.IsSet.PeerBidiStreamCount = 1;
-                settings.PeerBidiStreamCount = 1;
-                settings.IsSet.PeerUnidiStreamCount = 1;
-                settings.PeerUnidiStreamCount = 3;
-
-                // Fixando o ponteiro para configuração
-                fixed (QUIC_HANDLE** pConfiguration = &configuration)
-                {
-                    MsQuic.ThrowIfFailure(ApiTable->ConfigurationOpen(registration, &buffer, 1, &settings, (uint)sizeof(QUIC_SETTINGS), null, pConfiguration));
-                }
-
-                QUIC_CREDENTIAL_CONFIG credConfig = new()
-                {
-                    Type = QUIC_CREDENTIAL_TYPE.NONE,
-                    Flags = QUIC_CREDENTIAL_FLAGS.CLIENT | QUIC_CREDENTIAL_FLAGS.NO_CERTIFICATE_VALIDATION
-                };
-                MsQuic.ThrowIfFailure(ApiTable->ConfigurationLoadCredential(configuration, &credConfig));
+                //
+                // Load the client configuration based on the 'unsecure' value
+                //
+                LoadConfiguration(true);
 
                 // Callback
                 NativeCallbackDelegate clientConnectionCallback = ClientConnectionCallback;
                 _callbackHandle = GCHandle.Alloc(clientConnectionCallback);
                 IntPtr clientConnectionCallbackPtr = Marshal.GetFunctionPointerForDelegate(clientConnectionCallback);
 
-                // Fixando o ponteiro para conexão
-                fixed (QUIC_HANDLE** pConnection = &connection)
+                //
+                // Allocate a new connection object.
+                //
+                fixed (QUIC_HANDLE** pConnection = &_connection)
                 {
-                    MsQuic.ThrowIfFailure(ApiTable->ConnectionOpen(registration, (delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void*, QUIC_CONNECTION_EVENT*, int>)clientConnectionCallbackPtr.ToPointer(), null, pConnection));
+                    MsQuic.ThrowIfFailure(ApiTable->ConnectionOpen(_registration, (delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void*, QUIC_CONNECTION_EVENT*, int>)clientConnectionCallbackPtr.ToPointer(), null, pConnection));
                 }
 
                 // Resolve DNS para "google.com" antes de se conectar
@@ -124,15 +159,17 @@ public class QUICClient : MonoBehaviour
                     throw new Exception("Falha ao resolver DNS.");
                 }
 
-                // Inicia a conexão
-                sbyte* target = stackalloc sbyte[50];
-                int written = Encoding.UTF8.GetBytes(ipAddresses[0].ToString(), new Span<byte>(target, 50));
+                string ipAddress = "127.0.0.1";
+                int ipLength = Encoding.UTF8.GetByteCount(ipAddress);
+
+                sbyte* target = stackalloc sbyte[ipLength + 1];
+                int written = Encoding.UTF8.GetBytes(ipAddress, new Span<byte>(target, ipLength));
                 target[written] = 0;
 
-                MsQuic.ThrowIfFailure(ApiTable->ConnectionStart(connection, configuration, (ushort)MsQuic.QUIC_ADDRESS_FAMILY_UNSPEC, target, 4567));
+                MsQuic.ThrowIfFailure(ApiTable->ConnectionStart(_connection, _configuration, (ushort)MsQuic.QUIC_ADDRESS_FAMILY_UNSPEC, target, 8081));
                 Thread.Sleep(1000);
                 _statusconnection.text = "Status: connected";
-                Debug.Log("Connection started to google.com");
+                Debug.Log("Connection started to " + ipAddress);
             }
         }
         catch (Exception ex)
@@ -148,26 +185,26 @@ public class QUICClient : MonoBehaviour
         {
             unsafe
             {
-                if (connection == null)
+                if (_connection == null)
                 {
                     Debug.Log("No active connection to disconnect.");
                     return;
                 }
                 Thread.Sleep(1000);
                 Debug.Log("Disconnecting...");
-                ApiTable->ConnectionShutdown(connection, QUIC_CONNECTION_SHUTDOWN_FLAGS.NONE, 0);
-                ApiTable->ConnectionClose(connection);
-                connection = null;
+                ApiTable->ConnectionShutdown(_connection, QUIC_CONNECTION_SHUTDOWN_FLAGS.NONE, 0);
+                ApiTable->ConnectionClose(_connection);
+                _connection = null;
 
-                if (configuration != null)
+                if (_configuration != null)
                 {
-                    ApiTable->ConfigurationClose(configuration);
-                    configuration = null;
+                    ApiTable->ConfigurationClose(_configuration);
+                    _configuration = null;
                 }
-                if (registration != null)
+                if (_registration != null)
                 {
-                    ApiTable->RegistrationClose(registration);
-                    registration = null;
+                    ApiTable->RegistrationClose(_registration);
+                    _registration = null;
                 }
 
                 if (_callbackHandle.IsAllocated)
@@ -186,12 +223,35 @@ public class QUICClient : MonoBehaviour
         }
     }
 
+    public void OnResponse(string resp)
+    {
+        UnityMainThreadDispatcher.Enqueue(() =>
+        {
+            _request.text = "Response: " + resp;
+        }
+        );
+    }
+
     public unsafe int StreamEventCallback(QUIC_HANDLE* streamHandle, void* context, QUIC_STREAM_EVENT* streamEvent)
     {
         switch (streamEvent->Type)
         {
             case QUIC_STREAM_EVENT_TYPE.RECEIVE:
                 Debug.Log("Data received on stream.");
+                var receiveBuffer = streamEvent->RECEIVE.Buffers;
+
+                if (receiveBuffer != null && receiveBuffer->Length > 0)
+                {
+                    byte[] receivedData = new byte[receiveBuffer->Length];
+                    Marshal.Copy((IntPtr)receiveBuffer->Buffer, receivedData, 0, (int)receiveBuffer->Length);
+
+                    Debug.Log($"Data received: {BitConverter.ToString(receivedData)}");
+
+                    // Decode the received bytes, as it is a normal text, it's enough to decode with utf8
+                    string receivedString = Encoding.UTF8.GetString(receivedData);
+
+                    OnResponse(receivedString);
+                }
                 break;
             case QUIC_STREAM_EVENT_TYPE.SEND_COMPLETE:
                 Debug.Log("Data Sent.");
@@ -231,29 +291,43 @@ public class QUICClient : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Shut down by transport, " + evnt->SHUTDOWN_INITIATED_BY_TRANSPORT.Status);
+                    Debug.Log("Shut down by transport: " + evnt->SHUTDOWN_INITIATED_BY_TRANSPORT.Status);
+                    return evnt->SHUTDOWN_INITIATED_BY_TRANSPORT.Status;
                 }
                 break;
             case QUIC_CONNECTION_EVENT_TYPE.SHUTDOWN_INITIATED_BY_PEER:
-                Debug.Log("Shut down by peer, " + (ulong)evnt->SHUTDOWN_INITIATED_BY_PEER.ErrorCode);
+                Debug.Log("Shut down by peer, " + evnt->SHUTDOWN_INITIATED_BY_PEER.ErrorCode);
                 break;
             case QUIC_CONNECTION_EVENT_TYPE.SHUTDOWN_COMPLETE:
                 Debug.Log("All done!");
                 if (evnt->SHUTDOWN_COMPLETE.AppCloseInProgress == 0)
                 {
-                    ApiTable->ConnectionClose(connection);
+                    ApiTable->ConnectionClose(_connection);
                 }
                 break;
+            case QUIC_CONNECTION_EVENT_TYPE.RESUMPTION_TICKET_RECEIVED:
+                Debug.Log("Resumption ticket received " + evnt->RESUMPTION_TICKET_RECEIVED.ResumptionTicketLength);
+                for (int i = 0; i < evnt->RESUMPTION_TICKET_RECEIVED.ResumptionTicketLength; i++)
+                {
+                    Debug.Log(evnt->RESUMPTION_TICKET_RECEIVED.ResumptionTicket[i]);
+                }
+                break;
+            case QUIC_CONNECTION_EVENT_TYPE.PEER_STREAM_STARTED:
+                //
+                // The peer has started/created a new stream. The app MUST set the
+                // callback handler before returning.
+                //
+                Debug.Log("Peer started.");
 
-        }
-        if (evnt->Type == QUIC_CONNECTION_EVENT_TYPE.CONNECTED)
-        {
-            Debug.Log("Connection established.");
-        }
+                StreamCallbackDelegate streamEventCallback = StreamEventCallback;
+                _callbackHandle = GCHandle.Alloc(streamEventCallback);
+                IntPtr streamEventCallbackPtr = Marshal.GetFunctionPointerForDelegate(streamEventCallback);
+                ApiTable->SetCallbackHandler(evnt->PEER_STREAM_STARTED.Stream, streamEventCallbackPtr.ToPointer(), null);
+                break;
+            default:
+                Debug.Log("Other connection event: " + evnt->Type);
+                break;
 
-        if (evnt->Type == QUIC_CONNECTION_EVENT_TYPE.PEER_STREAM_STARTED)
-        {
-            return MsQuic.QUIC_STATUS_ABORTED;
         }
 
         return MsQuic.QUIC_STATUS_SUCCESS;
@@ -264,7 +338,7 @@ public class QUICClient : MonoBehaviour
     {
         try
         {
-            string url = "www.google.com/search?q=WildlifeStudios";
+            string url = "GET /search?q=WildlifeStudios HTTP/3.0\r\nHost: 127.0.0.1\r\n\r\n";  // A more valid HTTP request
             byte[] requestBytes = Encoding.ASCII.GetBytes(url);
 
             // Callback
@@ -275,27 +349,30 @@ public class QUICClient : MonoBehaviour
 
             fixed (QUIC_HANDLE** pStream = &stream)
             {
-                MsQuic.ThrowIfFailure(ApiTable->StreamOpen(connection, QUIC_STREAM_OPEN_FLAGS.NONE, (delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void*, QUIC_STREAM_EVENT*, int>)streamEventCallbackPtr.ToPointer(), null, pStream));
+                MsQuic.ThrowIfFailure(ApiTable->StreamOpen(_connection, QUIC_STREAM_OPEN_FLAGS.NONE, (delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void*, QUIC_STREAM_EVENT*, int>)streamEventCallbackPtr.ToPointer(), null, pStream), "StreamOpen failed.");
             }
 
             Debug.Log("Starting...");
 
-            MsQuic.ThrowIfFailure(ApiTable->StreamStart(stream, QUIC_STREAM_START_FLAGS.NONE));
+            MsQuic.ThrowIfFailure(ApiTable->StreamStart(stream, QUIC_STREAM_START_FLAGS.NONE), "StreamStart failed.");
 
 
             // Send the HTTP GET request through the QUIC stream
-            QUIC_BUFFER buffer = new()
+            fixed (byte* requestPtr = requestBytes)
             {
-                Buffer = (byte*)Marshal.UnsafeAddrOfPinnedArrayElement(requestBytes, 0),
-                Length = (uint)requestBytes.Length
-            };
+                QUIC_BUFFER buffer = new()
+                {
+                    Buffer = requestPtr,
+                    Length = (uint)requestBytes.Length
+                };
 
-            Debug.Log("Sending data...");
+                Debug.Log("Sending data...");
 
-            // Send the data through the QUIC stream
-            MsQuic.ThrowIfFailure(ApiTable->StreamSend(stream, &buffer, 1, QUIC_SEND_FLAGS.FIN, &buffer));
+                // Send the HTTP GET request through the QUIC stream
+                MsQuic.ThrowIfFailure(ApiTable->StreamSend(stream, &buffer, 1, QUIC_SEND_FLAGS.NONE, null), "StreamSend failed.");
 
-            Debug.Log("Request sent");
+                Debug.Log("Request sent.");
+            }
         }
         catch (Exception ex)
         {

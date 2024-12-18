@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets/QUICClient.cs" />
+    <Compile Include="Assets/UnityMainThreadDispatcher.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

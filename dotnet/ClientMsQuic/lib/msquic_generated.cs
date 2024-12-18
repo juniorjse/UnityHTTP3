@@ -2418,7 +2418,7 @@ namespace Microsoft.Quic
             }
         }
 
-        internal ref _Anonymous_e__Union._PEER_STREAM_STARTED_e__Struct PEER_STREAM_STARTED
+        public ref _Anonymous_e__Union._PEER_STREAM_STARTED_e__Struct PEER_STREAM_STARTED
         {
             get
             {
@@ -2482,7 +2482,7 @@ namespace Microsoft.Quic
             }
         }
 
-        internal ref _Anonymous_e__Union._RESUMPTION_TICKET_RECEIVED_e__Struct RESUMPTION_TICKET_RECEIVED
+        public ref _Anonymous_e__Union._RESUMPTION_TICKET_RECEIVED_e__Struct RESUMPTION_TICKET_RECEIVED
         {
             get
             {
@@ -2551,7 +2551,7 @@ namespace Microsoft.Quic
 
             [FieldOffset(0)]
             [NativeTypeName("struct (anonymous struct)")]
-            internal _PEER_STREAM_STARTED_e__Struct PEER_STREAM_STARTED;
+            public _PEER_STREAM_STARTED_e__Struct PEER_STREAM_STARTED;
 
             [FieldOffset(0)]
             [NativeTypeName("struct (anonymous struct)")]
@@ -2583,7 +2583,7 @@ namespace Microsoft.Quic
 
             [FieldOffset(0)]
             [NativeTypeName("struct (anonymous struct)")]
-            internal _RESUMPTION_TICKET_RECEIVED_e__Struct RESUMPTION_TICKET_RECEIVED;
+            public _RESUMPTION_TICKET_RECEIVED_e__Struct RESUMPTION_TICKET_RECEIVED;
 
             [FieldOffset(0)]
             [NativeTypeName("struct (anonymous struct)")]
@@ -2687,10 +2687,10 @@ namespace Microsoft.Quic
                 public QuicAddr* Address;
             }
 
-            internal unsafe partial struct _PEER_STREAM_STARTED_e__Struct
+            public unsafe partial struct _PEER_STREAM_STARTED_e__Struct
             {
                 [NativeTypeName("HQUIC")]
-                internal QUIC_HANDLE* Stream;
+                public QUIC_HANDLE* Stream;
 
                 internal QUIC_STREAM_OPEN_FLAGS Flags;
             }
@@ -2752,13 +2752,13 @@ namespace Microsoft.Quic
                 internal byte* ResumptionState;
             }
 
-            internal unsafe partial struct _RESUMPTION_TICKET_RECEIVED_e__Struct
+            public unsafe partial struct _RESUMPTION_TICKET_RECEIVED_e__Struct
             {
                 [NativeTypeName("uint32_t")]
-                internal uint ResumptionTicketLength;
+                public uint ResumptionTicketLength;
 
                 [NativeTypeName("const uint8_t *")]
-                internal byte* ResumptionTicket;
+                public byte* ResumptionTicket;
             }
 
             internal unsafe partial struct _PEER_CERTIFICATE_RECEIVED_e__Struct
@@ -3122,7 +3122,7 @@ namespace Microsoft.Quic
         internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void*> GetContext;
 
         [NativeTypeName("QUIC_SET_CALLBACK_HANDLER_FN")]
-        internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void*, void*, void> SetCallbackHandler;
+        public delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void*, void*, void> SetCallbackHandler;
 
         [NativeTypeName("QUIC_SET_PARAM_FN")]
         public delegate* unmanaged[Cdecl]<QUIC_HANDLE*, uint, uint, void*, int> SetParam;
