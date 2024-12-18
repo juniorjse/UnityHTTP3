@@ -1,0 +1,6 @@
+framework module QUICClient {
+  umbrella header "QUICClient.h"
+  export *
+
+  module * { export * }
+}
