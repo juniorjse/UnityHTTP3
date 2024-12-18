@@ -20,7 +20,7 @@ public class QUICClient : MonoBehaviour
     private unsafe QUIC_HANDLE* _connection = null;
     private unsafe QUIC_HANDLE* _registration = null;
     private unsafe QUIC_HANDLE* _configuration = null;
-    private unsafe QUIC_HANDLE* stream = null;
+    private unsafe QUIC_HANDLE* _stream = null;
     private unsafe QUIC_API_TABLE* ApiTable;
     ushort _port = 443;
 
@@ -64,7 +64,10 @@ public class QUICClient : MonoBehaviour
 
     unsafe void LoadConfiguration(bool isUnsecureConnection)
     {
-        QUIC_SETTINGS settings = new();
+        QUIC_SETTINGS settings = new()
+        {
+            IsSetFlags = 0
+        };
 
         //
         // Configures the client's idle timeout.
@@ -75,6 +78,8 @@ public class QUICClient : MonoBehaviour
         settings.PeerBidiStreamCount = 1;
         settings.IsSet.PeerBidiStreamCount = 1;
 
+        settings.IsSet.PeerUnidiStreamCount = 1;
+        settings.PeerUnidiStreamCount = 3;
         //
         // Configures a default client configuration, optionally disabling
         // server certificate validation.
@@ -152,24 +157,17 @@ public class QUICClient : MonoBehaviour
                     MsQuic.ThrowIfFailure(ApiTable->ConnectionOpen(_registration, (delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void*, QUIC_CONNECTION_EVENT*, int>)clientConnectionCallbackPtr.ToPointer(), null, pConnection));
                 }
 
-                // Resolve DNS para "google.com" antes de se conectar
-                var ipAddresses = Dns.GetHostAddresses("google.com");
-                if (ipAddresses.Length == 0)
-                {
-                    throw new Exception("Falha ao resolver DNS.");
-                }
+                string server = "127.0.0.1";
+                int targetLength = Encoding.UTF8.GetByteCount(server);
 
-                string ipAddress = "127.0.0.1";
-                int ipLength = Encoding.UTF8.GetByteCount(ipAddress);
-
-                sbyte* target = stackalloc sbyte[ipLength + 1];
-                int written = Encoding.UTF8.GetBytes(ipAddress, new Span<byte>(target, ipLength));
+                sbyte* target = stackalloc sbyte[targetLength + 1];
+                int written = Encoding.UTF8.GetBytes(server, new Span<byte>(target, targetLength));
                 target[written] = 0;
 
                 MsQuic.ThrowIfFailure(ApiTable->ConnectionStart(_connection, _configuration, (ushort)MsQuic.QUIC_ADDRESS_FAMILY_UNSPEC, target, 8081));
                 Thread.Sleep(1000);
                 _statusconnection.text = "Status: connected";
-                Debug.Log("Connection started to " + ipAddress);
+                Debug.Log("Connection started to " + server);
             }
         }
         catch (Exception ex)
@@ -266,11 +264,11 @@ public class QUICClient : MonoBehaviour
                 Debug.Log("All done!");
                 if (streamEvent->SHUTDOWN_COMPLETE.AppCloseInProgress == 0)
                 {
-                    ApiTable->StreamClose(stream);
+                    ApiTable->StreamClose(_stream);
                 }
                 break;
             default:
-                Debug.Log("Other stream event.");
+                Debug.Log("Other stream event: " + streamEvent->Type);
                 break;
         }
 
@@ -347,14 +345,14 @@ public class QUICClient : MonoBehaviour
             IntPtr streamEventCallbackPtr = Marshal.GetFunctionPointerForDelegate(streamEventCallback);
 
 
-            fixed (QUIC_HANDLE** pStream = &stream)
+            fixed (QUIC_HANDLE** pStream = &_stream)
             {
                 MsQuic.ThrowIfFailure(ApiTable->StreamOpen(_connection, QUIC_STREAM_OPEN_FLAGS.NONE, (delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void*, QUIC_STREAM_EVENT*, int>)streamEventCallbackPtr.ToPointer(), null, pStream), "StreamOpen failed.");
             }
 
             Debug.Log("Starting...");
 
-            MsQuic.ThrowIfFailure(ApiTable->StreamStart(stream, QUIC_STREAM_START_FLAGS.NONE), "StreamStart failed.");
+            MsQuic.ThrowIfFailure(ApiTable->StreamStart(_stream, QUIC_STREAM_START_FLAGS.NONE), "StreamStart failed.");
 
 
             // Send the HTTP GET request through the QUIC stream
@@ -369,7 +367,7 @@ public class QUICClient : MonoBehaviour
                 Debug.Log("Sending data...");
 
                 // Send the HTTP GET request through the QUIC stream
-                MsQuic.ThrowIfFailure(ApiTable->StreamSend(stream, &buffer, 1, QUIC_SEND_FLAGS.NONE, null), "StreamSend failed.");
+                MsQuic.ThrowIfFailure(ApiTable->StreamSend(_stream, &buffer, 1, QUIC_SEND_FLAGS.NONE, null), "StreamSend failed.");
 
                 Debug.Log("Request sent.");
             }
