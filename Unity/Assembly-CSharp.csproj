@@ -1088,7 +1088,6 @@
     <ProjectReference Include="Unity.VisualScripting.SettingsProvider.Editor.csproj" />
     <ProjectReference Include="Unity.VisualScripting.State.Editor.csproj" />
     <ProjectReference Include="Unity.Mathematics.csproj" />
-    <ProjectReference Include="Unity.VSCode.Editor.csproj" />
     <ProjectReference Include="Unity.AdaptivePerformance.UI.Editor.csproj" />
     <ProjectReference Include="Unity.VisualScripting.State.csproj" />
     <ProjectReference Include="Unity.2D.SpriteShape.Editor.csproj" />

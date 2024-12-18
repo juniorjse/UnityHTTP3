@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using Microsoft.Quic;
 using System.Text;
 using System.Threading;
+using System.Net.Http;
+using System.Net;
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 public unsafe delegate int NativeCallbackDelegate(QUIC_HANDLE* handle, void* context, QUIC_CONNECTION_EVENT* evnt);
@@ -14,211 +16,98 @@ public class QUICClient : MonoBehaviour
     public Text _statusconnection;
     public Text _request;
     private GCHandle _callbackHandle;
+    // Definir a DLL do msquic
+    private const string MsquicDll = "msquic.dll";
 
-    public void ConnectVerify()
+    // Função de P/Invoke para abrir a biblioteca msquic
+    [DllImport(MsquicDll, SetLastError = true)]
+    private static extern int MsQuicOpen(IntPtr config, out IntPtr handle);
+
+    // Função para fechar a conexão QUIC
+    [DllImport(MsquicDll, SetLastError = true)]
+    private static extern int MsQuicClose(IntPtr handle);
+
+    // Função para iniciar a negociação de handshake QUIC
+    [DllImport(MsquicDll, SetLastError = true)]
+    private static extern int MsQuicStart(IntPtr handle);
+
+    // Função para enviar dados QUIC
+    [DllImport(MsquicDll, SetLastError = true)]
+    private static extern int MsQuicSend(IntPtr handle, byte[] buffer, int length);
+
+    // Função para receber dados QUIC
+    [DllImport(MsquicDll, SetLastError = true)]
+    private static extern int MsQuicRecv(IntPtr handle, byte[] buffer, int length);
+
+    public void Teste()
     {
-#if UNITY_IOS
-        ConnectToQUIC("www.google.com", 443);
-#else
-        ConnectToQUICUnity();
-#endif
-    }
 
-    public void DisconnectVerify()
-    {
-#if UNITY_IOS
-        DisconnectFromQUIC();
-#else
-        DisconnectFromUnityQUIC();
-#endif
-    }
-
-    public void RequestVerify()
-    {
-#if UNITY_IOS
-        GetRequestToServer($"https://www.google.com/search?q=WildlifeStudios&tbm=nws");
-#else
-        Request();
-#endif
-    }
-
-#if UNITY_IOS
-    [DllImport("__Internal")]
-    private static extern void connectToQUIC(string host, int port);
-
-    [DllImport("__Internal")]
-    private static extern void disconnectFromQUIC();
-
-    [DllImport("__Internal")]
-    private static extern void getRequestToServer(string url);
-
-    public void ConnectToQUIC(string host, int port)
-    {
+    
+        IntPtr msquicHandle = IntPtr.Zero;
         try
         {
-            connectToQUIC(host, port);
-            Debug.Log("Status: connected");
-        }
-        catch (Exception ex)
-        {
-            Debug.Log($"Error: {ex.Message}");
-        }
-    }
-
-    public void DisconnectFromQUIC()
-    {
-        try
-        {
-            disconnectFromQUIC();
-            Debug.Log("Status: disconnected");
-        }
-        catch (Exception ex)
-        {
-            Debug.Log($"Error: {ex.Message}");
-        }
-    }
-
-    public void GetRequestToServer(string url)
-    {
-        try
-        {
-            getRequestToServer(url);
-            Debug.Log("Request sent. Waiting for response...");
-        }
-        catch (Exception ex)
-        {
-            Debug.Log($"Error: {ex.Message}");
-        }
-    }
-#else
-
-    public void AndroidConnectQuic()
-    {   
-        AndroidJavaObject instance = new AndroidJavaObject("com.example.quicconnectionwrapper.QuicInstructions");
-        _statusconnection.text = instance.Call<string>("QuicAndroidConnect");
-    }
-    public void ConnectToQUICUnity()
-    {
-        try
-        {
-            unsafe
+            // Abrir a biblioteca msquic
+            int result = MsQuicOpen(IntPtr.Zero, out msquicHandle);
+            if (result != 0 || msquicHandle == IntPtr.Zero)
             {
-                var ApiTable = MsQuic.Open();
-                QUIC_HANDLE* registration = null;
-                QUIC_HANDLE* configuration = null;
-                QUIC_HANDLE* connection = null;
+                Console.WriteLine("Erro ao abrir msquic.");
+                return;
+            }
 
-                try
-                {
-                    MsQuic.ThrowIfFailure(ApiTable->RegistrationOpen(null, &registration));
+            Debug.Log("msquic aberto com sucesso.");
 
-                    byte* alpn = stackalloc byte[] { (byte)'h', (byte)'3' };
-                    QUIC_BUFFER buffer = new()
-                    {
-                        Buffer = alpn,
-                        Length = 2
-                    };
+            // Iniciar a negociação QUIC
+            result = MsQuicStart(msquicHandle);
+            if (result != 0)
+            {
+                Debug.Log("Erro ao iniciar QUIC.");
+                return;
+            }
 
-                    QUIC_SETTINGS settings = new()
-                    {
-                        IsSetFlags = 0
-                    };
-                    settings.IsSet.PeerBidiStreamCount = 1;
-                    settings.PeerBidiStreamCount = 1;
-                    settings.IsSet.PeerUnidiStreamCount = 1;
-                    settings.PeerUnidiStreamCount = 3;
+            Debug.Log("HandShake QUIC iniciado.");
 
-                    MsQuic.ThrowIfFailure(ApiTable->ConfigurationOpen(registration, &buffer, 1, &settings, (uint)sizeof(QUIC_SETTINGS), null, &configuration));
+            // Enviar dados para o servidor
+            var dataToSend = System.Text.Encoding.UTF8.GetBytes("Exemplo de dados QUIC");
+            result = MsQuicSend(msquicHandle, dataToSend, dataToSend.Length);
+            if (result != 0)
+            {
+                Debug.Log("Erro ao enviar dados.");
+                return;
+            }
 
-                    QUIC_CREDENTIAL_CONFIG config = new()
-                    {
-                        Flags = QUIC_CREDENTIAL_FLAGS.CLIENT
-                    };
-                    MsQuic.ThrowIfFailure(ApiTable->ConfigurationLoadCredential(configuration, &config));
+            Debug.Log("Dados enviados com sucesso.");
 
-                    // Crie uma instância do delegate
-                    NativeCallbackDelegate callbackDelegate = NativeCallback;
+            // Receber dados do servidor
+            byte[] buffer = new byte[1024];
+            result = MsQuicRecv(msquicHandle, buffer, buffer.Length);
+            if (result != 0)
+            {
+                Debug.Log("Erro ao receber dados.");
+                return;
+            }
 
-                    // Mantenha uma referência ao delegate para evitar coleta de lixo
-                    _callbackHandle = GCHandle.Alloc(callbackDelegate);
+            Debug.Log("Dados recebidos: " + System.Text.Encoding.UTF8.GetString(buffer));
 
-                    // Converta o delegate para um ponteiro de função
-                    IntPtr callbackPtr = Marshal.GetFunctionPointerForDelegate(callbackDelegate);
-                    MsQuic.ThrowIfFailure(ApiTable->ConnectionOpen(registration, (delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void*, QUIC_CONNECTION_EVENT*, int>)callbackPtr.ToPointer(), ApiTable, &connection));
-
-                    sbyte* google = stackalloc sbyte[50];
-                    int written = Encoding.UTF8.GetBytes("google.com", new Span<byte>(google, 50));
-                    google[written] = 0;
-
-                    MsQuic.ThrowIfFailure(ApiTable->ConnectionStart(connection, configuration, 0, google, 443));
-                    Thread.Sleep(1000);
-                    _statusconnection.text = "Status: connected";
-                }
-                finally
-                {
-                    if (connection != null)
-                    {
-                        ApiTable->ConnectionShutdown(connection, QUIC_CONNECTION_SHUTDOWN_FLAGS.NONE, 0);
-                        ApiTable->ConnectionClose(connection);
-                    }
-                    if (configuration != null)
-                    {
-                        ApiTable->ConfigurationClose(configuration);
-                    }
-                    if (registration != null)
-                    {
-                        ApiTable->RegistrationClose(registration);
-                    }
-
-                    // Libere o GCHandle
-                    if (_callbackHandle.IsAllocated)
-                    {
-                        _callbackHandle.Free();
-                    }
-                }
+        }
+        catch (Exception ex)
+        {
+            Debug.Log("Erro geral: " + ex.Message);
+        }
+        finally
+        {
+            // Fechar a conexão
+            if (msquicHandle != IntPtr.Zero)
+            {
+                MsQuicClose(msquicHandle);
+                Debug.Log("Conexão QUIC fechada.");
             }
         }
-        catch (Exception ex)
-        {
-            _statusconnection.text = $"Status: {ex.Message}";
-            Debug.Log("Erro: " + ex.Message);
-        }
     }
-
-    public void DisconnectFromUnityQUIC()
-    {
-        _statusconnection.text = "Status: disconnected";
-    }
-
-    private static unsafe int NativeCallback(QUIC_HANDLE* handle, void* context, QUIC_CONNECTION_EVENT* evnt)
-    {
-        Debug.Log($"Connection event received: {evnt->Type}");
-        if (evnt->Type == QUIC_CONNECTION_EVENT_TYPE.CONNECTED)
-        {
-            QUIC_API_TABLE* ApiTable = (QUIC_API_TABLE*)context;
-            void* buf = stackalloc byte[128];
-            uint len = 128;
-            if (MsQuic.StatusSucceeded(ApiTable->GetParam(handle, MsQuic.QUIC_PARAM_CONN_REMOTE_ADDRESS, &len, buf)))
-            {
-                QuicAddr* addr = (QuicAddr*)(buf);
-                Debug.Log($"Connected Family: {addr->Family}");
-            }
-        }
-        if (evnt->Type == QUIC_CONNECTION_EVENT_TYPE.PEER_STREAM_STARTED)
-        {
-            Debug.Log("Aborting Stream");
-            return MsQuic.QUIC_STATUS_ABORTED;
-        }
-        if (evnt->Type == QUIC_CONNECTION_EVENT_TYPE.SHUTDOWN_INITIATED_BY_TRANSPORT)
-        {
-            Debug.Log($"{evnt->SHUTDOWN_INITIATED_BY_TRANSPORT.Status.ToString("X8")}: {MsQuicException.GetErrorCodeForStatus(evnt->SHUTDOWN_INITIATED_BY_TRANSPORT.Status)}");
-        }
-        return MsQuic.QUIC_STATUS_SUCCESS;
-    }
-
-    public void Request()
-    {
-        _request.text = "Response: Request sent!";
-    }
-#endif
 }
+
+
+
+
+
+          
+
