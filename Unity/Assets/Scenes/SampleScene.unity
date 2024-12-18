@@ -1088,8 +1088,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 521718693}
-        m_TargetAssemblyTypeName: MsQuicUnity, Assembly-CSharp
-        m_MethodName: Request
+        m_TargetAssemblyTypeName: QUICClient, Assembly-CSharp
+        m_MethodName: RequestVerify
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

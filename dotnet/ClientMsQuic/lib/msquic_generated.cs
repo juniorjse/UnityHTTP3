@@ -63,7 +63,7 @@ namespace Microsoft.Quic
         MAX = 255,
     }
 
-    internal enum QUIC_CREDENTIAL_TYPE
+    public enum QUIC_CREDENTIAL_TYPE
     {
         NONE,
         CERTIFICATE_HASH,
@@ -146,7 +146,7 @@ namespace Microsoft.Quic
     }
 
     [System.Flags]
-    internal enum QUIC_STREAM_OPEN_FLAGS
+    public enum QUIC_STREAM_OPEN_FLAGS
     {
         NONE = 0x0000,
         UNIDIRECTIONAL = 0x0001,
@@ -155,7 +155,7 @@ namespace Microsoft.Quic
     }
 
     [System.Flags]
-    internal enum QUIC_STREAM_START_FLAGS
+    public enum QUIC_STREAM_START_FLAGS
     {
         NONE = 0x0000,
         IMMEDIATE = 0x0001,
@@ -178,7 +178,7 @@ namespace Microsoft.Quic
     }
 
     [System.Flags]
-    internal enum QUIC_RECEIVE_FLAGS
+    public enum QUIC_RECEIVE_FLAGS
     {
         NONE = 0x0000,
         ZERO_RTT = 0x0001,
@@ -186,7 +186,7 @@ namespace Microsoft.Quic
     }
 
     [System.Flags]
-    internal enum QUIC_SEND_FLAGS
+    public enum QUIC_SEND_FLAGS
     {
         NONE = 0x0000,
         ALLOW_0_RTT = 0x0001,
@@ -292,7 +292,7 @@ namespace Microsoft.Quic
 
     public unsafe partial struct QUIC_CREDENTIAL_CONFIG
     {
-        internal QUIC_CREDENTIAL_TYPE Type;
+        public QUIC_CREDENTIAL_TYPE Type;
 
         public QUIC_CREDENTIAL_FLAGS Flags;
 
@@ -1074,7 +1074,7 @@ namespace Microsoft.Quic
         internal ulong HandshakeIdleTimeoutMs;
 
         [NativeTypeName("uint64_t")]
-        internal ulong IdleTimeoutMs;
+        public ulong IdleTimeoutMs;
 
         [NativeTypeName("uint64_t")]
         internal ulong MtuDiscoverySearchCompleteTimeoutUs;
@@ -1406,7 +1406,7 @@ namespace Microsoft.Quic
                 }
 
                 [NativeTypeName("uint64_t : 1")]
-                internal ulong IdleTimeoutMs
+                public ulong IdleTimeoutMs
                 {
                     get
                     {
@@ -2386,7 +2386,7 @@ namespace Microsoft.Quic
             }
         }
 
-        internal ref _Anonymous_e__Union._SHUTDOWN_INITIATED_BY_PEER_e__Struct SHUTDOWN_INITIATED_BY_PEER
+        public ref _Anonymous_e__Union._SHUTDOWN_INITIATED_BY_PEER_e__Struct SHUTDOWN_INITIATED_BY_PEER
         {
             get
             {
@@ -2394,7 +2394,7 @@ namespace Microsoft.Quic
             }
         }
 
-        internal ref _Anonymous_e__Union._SHUTDOWN_COMPLETE_e__Struct SHUTDOWN_COMPLETE
+        public ref _Anonymous_e__Union._SHUTDOWN_COMPLETE_e__Struct SHUTDOWN_COMPLETE
         {
             get
             {
@@ -2418,7 +2418,7 @@ namespace Microsoft.Quic
             }
         }
 
-        internal ref _Anonymous_e__Union._PEER_STREAM_STARTED_e__Struct PEER_STREAM_STARTED
+        public ref _Anonymous_e__Union._PEER_STREAM_STARTED_e__Struct PEER_STREAM_STARTED
         {
             get
             {
@@ -2482,7 +2482,7 @@ namespace Microsoft.Quic
             }
         }
 
-        internal ref _Anonymous_e__Union._RESUMPTION_TICKET_RECEIVED_e__Struct RESUMPTION_TICKET_RECEIVED
+        public ref _Anonymous_e__Union._RESUMPTION_TICKET_RECEIVED_e__Struct RESUMPTION_TICKET_RECEIVED
         {
             get
             {
@@ -2535,11 +2535,11 @@ namespace Microsoft.Quic
 
             [FieldOffset(0)]
             [NativeTypeName("struct (anonymous struct)")]
-            internal _SHUTDOWN_INITIATED_BY_PEER_e__Struct SHUTDOWN_INITIATED_BY_PEER;
+            public _SHUTDOWN_INITIATED_BY_PEER_e__Struct SHUTDOWN_INITIATED_BY_PEER;
 
             [FieldOffset(0)]
             [NativeTypeName("struct (anonymous struct)")]
-            internal _SHUTDOWN_COMPLETE_e__Struct SHUTDOWN_COMPLETE;
+            public _SHUTDOWN_COMPLETE_e__Struct SHUTDOWN_COMPLETE;
 
             [FieldOffset(0)]
             [NativeTypeName("struct (anonymous struct)")]
@@ -2551,7 +2551,7 @@ namespace Microsoft.Quic
 
             [FieldOffset(0)]
             [NativeTypeName("struct (anonymous struct)")]
-            internal _PEER_STREAM_STARTED_e__Struct PEER_STREAM_STARTED;
+            public _PEER_STREAM_STARTED_e__Struct PEER_STREAM_STARTED;
 
             [FieldOffset(0)]
             [NativeTypeName("struct (anonymous struct)")]
@@ -2583,7 +2583,7 @@ namespace Microsoft.Quic
 
             [FieldOffset(0)]
             [NativeTypeName("struct (anonymous struct)")]
-            internal _RESUMPTION_TICKET_RECEIVED_e__Struct RESUMPTION_TICKET_RECEIVED;
+            public _RESUMPTION_TICKET_RECEIVED_e__Struct RESUMPTION_TICKET_RECEIVED;
 
             [FieldOffset(0)]
             [NativeTypeName("struct (anonymous struct)")]
@@ -2622,13 +2622,13 @@ namespace Microsoft.Quic
                 public ulong ErrorCode;
             }
 
-            internal partial struct _SHUTDOWN_INITIATED_BY_PEER_e__Struct
+            public partial struct _SHUTDOWN_INITIATED_BY_PEER_e__Struct
             {
                 [NativeTypeName("QUIC_UINT62")]
-                internal ulong ErrorCode;
+                public ulong ErrorCode;
             }
 
-            internal partial struct _SHUTDOWN_COMPLETE_e__Struct
+            public partial struct _SHUTDOWN_COMPLETE_e__Struct
             {
                 internal byte _bitfield;
 
@@ -2661,7 +2661,7 @@ namespace Microsoft.Quic
                 }
 
                 [NativeTypeName("BOOLEAN : 1")]
-                internal byte AppCloseInProgress
+                public byte AppCloseInProgress
                 {
                     get
                     {
@@ -2687,10 +2687,10 @@ namespace Microsoft.Quic
                 public QuicAddr* Address;
             }
 
-            internal unsafe partial struct _PEER_STREAM_STARTED_e__Struct
+            public unsafe partial struct _PEER_STREAM_STARTED_e__Struct
             {
                 [NativeTypeName("HQUIC")]
-                internal QUIC_HANDLE* Stream;
+                public QUIC_HANDLE* Stream;
 
                 internal QUIC_STREAM_OPEN_FLAGS Flags;
             }
@@ -2752,13 +2752,13 @@ namespace Microsoft.Quic
                 internal byte* ResumptionState;
             }
 
-            internal unsafe partial struct _RESUMPTION_TICKET_RECEIVED_e__Struct
+            public unsafe partial struct _RESUMPTION_TICKET_RECEIVED_e__Struct
             {
                 [NativeTypeName("uint32_t")]
-                internal uint ResumptionTicketLength;
+                public uint ResumptionTicketLength;
 
                 [NativeTypeName("const uint8_t *")]
-                internal byte* ResumptionTicket;
+                public byte* ResumptionTicket;
             }
 
             internal unsafe partial struct _PEER_CERTIFICATE_RECEIVED_e__Struct
@@ -3122,7 +3122,7 @@ namespace Microsoft.Quic
         internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void*> GetContext;
 
         [NativeTypeName("QUIC_SET_CALLBACK_HANDLER_FN")]
-        internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void*, void*, void> SetCallbackHandler;
+        public delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void*, void*, void> SetCallbackHandler;
 
         [NativeTypeName("QUIC_SET_PARAM_FN")]
         public delegate* unmanaged[Cdecl]<QUIC_HANDLE*, uint, uint, void*, int> SetParam;
@@ -3182,19 +3182,19 @@ namespace Microsoft.Quic
         public delegate* unmanaged[Cdecl]<QUIC_HANDLE*, QUIC_STREAM_OPEN_FLAGS, delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void*, QUIC_STREAM_EVENT*, int>, void*, QUIC_HANDLE**, int> StreamOpen;
 
         [NativeTypeName("QUIC_STREAM_CLOSE_FN")]
-        internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void> StreamClose;
+        public delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void> StreamClose;
 
         [NativeTypeName("QUIC_STREAM_START_FN")]
-        internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, QUIC_STREAM_START_FLAGS, int> StreamStart;
+        public delegate* unmanaged[Cdecl]<QUIC_HANDLE*, QUIC_STREAM_START_FLAGS, int> StreamStart;
 
         [NativeTypeName("QUIC_STREAM_SHUTDOWN_FN")]
         public delegate* unmanaged[Cdecl]<QUIC_HANDLE*, QUIC_STREAM_SHUTDOWN_FLAGS, ulong, int> StreamShutdown;
 
         [NativeTypeName("QUIC_STREAM_SEND_FN")]
-        internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, QUIC_BUFFER*, uint, QUIC_SEND_FLAGS, void*, int> StreamSend;
+        public delegate* unmanaged[Cdecl]<QUIC_HANDLE*, QUIC_BUFFER*, uint, QUIC_SEND_FLAGS, void*, int> StreamSend;
 
         [NativeTypeName("QUIC_STREAM_RECEIVE_COMPLETE_FN")]
-        internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, ulong, void> StreamReceiveComplete;
+        public delegate* unmanaged[Cdecl]<QUIC_HANDLE*, ulong, void> StreamReceiveComplete;
 
         [NativeTypeName("QUIC_STREAM_RECEIVE_SET_ENABLED_FN")]
         public delegate* unmanaged[Cdecl]<QUIC_HANDLE*, byte, int> StreamReceiveSetEnabled;
