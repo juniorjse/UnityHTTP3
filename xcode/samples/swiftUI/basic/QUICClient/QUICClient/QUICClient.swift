@@ -7,6 +7,8 @@ import Foundation
 import Network
 
 @objc public class FrameworkQUICClient: NSObject {
+
+    @objc public static let shared = FrameworkQUICClient()
     
     @objc public override init() {
         super.init()

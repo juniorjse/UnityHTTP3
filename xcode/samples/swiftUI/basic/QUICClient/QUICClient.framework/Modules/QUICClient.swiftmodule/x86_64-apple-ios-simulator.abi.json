@@ -27,6 +27,59 @@
         "printedName": "FrameworkQUICClient",
         "children": [
           {
+            "kind": "Var",
+            "name": "shared",
+            "printedName": "shared",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "FrameworkQUICClient",
+                "printedName": "QUICClient.FrameworkQUICClient",
+                "usr": "c:@M@QUICClient@objc(cs)FrameworkQUICClient"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@QUICClient@objc(cs)FrameworkQUICClient(cpy)shared",
+            "mangledName": "$s10QUICClient09FrameworkA0C6sharedACvpZ",
+            "moduleName": "QUICClient",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "HasStorage",
+              "AccessControl",
+              "ObjC"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "FrameworkQUICClient",
+                    "printedName": "QUICClient.FrameworkQUICClient",
+                    "usr": "c:@M@QUICClient@objc(cs)FrameworkQUICClient"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@QUICClient@objc(cs)FrameworkQUICClient(cm)shared",
+                "mangledName": "$s10QUICClient09FrameworkA0C6sharedACvgZ",
+                "moduleName": "QUICClient",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final",
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
             "kind": "Constructor",
             "name": "init",
             "printedName": "init()",

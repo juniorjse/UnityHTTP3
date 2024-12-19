@@ -1,12 +1,8 @@
-using System.Net.Http;
 using System;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Net;
 using UnityEngine;
 using UnityEngine.UI;
 using Microsoft.Quic;
-using System.Threading;
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 public unsafe delegate int NativeCallbackDelegate(QUIC_HANDLE* handle, void* context, QUIC_CONNECTION_EVENT* evnt);

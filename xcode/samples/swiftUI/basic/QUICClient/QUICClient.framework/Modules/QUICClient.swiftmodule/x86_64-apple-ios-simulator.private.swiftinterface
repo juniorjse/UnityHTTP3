@@ -9,6 +9,7 @@ import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
 @_inheritsConvenienceInitializers @objc public class FrameworkQUICClient : ObjectiveC.NSObject {
+  @objc public static let shared: QUICClient.FrameworkQUICClient
   @objc override dynamic public init()
   @objc public func connectToQUIC()
   @objc public func disconnectFromQUIC()
