@@ -13,7 +13,7 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 10
+  serializedVersion: 9
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
@@ -38,12 +38,13 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 13
-  m_BakeOnSceneLoad: 0
+  serializedVersion: 12
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -66,6 +67,9 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
+    m_FinalGather: 0
+    m_FinalGatherFiltering: 1
+    m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
     m_MixedBakeMode: 2
     m_BakeBackend: 0
@@ -281,8 +285,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: script, Assembly-CSharp
+      - m_Target: {fileID: 521718693}
+        m_TargetAssemblyTypeName: QUICClient, Assembly-CSharp
         m_MethodName: DisconnectVerify
         m_Mode: 1
         m_Arguments:
@@ -447,7 +451,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -523,7 +527,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 521718694}
-  - component: {fileID: 521718695}
+  - component: {fileID: 521718693}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -531,6 +535,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &521718693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 521718692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a064d3bcac04493b8f63d126bc541b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _statusconnection: {fileID: 589941030}
+  _request: {fileID: 1180583837}
 --- !u!4 &521718694
 Transform:
   m_ObjectHideFlags: 0
@@ -546,20 +564,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &521718695
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 521718692}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a064d3bcac04493b8f63d126bc541b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _statusconnection: {fileID: 589941030}
-  _request: {fileID: 1180583837}
 --- !u!1 &562092423
 GameObject:
   m_ObjectHideFlags: 0
@@ -719,7 +723,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: 'Status: N/A'
 --- !u!114 &589941031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -758,8 +762,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3.5155, y: 281.84045}
-  m_SizeDelta: {x: 647.03, y: 881.2579}
+  m_AnchoredPosition: {x: 2.5663, y: 217.54727}
+  m_SizeDelta: {x: 654.0632, y: 696.5547}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &786337958
 GameObject:
@@ -844,21 +848,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 521718695}
+      - m_Target: {fileID: 521718693}
         m_TargetAssemblyTypeName: QUICClient, Assembly-CSharp
-        m_MethodName: Teste
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: script, Assembly-CSharp
-        m_MethodName: ButtonFunction2
+        m_MethodName: AndroidConnection
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -941,8 +933,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.5663, y: 221}
-  m_SizeDelta: {x: 654.0632, y: 337.6491}
+  m_AnchoredPosition: {x: 2.5663, y: 93.39816}
+  m_SizeDelta: {x: 654.0632, y: 82.4455}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1180583836
 MonoBehaviour:
@@ -1083,9 +1075,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: script, Assembly-CSharp
-        m_MethodName: RequestVerify
+      - m_Target: {fileID: 521718693}
+        m_TargetAssemblyTypeName: MsQuicUnity, Assembly-CSharp
+        m_MethodName: Request
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

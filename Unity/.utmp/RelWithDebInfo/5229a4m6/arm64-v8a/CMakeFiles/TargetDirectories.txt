@@ -1,5 +1,0 @@
-/Users/pedromalaquias/Documents/UnityHTTP3/Unity/.utmp/RelWithDebInfo/5229a4m6/arm64-v8a/CMakeFiles/edit_cache.dir
-/Users/pedromalaquias/Documents/UnityHTTP3/Unity/.utmp/RelWithDebInfo/5229a4m6/arm64-v8a/CMakeFiles/rebuild_cache.dir
-/Users/pedromalaquias/Documents/UnityHTTP3/Unity/.utmp/RelWithDebInfo/5229a4m6/arm64-v8a/FramePacing/CMakeFiles/swappywrapper.dir
-/Users/pedromalaquias/Documents/UnityHTTP3/Unity/.utmp/RelWithDebInfo/5229a4m6/arm64-v8a/FramePacing/CMakeFiles/edit_cache.dir
-/Users/pedromalaquias/Documents/UnityHTTP3/Unity/.utmp/RelWithDebInfo/5229a4m6/arm64-v8a/FramePacing/CMakeFiles/rebuild_cache.dir

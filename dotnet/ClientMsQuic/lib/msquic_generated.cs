@@ -63,7 +63,7 @@ namespace Microsoft.Quic
         MAX = 255,
     }
 
-    internal enum QUIC_CREDENTIAL_TYPE
+    public enum QUIC_CREDENTIAL_TYPE
     {
         NONE,
         CERTIFICATE_HASH,
@@ -146,7 +146,7 @@ namespace Microsoft.Quic
     }
 
     [System.Flags]
-    internal enum QUIC_STREAM_OPEN_FLAGS
+    public enum QUIC_STREAM_OPEN_FLAGS
     {
         NONE = 0x0000,
         UNIDIRECTIONAL = 0x0001,
@@ -155,7 +155,7 @@ namespace Microsoft.Quic
     }
 
     [System.Flags]
-    internal enum QUIC_STREAM_START_FLAGS
+    public enum QUIC_STREAM_START_FLAGS
     {
         NONE = 0x0000,
         IMMEDIATE = 0x0001,
@@ -178,7 +178,7 @@ namespace Microsoft.Quic
     }
 
     [System.Flags]
-    internal enum QUIC_RECEIVE_FLAGS
+    public enum QUIC_RECEIVE_FLAGS
     {
         NONE = 0x0000,
         ZERO_RTT = 0x0001,
@@ -186,7 +186,7 @@ namespace Microsoft.Quic
     }
 
     [System.Flags]
-    internal enum QUIC_SEND_FLAGS
+    public enum QUIC_SEND_FLAGS
     {
         NONE = 0x0000,
         ALLOW_0_RTT = 0x0001,
@@ -292,7 +292,7 @@ namespace Microsoft.Quic
 
     public unsafe partial struct QUIC_CREDENTIAL_CONFIG
     {
-        internal QUIC_CREDENTIAL_TYPE Type;
+        public QUIC_CREDENTIAL_TYPE Type;
 
         public QUIC_CREDENTIAL_FLAGS Flags;
 
@@ -1074,7 +1074,7 @@ namespace Microsoft.Quic
         internal ulong HandshakeIdleTimeoutMs;
 
         [NativeTypeName("uint64_t")]
-        internal ulong IdleTimeoutMs;
+        public ulong IdleTimeoutMs;
 
         [NativeTypeName("uint64_t")]
         internal ulong MtuDiscoverySearchCompleteTimeoutUs;
@@ -1406,7 +1406,7 @@ namespace Microsoft.Quic
                 }
 
                 [NativeTypeName("uint64_t : 1")]
-                internal ulong IdleTimeoutMs
+                public ulong IdleTimeoutMs
                 {
                     get
                     {
@@ -2386,7 +2386,7 @@ namespace Microsoft.Quic
             }
         }
 
-        internal ref _Anonymous_e__Union._SHUTDOWN_INITIATED_BY_PEER_e__Struct SHUTDOWN_INITIATED_BY_PEER
+        public ref _Anonymous_e__Union._SHUTDOWN_INITIATED_BY_PEER_e__Struct SHUTDOWN_INITIATED_BY_PEER
         {
             get
             {
@@ -2394,7 +2394,7 @@ namespace Microsoft.Quic
             }
         }
 
-        internal ref _Anonymous_e__Union._SHUTDOWN_COMPLETE_e__Struct SHUTDOWN_COMPLETE
+        public ref _Anonymous_e__Union._SHUTDOWN_COMPLETE_e__Struct SHUTDOWN_COMPLETE
         {
             get
             {
@@ -2535,11 +2535,11 @@ namespace Microsoft.Quic
 
             [FieldOffset(0)]
             [NativeTypeName("struct (anonymous struct)")]
-            internal _SHUTDOWN_INITIATED_BY_PEER_e__Struct SHUTDOWN_INITIATED_BY_PEER;
+            public _SHUTDOWN_INITIATED_BY_PEER_e__Struct SHUTDOWN_INITIATED_BY_PEER;
 
             [FieldOffset(0)]
             [NativeTypeName("struct (anonymous struct)")]
-            internal _SHUTDOWN_COMPLETE_e__Struct SHUTDOWN_COMPLETE;
+            public _SHUTDOWN_COMPLETE_e__Struct SHUTDOWN_COMPLETE;
 
             [FieldOffset(0)]
             [NativeTypeName("struct (anonymous struct)")]
@@ -2622,13 +2622,13 @@ namespace Microsoft.Quic
                 public ulong ErrorCode;
             }
 
-            internal partial struct _SHUTDOWN_INITIATED_BY_PEER_e__Struct
+            public partial struct _SHUTDOWN_INITIATED_BY_PEER_e__Struct
             {
                 [NativeTypeName("QUIC_UINT62")]
-                internal ulong ErrorCode;
+                public ulong ErrorCode;
             }
 
-            internal partial struct _SHUTDOWN_COMPLETE_e__Struct
+            public partial struct _SHUTDOWN_COMPLETE_e__Struct
             {
                 internal byte _bitfield;
 
@@ -2661,7 +2661,7 @@ namespace Microsoft.Quic
                 }
 
                 [NativeTypeName("BOOLEAN : 1")]
-                internal byte AppCloseInProgress
+                public byte AppCloseInProgress
                 {
                     get
                     {
@@ -2814,7 +2814,7 @@ namespace Microsoft.Quic
         }
     }
 
-    internal enum QUIC_STREAM_EVENT_TYPE
+    public enum QUIC_STREAM_EVENT_TYPE
     {
         START_COMPLETE = 0,
         RECEIVE = 1,
@@ -2829,14 +2829,14 @@ namespace Microsoft.Quic
         CANCEL_ON_LOSS = 10,
     }
 
-    internal partial struct QUIC_STREAM_EVENT
+    public partial struct QUIC_STREAM_EVENT
     {
-        internal QUIC_STREAM_EVENT_TYPE Type;
+        public QUIC_STREAM_EVENT_TYPE Type;
 
         [NativeTypeName("QUIC_STREAM_EVENT::(anonymous union)")]
-        internal _Anonymous_e__Union Anonymous;
+        public _Anonymous_e__Union Anonymous;
 
-        internal ref _Anonymous_e__Union._START_COMPLETE_e__Struct START_COMPLETE
+        public ref _Anonymous_e__Union._START_COMPLETE_e__Struct START_COMPLETE
         {
             get
             {
@@ -2844,7 +2844,7 @@ namespace Microsoft.Quic
             }
         }
 
-        internal ref _Anonymous_e__Union._RECEIVE_e__Struct RECEIVE
+        public ref _Anonymous_e__Union._RECEIVE_e__Struct RECEIVE
         {
             get
             {
@@ -2852,7 +2852,7 @@ namespace Microsoft.Quic
             }
         }
 
-        internal ref _Anonymous_e__Union._SEND_COMPLETE_e__Struct SEND_COMPLETE
+        public ref _Anonymous_e__Union._SEND_COMPLETE_e__Struct SEND_COMPLETE
         {
             get
             {
@@ -2860,7 +2860,7 @@ namespace Microsoft.Quic
             }
         }
 
-        internal ref _Anonymous_e__Union._PEER_SEND_ABORTED_e__Struct PEER_SEND_ABORTED
+        public ref _Anonymous_e__Union._PEER_SEND_ABORTED_e__Struct PEER_SEND_ABORTED
         {
             get
             {
@@ -2868,7 +2868,7 @@ namespace Microsoft.Quic
             }
         }
 
-        internal ref _Anonymous_e__Union._PEER_RECEIVE_ABORTED_e__Struct PEER_RECEIVE_ABORTED
+        public ref _Anonymous_e__Union._PEER_RECEIVE_ABORTED_e__Struct PEER_RECEIVE_ABORTED
         {
             get
             {
@@ -2876,7 +2876,7 @@ namespace Microsoft.Quic
             }
         }
 
-        internal ref _Anonymous_e__Union._SEND_SHUTDOWN_COMPLETE_e__Struct SEND_SHUTDOWN_COMPLETE
+        public ref _Anonymous_e__Union._SEND_SHUTDOWN_COMPLETE_e__Struct SEND_SHUTDOWN_COMPLETE
         {
             get
             {
@@ -2884,7 +2884,7 @@ namespace Microsoft.Quic
             }
         }
 
-        internal ref _Anonymous_e__Union._SHUTDOWN_COMPLETE_e__Struct SHUTDOWN_COMPLETE
+        public ref _Anonymous_e__Union._SHUTDOWN_COMPLETE_e__Struct SHUTDOWN_COMPLETE
         {
             get
             {
@@ -2892,7 +2892,7 @@ namespace Microsoft.Quic
             }
         }
 
-        internal ref _Anonymous_e__Union._IDEAL_SEND_BUFFER_SIZE_e__Struct IDEAL_SEND_BUFFER_SIZE
+        public ref _Anonymous_e__Union._IDEAL_SEND_BUFFER_SIZE_e__Struct IDEAL_SEND_BUFFER_SIZE
         {
             get
             {
@@ -2900,7 +2900,7 @@ namespace Microsoft.Quic
             }
         }
 
-        internal ref _Anonymous_e__Union._CANCEL_ON_LOSS_e__Struct CANCEL_ON_LOSS
+        public ref _Anonymous_e__Union._CANCEL_ON_LOSS_e__Struct CANCEL_ON_LOSS
         {
             get
             {
@@ -2909,56 +2909,56 @@ namespace Microsoft.Quic
         }
 
         [StructLayout(LayoutKind.Explicit)]
-        internal partial struct _Anonymous_e__Union
+        public partial struct _Anonymous_e__Union
         {
             [FieldOffset(0)]
             [NativeTypeName("struct (anonymous struct)")]
-            internal _START_COMPLETE_e__Struct START_COMPLETE;
+            public _START_COMPLETE_e__Struct START_COMPLETE;
 
             [FieldOffset(0)]
             [NativeTypeName("struct (anonymous struct)")]
-            internal _RECEIVE_e__Struct RECEIVE;
+            public _RECEIVE_e__Struct RECEIVE;
 
             [FieldOffset(0)]
             [NativeTypeName("struct (anonymous struct)")]
-            internal _SEND_COMPLETE_e__Struct SEND_COMPLETE;
+            public _SEND_COMPLETE_e__Struct SEND_COMPLETE;
 
             [FieldOffset(0)]
             [NativeTypeName("struct (anonymous struct)")]
-            internal _PEER_SEND_ABORTED_e__Struct PEER_SEND_ABORTED;
+            public _PEER_SEND_ABORTED_e__Struct PEER_SEND_ABORTED;
 
             [FieldOffset(0)]
             [NativeTypeName("struct (anonymous struct)")]
-            internal _PEER_RECEIVE_ABORTED_e__Struct PEER_RECEIVE_ABORTED;
+            public _PEER_RECEIVE_ABORTED_e__Struct PEER_RECEIVE_ABORTED;
 
             [FieldOffset(0)]
             [NativeTypeName("struct (anonymous struct)")]
-            internal _SEND_SHUTDOWN_COMPLETE_e__Struct SEND_SHUTDOWN_COMPLETE;
+            public _SEND_SHUTDOWN_COMPLETE_e__Struct SEND_SHUTDOWN_COMPLETE;
 
             [FieldOffset(0)]
             [NativeTypeName("struct (anonymous struct)")]
-            internal _SHUTDOWN_COMPLETE_e__Struct SHUTDOWN_COMPLETE;
+            public _SHUTDOWN_COMPLETE_e__Struct SHUTDOWN_COMPLETE;
 
             [FieldOffset(0)]
             [NativeTypeName("struct (anonymous struct)")]
-            internal _IDEAL_SEND_BUFFER_SIZE_e__Struct IDEAL_SEND_BUFFER_SIZE;
+            public _IDEAL_SEND_BUFFER_SIZE_e__Struct IDEAL_SEND_BUFFER_SIZE;
 
             [FieldOffset(0)]
             [NativeTypeName("struct (anonymous struct)")]
-            internal _CANCEL_ON_LOSS_e__Struct CANCEL_ON_LOSS;
+            public _CANCEL_ON_LOSS_e__Struct CANCEL_ON_LOSS;
 
-            internal partial struct _START_COMPLETE_e__Struct
+            public partial struct _START_COMPLETE_e__Struct
             {
                 [NativeTypeName("HRESULT")]
-                internal int Status;
+                public int Status;
 
                 [NativeTypeName("QUIC_UINT62")]
-                internal ulong ID;
+                public ulong ID;
 
-                internal byte _bitfield;
+                public byte _bitfield;
 
                 [NativeTypeName("BOOLEAN : 1")]
-                internal byte PeerAccepted
+                public byte PeerAccepted
                 {
                     get
                     {
@@ -2972,7 +2972,7 @@ namespace Microsoft.Quic
                 }
 
                 [NativeTypeName("BOOLEAN : 7")]
-                internal byte RESERVED
+                public byte RESERVED
                 {
                     get
                     {
@@ -2986,58 +2986,58 @@ namespace Microsoft.Quic
                 }
             }
 
-            internal unsafe partial struct _RECEIVE_e__Struct
+            public unsafe partial struct _RECEIVE_e__Struct
             {
                 [NativeTypeName("uint64_t")]
-                internal ulong AbsoluteOffset;
+                public ulong AbsoluteOffset;
 
                 [NativeTypeName("uint64_t")]
-                internal ulong TotalBufferLength;
+                public ulong TotalBufferLength;
 
                 [NativeTypeName("const QUIC_BUFFER *")]
                 public QUIC_BUFFER* Buffers;
 
                 [NativeTypeName("uint32_t")]
-                internal uint BufferCount;
+                public uint BufferCount;
 
-                internal QUIC_RECEIVE_FLAGS Flags;
+                public QUIC_RECEIVE_FLAGS Flags;
             }
 
-            internal unsafe partial struct _SEND_COMPLETE_e__Struct
+            public unsafe partial struct _SEND_COMPLETE_e__Struct
             {
                 [NativeTypeName("BOOLEAN")]
-                internal byte Canceled;
+                public byte Canceled;
 
-                internal void* ClientContext;
+                public void* ClientContext;
             }
 
-            internal partial struct _PEER_SEND_ABORTED_e__Struct
+            public partial struct _PEER_SEND_ABORTED_e__Struct
             {
                 [NativeTypeName("QUIC_UINT62")]
-                internal ulong ErrorCode;
+                public ulong ErrorCode;
             }
 
-            internal partial struct _PEER_RECEIVE_ABORTED_e__Struct
+            public partial struct _PEER_RECEIVE_ABORTED_e__Struct
             {
                 [NativeTypeName("QUIC_UINT62")]
-                internal ulong ErrorCode;
+                public ulong ErrorCode;
             }
 
-            internal partial struct _SEND_SHUTDOWN_COMPLETE_e__Struct
+            public partial struct _SEND_SHUTDOWN_COMPLETE_e__Struct
             {
                 [NativeTypeName("BOOLEAN")]
-                internal byte Graceful;
+                public byte Graceful;
             }
 
-            internal partial struct _SHUTDOWN_COMPLETE_e__Struct
+            public partial struct _SHUTDOWN_COMPLETE_e__Struct
             {
                 [NativeTypeName("BOOLEAN")]
-                internal byte ConnectionShutdown;
+                public byte ConnectionShutdown;
 
-                internal byte _bitfield;
+                public byte _bitfield;
 
                 [NativeTypeName("BOOLEAN : 1")]
-                internal byte AppCloseInProgress
+                public byte AppCloseInProgress
                 {
                     get
                     {
@@ -3051,7 +3051,7 @@ namespace Microsoft.Quic
                 }
 
                 [NativeTypeName("BOOLEAN : 1")]
-                internal byte ConnectionShutdownByApp
+                public byte ConnectionShutdownByApp
                 {
                     get
                     {
@@ -3065,7 +3065,7 @@ namespace Microsoft.Quic
                 }
 
                 [NativeTypeName("BOOLEAN : 1")]
-                internal byte ConnectionClosedRemotely
+                public byte ConnectionClosedRemotely
                 {
                     get
                     {
@@ -3079,7 +3079,7 @@ namespace Microsoft.Quic
                 }
 
                 [NativeTypeName("BOOLEAN : 5")]
-                internal byte RESERVED
+                public byte RESERVED
                 {
                     get
                     {
@@ -3093,22 +3093,22 @@ namespace Microsoft.Quic
                 }
 
                 [NativeTypeName("QUIC_UINT62")]
-                internal ulong ConnectionErrorCode;
+                public ulong ConnectionErrorCode;
 
                 [NativeTypeName("HRESULT")]
-                internal int ConnectionCloseStatus;
+                public int ConnectionCloseStatus;
             }
 
-            internal partial struct _IDEAL_SEND_BUFFER_SIZE_e__Struct
+            public partial struct _IDEAL_SEND_BUFFER_SIZE_e__Struct
             {
                 [NativeTypeName("uint64_t")]
-                internal ulong ByteCount;
+                public ulong ByteCount;
             }
 
-            internal partial struct _CANCEL_ON_LOSS_e__Struct
+            public partial struct _CANCEL_ON_LOSS_e__Struct
             {
                 [NativeTypeName("QUIC_UINT62")]
-                internal ulong ErrorCode;
+                public ulong ErrorCode;
             }
         }
     }
@@ -3179,22 +3179,22 @@ namespace Microsoft.Quic
         internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, QUIC_SEND_RESUMPTION_FLAGS, ushort, byte*, int> ConnectionSendResumptionTicket;
 
         [NativeTypeName("QUIC_STREAM_OPEN_FN")]
-        internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, QUIC_STREAM_OPEN_FLAGS, delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void*, QUIC_STREAM_EVENT*, int>, void*, QUIC_HANDLE**, int> StreamOpen;
+        public delegate* unmanaged[Cdecl]<QUIC_HANDLE*, QUIC_STREAM_OPEN_FLAGS, delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void*, QUIC_STREAM_EVENT*, int>, void*, QUIC_HANDLE**, int> StreamOpen;
 
         [NativeTypeName("QUIC_STREAM_CLOSE_FN")]
-        internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void> StreamClose;
+        public delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void> StreamClose;
 
         [NativeTypeName("QUIC_STREAM_START_FN")]
-        internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, QUIC_STREAM_START_FLAGS, int> StreamStart;
+        public delegate* unmanaged[Cdecl]<QUIC_HANDLE*, QUIC_STREAM_START_FLAGS, int> StreamStart;
 
         [NativeTypeName("QUIC_STREAM_SHUTDOWN_FN")]
         public delegate* unmanaged[Cdecl]<QUIC_HANDLE*, QUIC_STREAM_SHUTDOWN_FLAGS, ulong, int> StreamShutdown;
 
         [NativeTypeName("QUIC_STREAM_SEND_FN")]
-        internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, QUIC_BUFFER*, uint, QUIC_SEND_FLAGS, void*, int> StreamSend;
+        public delegate* unmanaged[Cdecl]<QUIC_HANDLE*, QUIC_BUFFER*, uint, QUIC_SEND_FLAGS, void*, int> StreamSend;
 
         [NativeTypeName("QUIC_STREAM_RECEIVE_COMPLETE_FN")]
-        internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, ulong, void> StreamReceiveComplete;
+        public delegate* unmanaged[Cdecl]<QUIC_HANDLE*, ulong, void> StreamReceiveComplete;
 
         [NativeTypeName("QUIC_STREAM_RECEIVE_SET_ENABLED_FN")]
         public delegate* unmanaged[Cdecl]<QUIC_HANDLE*, byte, int> StreamReceiveSetEnabled;
