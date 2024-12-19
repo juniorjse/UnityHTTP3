@@ -7,7 +7,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using Microsoft.Quic;
 using System.Threading;
-using UnityEditor.MemoryProfiler;
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 public unsafe delegate int NativeCallbackDelegate(QUIC_HANDLE* handle, void* context, QUIC_CONNECTION_EVENT* evnt);
@@ -22,7 +21,7 @@ public class QUICClient : MonoBehaviour
     private unsafe QUIC_HANDLE* _configuration = null;
     private unsafe QUIC_HANDLE* _stream = null;
     private unsafe QUIC_API_TABLE* ApiTable;
-    ushort _port = 443;
+    // ushort _port = 443;
 
     public void ConnectVerify()
     {
