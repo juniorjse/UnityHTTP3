@@ -14,12 +14,11 @@ public class QuicInstructions
     private static HttpEngine.Builder httpBuilder;
     private HttpEngine httpEngine;
     UrlRequest request;
-    public String QuicAndroidConnect() throws InterruptedException {
+    public String QuicAndroidConnect(Context context) throws InterruptedException {
         String out = "";
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && SdkExtensions.getExtensionVersion(Build.VERSION_CODES.S) >= 7) {
             try {
-                setUpQuicConnection();
-                httpEngine = httpBuilder.build();
+                setUpQuicConnection(context);
                 httpEngine.openConnection(new URL("http", "www.google.com", 443, "")).connect();
                 out = ("CONEXÃO BEM SUCEDIDA");
 
@@ -54,26 +53,35 @@ public class QuicInstructions
 
         return output;
     }
-    private void setUpQuicConnection(App app)
+    private String setUpQuicConnection(Context context)
     {
+        String out = "";
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && SdkExtensions.getExtensionVersion(Build.VERSION_CODES.S) >= 7)
         {
+            try {
+                this.httpBuilder = new HttpEngine.Builder(context);
 
-            this.httpBuilder = new HttpEngine.Builder(App.getContext());
+                this.httpBuilder.setEnableQuic(true);
+                this.httpBuilder.setEnableHttp2(false);
+                this.httpBuilder.setEnableBrotli(false);
 
-            httpBuilder.setEnableQuic(true);
-            httpBuilder.setEnableHttp2(false);
-            httpBuilder.setEnableBrotli(false);
+                QuicOptions.Builder quicBuilder = new QuicOptions.Builder();
 
-            QuicOptions.Builder quicBuilder = new QuicOptions.Builder();
+                quicBuilder.addAllowedQuicHost("www.google.com");
+                QuicOptions quicOptions = quicBuilder.build();
+                this.httpBuilder.setQuicOptions(quicOptions);
+                this.httpBuilder.addQuicHint("www.google.com", 443, 443);
 
-            quicBuilder.addAllowedQuicHost("www.google.com");
-            QuicOptions quicOptions = quicBuilder.build();
-            httpBuilder.setQuicOptions(quicOptions);
-            httpBuilder.addQuicHint("www.google.com", 443, 443);
+                this.httpEngine = httpBuilder.build();
+                out = "funcionou";
+            }
+            catch (Exception ex)
+            {
+                out = ex.getMessage();
+            }
 
-            this.httpEngine = httpBuilder.build();
         }
+        return out;
     }
 
 
