@@ -1,27 +1,21 @@
 import SwiftUI
 
 struct quicView: View {
-    @State private var result: String = ""
+    @State private var result: String = "Press the button to fetch data"
     let quicClient = FrameworkQUICClient.shared
 
     var body: some View {
         VStack {
-            Button("Connect") {
-                result = quicClient.connectToQUIC()
+            Button("Fetch Data") {
+                quicClient.getRequestToServer { response in
+                    DispatchQueue.main.async {
+                        self.result = response as String
+                    }
+                }
             }
             .padding()
 
-            Button("Request") {
-                result = quicClient.getRequestToServer()
-            }
-            .padding()
-
-            Button("Disconnect") {
-                result = quicClient.disconnectFromQUIC()
-            }
-            .padding()
-
-            Text("Result: \(result)")
+            Text(result)
                 .padding()
                 .foregroundColor(.blue)
                 .multilineTextAlignment(.center)
@@ -30,6 +24,7 @@ struct quicView: View {
     }
 }
 
+// Preview para testar a visualização no SwiftUI Canvas
 #Preview {
     quicView()
 }

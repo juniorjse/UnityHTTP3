@@ -15,7 +15,7 @@ import Network
         super.init()
     }
     
-    @objc public func connectToQUIC() -> String {
+    @objc public func connectToQUIC(completion: @escaping (NSString) -> Void) {
         let host = "www.google.com"
         let port = 443
         
@@ -27,9 +27,9 @@ import Network
         let endpoint = NWEndpoint.hostPort(host: NWEndpoint.Host(host), port: NWEndpoint.Port(rawValue: UInt16(port))!)
         connection = NWConnection(to: endpoint, using: parameters)
         
-        var stateMessage = "Connectting"
         connection?.stateUpdateHandler = { state in
             DispatchQueue.main.async {
+                var stateMessage: String
                 switch state {
                 case .ready:
                     stateMessage = "Connected to \(host):\(port)"
@@ -44,61 +44,64 @@ import Network
                     stateMessage = "Preparing to connect..."
                     print(stateMessage)
                 default:
-                    break
+                    stateMessage = "Unknown state"
                 }
+                // Passa o estado atualizado pelo callback
+                completion(stateMessage as NSString)
             }
         }
         connection?.start(queue: .main)
-        return stateMessage
     }
     
-    @objc public func getRequestToServer() -> String {
+    @objc public func getRequestToServer(completion: @escaping (NSString) -> Void) {
         let url = "https://www.google.com/search?q=WildlifeStudios&tbm=nws"
         guard let requestUrl = URL(string: url) else {
             let errorMessage = "❌ Invalid URL"
             print(errorMessage)
-            return errorMessage
+            completion(errorMessage as NSString)
+            return
         }
         
-        var resultMessage = ""
         var request = URLRequest(url: requestUrl)
         request.httpMethod = "GET"
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 DispatchQueue.main.async {
-                    resultMessage = "❌ Request failed: \(error.localizedDescription)"
+                    let resultMessage = "❌ Request failed: \(error.localizedDescription)"
                     print(resultMessage)
+                    completion(resultMessage as NSString)
                 }
                 return
             }
             
             guard let data = data else {
                 DispatchQueue.main.async {
-                    resultMessage = "❌ No data received"
+                    let resultMessage = "❌ No data received"
                     print(resultMessage)
+                    completion(resultMessage as NSString)
                 }
                 return
             }
             
             if let htmlString = String(data: data, encoding: .utf8) ?? String(data: data, encoding: .isoLatin1) {
                 DispatchQueue.main.async {
-                    resultMessage = "✅ Response: \(htmlString.prefix(300))..."
+                    let resultMessage = "✅ Response: \(htmlString.prefix(300))..."
                     print(resultMessage)
+                    completion(resultMessage as NSString)
                 }
             } else {
                 DispatchQueue.main.async {
-                    resultMessage = "❌ Unable to decode response"
+                    let resultMessage = "❌ Unable to decode response"
                     print(resultMessage)
+                    completion(resultMessage as NSString)
                 }
             }
         }
         
         task.resume()
-        let sentMessage = "🌐 GET request sent to \(url)"
-        print(sentMessage)
-        return sentMessage
     }
+
 
     @objc public func disconnectFromQUIC() -> String {
         connection?.cancel()

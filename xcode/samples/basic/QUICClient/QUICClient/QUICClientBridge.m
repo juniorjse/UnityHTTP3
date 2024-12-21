@@ -8,8 +8,16 @@
 #include <stdlib.h>
 
 char* connectToQUIC(void) {
-    NSString *result = [[FrameworkQUICClient shared] connectToQUIC];
-    return result ? strdup([result UTF8String]) : NULL;
+    __block char *resultCString = NULL;
+    
+    // Chama o método assíncrono com callback
+    [[FrameworkQUICClient shared] connectToQUICWithCompletion:^(NSString *stateMessage) {
+        if (stateMessage) {
+            resultCString = strdup([stateMessage UTF8String]);
+        }
+    }];
+    
+    return resultCString;
 }
 
 char* disconnectFromQUIC(void) {
@@ -18,6 +26,14 @@ char* disconnectFromQUIC(void) {
 }
 
 char* getRequestToServer(void) {
-    NSString *result = [[FrameworkQUICClient shared] getRequestToServer];
-    return result ? strdup([result UTF8String]) : NULL;
+    __block char *resultCString = NULL;
+
+    // Chama o método assíncrono com callback
+    [[FrameworkQUICClient shared] getRequestToServerWithCompletion:^(NSString *response) {
+        if (response) {
+            resultCString = strdup([response UTF8String]);
+        }
+    }];
+
+    return resultCString;
 }
