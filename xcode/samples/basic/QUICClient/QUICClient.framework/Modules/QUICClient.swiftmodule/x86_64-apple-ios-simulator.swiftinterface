@@ -5,14 +5,16 @@ import Foundation
 import Network
 @_exported import QUICClient
 import Swift
+import SwiftUI
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
 @_inheritsConvenienceInitializers @objc public class FrameworkQUICClient : ObjectiveC.NSObject {
   @objc public static let shared: QUICClient.FrameworkQUICClient
   @objc override dynamic public init()
-  @objc public func connectToQUIC()
-  @objc public func disconnectFromQUIC()
-  @objc public func getRequestToServer()
+  @objc public func connectToQUIC() -> Swift.String
+  @objc public func disconnectFromQUIC() -> Swift.String
+  @objc public func getRequestToServer() -> Swift.String
   @objc deinit
 }
+

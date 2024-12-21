@@ -5,15 +5,19 @@
 //  Created by Junior Silva (EXT) on 19/12/24.
 //
 #import "QUICClient-Swift.h"
+#include <stdlib.h>
 
-void connectToQUIC(void) {
-    [[FrameworkQUICClient shared] connectToQUIC];
+char* connectToQUIC(void) {
+    NSString *result = [[FrameworkQUICClient shared] connectToQUIC];
+    return result ? strdup([result UTF8String]) : NULL;
 }
 
-void disconnectFromQUIC(void) {
-    [[FrameworkQUICClient shared] disconnectFromQUIC];
+char* disconnectFromQUIC(void) {
+    NSString *result = [[FrameworkQUICClient shared] disconnectFromQUIC];
+    return result ? strdup([result UTF8String]) : NULL;
 }
 
-void getRequestToServer(void) {
-    [[FrameworkQUICClient shared] getRequestToServer];
+char* getRequestToServer(void) {
+    NSString *result = [[FrameworkQUICClient shared] getRequestToServer];
+    return result ? strdup([result UTF8String]) : NULL;
 }

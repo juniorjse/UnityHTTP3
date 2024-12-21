@@ -27,6 +27,59 @@
         "printedName": "FrameworkQUICClient",
         "children": [
           {
+            "kind": "Var",
+            "name": "shared",
+            "printedName": "shared",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "FrameworkQUICClient",
+                "printedName": "QUICClient.FrameworkQUICClient",
+                "usr": "c:@M@QUICClient@objc(cs)FrameworkQUICClient"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@QUICClient@objc(cs)FrameworkQUICClient(cpy)shared",
+            "mangledName": "$s10QUICClient09FrameworkA0C6sharedACvpZ",
+            "moduleName": "QUICClient",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "HasStorage",
+              "AccessControl",
+              "ObjC"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "FrameworkQUICClient",
+                    "printedName": "QUICClient.FrameworkQUICClient",
+                    "usr": "c:@M@QUICClient@objc(cs)FrameworkQUICClient"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@QUICClient@objc(cs)FrameworkQUICClient(cm)shared",
+                "mangledName": "$s10QUICClient09FrameworkA0C6sharedACvgZ",
+                "moduleName": "QUICClient",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final",
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
             "kind": "Constructor",
             "name": "init",
             "printedName": "init()",
@@ -59,13 +112,14 @@
             "children": [
               {
                 "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
               }
             ],
             "declKind": "Func",
             "usr": "c:@M@QUICClient@objc(cs)FrameworkQUICClient(im)connectToQUIC",
-            "mangledName": "$s10QUICClient09FrameworkA0C13connectToQUICyyF",
+            "mangledName": "$s10QUICClient09FrameworkA0C13connectToQUICSSyF",
             "moduleName": "QUICClient",
             "isOpen": true,
             "declAttributes": [
@@ -81,13 +135,14 @@
             "children": [
               {
                 "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
               }
             ],
             "declKind": "Func",
             "usr": "c:@M@QUICClient@objc(cs)FrameworkQUICClient(im)disconnectFromQUIC",
-            "mangledName": "$s10QUICClient09FrameworkA0C18disconnectFromQUICyyF",
+            "mangledName": "$s10QUICClient09FrameworkA0C18disconnectFromQUICSSyF",
             "moduleName": "QUICClient",
             "isOpen": true,
             "declAttributes": [
@@ -103,13 +158,14 @@
             "children": [
               {
                 "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
               }
             ],
             "declKind": "Func",
             "usr": "c:@M@QUICClient@objc(cs)FrameworkQUICClient(im)getRequestToServer",
-            "mangledName": "$s10QUICClient09FrameworkA0C18getRequestToServeryyF",
+            "mangledName": "$s10QUICClient09FrameworkA0C18getRequestToServerSSyF",
             "moduleName": "QUICClient",
             "isOpen": true,
             "declAttributes": [
@@ -198,9 +254,254 @@
             "mangledName": "$ss28CustomDebugStringConvertibleP"
           }
         ]
+      },
+      {
+        "kind": "Import",
+        "name": "SwiftUI",
+        "printedName": "SwiftUI",
+        "declKind": "Import",
+        "moduleName": "QUICClient"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "quicView",
+        "printedName": "quicView",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "_result",
+            "printedName": "_result",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "State",
+                "printedName": "SwiftUI.State<Swift.String>",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:7SwiftUI5StateV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:10QUICClient8quicViewV7_result33_C716C4262ED2DC534B8399156E497C5ALL7SwiftUI5StateVySSGvp",
+            "mangledName": "$s10QUICClient8quicViewV7_result33_C716C4262ED2DC534B8399156E497C5ALL7SwiftUI5StateVySSGvp",
+            "moduleName": "QUICClient",
+            "implicit": true,
+            "isInternal": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Preconcurrency",
+              "Custom",
+              "HasStorage"
+            ],
+            "fixedbinaryorder": 0,
+            "hasStorage": true
+          },
+          {
+            "kind": "Var",
+            "name": "quicClient",
+            "printedName": "quicClient",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "FrameworkQUICClient",
+                "printedName": "QUICClient.FrameworkQUICClient",
+                "usr": "c:@M@QUICClient@objc(cs)FrameworkQUICClient"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:10QUICClient8quicViewV0B6ClientAA09FrameworkA0Cvp",
+            "mangledName": "$s10QUICClient8quicViewV0B6ClientAA09FrameworkA0Cvp",
+            "moduleName": "QUICClient",
+            "declAttributes": [
+              "HasInitialValue",
+              "Preconcurrency",
+              "Custom",
+              "HasStorage"
+            ],
+            "fixedbinaryorder": 1,
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "FrameworkQUICClient",
+                    "printedName": "QUICClient.FrameworkQUICClient",
+                    "usr": "c:@M@QUICClient@objc(cs)FrameworkQUICClient"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:10QUICClient8quicViewV0B6ClientAA09FrameworkA0Cvg",
+                "mangledName": "$s10QUICClient8quicViewV0B6ClientAA09FrameworkA0Cvg",
+                "moduleName": "QUICClient",
+                "implicit": true,
+                "declAttributes": [
+                  "Transparent"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "body",
+            "printedName": "body",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "OpaqueTypeArchetype",
+                "printedName": "some SwiftUI.View",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "View",
+                    "printedName": "SwiftUI.View",
+                    "usr": "s:7SwiftUI4ViewP"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:10QUICClient8quicViewV4bodyQrvp",
+            "mangledName": "$s10QUICClient8quicViewV4bodyQrvp",
+            "moduleName": "QUICClient",
+            "declAttributes": [
+              "Preconcurrency",
+              "Custom"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "OpaqueTypeArchetype",
+                    "printedName": "some SwiftUI.View",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "View",
+                        "printedName": "SwiftUI.View",
+                        "usr": "s:7SwiftUI4ViewP"
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:10QUICClient8quicViewV4bodyQrvg",
+                "mangledName": "$s10QUICClient8quicViewV4bodyQrvg",
+                "moduleName": "QUICClient",
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "quicView",
+                "printedName": "QUICClient.quicView",
+                "usr": "s:10QUICClient8quicViewV"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:10QUICClient8quicViewVACycfc",
+            "mangledName": "$s10QUICClient8quicViewVACycfc",
+            "moduleName": "QUICClient",
+            "implicit": true,
+            "declAttributes": [
+              "Preconcurrency",
+              "Custom"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Struct",
+        "usr": "s:10QUICClient8quicViewV",
+        "mangledName": "$s10QUICClient8quicViewV",
+        "moduleName": "QUICClient",
+        "declAttributes": [
+          "Preconcurrency",
+          "Custom"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "View",
+            "printedName": "View",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "Body",
+                "printedName": "Body",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "OpaqueTypeArchetype",
+                    "printedName": "some SwiftUI.View",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "View",
+                        "printedName": "SwiftUI.View",
+                        "usr": "s:7SwiftUI4ViewP"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "usr": "s:7SwiftUI4ViewP",
+            "mangledName": "$s7SwiftUI4ViewP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          }
+        ]
       }
     ],
     "json_format_version": 8
   },
-  "ConstValues": []
+  "ConstValues": [
+    {
+      "filePath": "\/Users\/junior.silva\/Documents\/GitHub\/QUIC\/quic-client\/xcode\/samples\/basic\/QUICClient\/QUICClient\/quicview.swift",
+      "kind": "StringLiteral",
+      "offset": 80,
+      "length": 2,
+      "value": "\"\""
+    }
+  ]
 }

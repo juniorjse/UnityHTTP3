@@ -3,6 +3,9 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UI;
 using Microsoft.Quic;
+using System.Text;
+using System.Threading;
+using TMPro;
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 public unsafe delegate int NativeCallbackDelegate(QUIC_HANDLE* handle, void* context, QUIC_CONNECTION_EVENT* evnt);
@@ -11,6 +14,7 @@ public class QUICClient : MonoBehaviour
 {
     public Text _statusconnection;
     public Text _request;
+    public TMP_Text _statusconnectionpro;
     private GCHandle _callbackHandle;
     private unsafe QUIC_HANDLE* _connection = null;
     private unsafe QUIC_HANDLE* _registration = null;
@@ -22,7 +26,10 @@ public class QUICClient : MonoBehaviour
     public void ConnectVerify()
     {
 #if UNITY_IOS
-        connectToQUIC();
+        IntPtr resultPtr = connectToQUIC();
+        string result = Marshal.PtrToStringAuto(resultPtr);
+        _statusconnectionpro.text = "StatusPRO: " + result; 
+        _statusconnection.text = "Status: " + result;
 #else
         ConnectToQUICUnity();
 #endif
@@ -31,7 +38,10 @@ public class QUICClient : MonoBehaviour
     public void DisconnectVerify()
     {
 #if UNITY_IOS
-        disconnectFromQUIC();
+        IntPtr resultPtr = disconnectFromQUIC();
+        string result = Marshal.PtrToStringAuto(resultPtr);
+        _statusconnectionpro.text = "StatusPRO: " + result; 
+        _statusconnection.text = "Status: " + result;
 #else
         DisconnectFromUnityQUIC();
 #endif
@@ -40,21 +50,24 @@ public class QUICClient : MonoBehaviour
     public void RequestVerify()
     {
 #if UNITY_IOS
-        getRequestToServer();
+        IntPtr resultPtr = getRequestToServer();
+        string result = Marshal.PtrToStringAuto(resultPtr);
+        _request.text = "Response" + result;
 #else
         Request();
 #endif
     }
 
+
 #if UNITY_IOS
     [DllImport("__Internal")]
-    private static extern void connectToQUIC();
+    private static extern IntPtr connectToQUIC();
 
     [DllImport("__Internal")]
-    private static extern void disconnectFromQUIC();
+    private static extern IntPtr disconnectFromQUIC();
 
     [DllImport("__Internal")]
-    private static extern void getRequestToServer();
+    private static extern IntPtr getRequestToServer();
 #else
 
     unsafe void LoadConfiguration(bool isUnsecureConnection)
