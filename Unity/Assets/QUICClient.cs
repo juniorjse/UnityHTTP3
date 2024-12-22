@@ -27,20 +27,23 @@ public class QUICClient : MonoBehaviour
     {
 #if UNITY_IOS
         IntPtr resultPtr = connectToQUIC();
-        string result = Marshal.PtrToStringAuto(resultPtr);
-        _statusconnectionpro.text = "StatusPRO: " + result; 
+        string result = Marshal.PtrToStringAnsi(resultPtr); // Converte o ponteiro para string
+        Marshal.FreeHGlobal(resultPtr); // Libera a memória alocada no lado nativo
+
+        _statusconnectionpro.text = "StatusPRO: " + result;
         _statusconnection.text = "Status: " + result;
 #else
         ConnectToQUICUnity();
 #endif
     }
 
+
+
     public void DisconnectVerify()
     {
 #if UNITY_IOS
-        IntPtr resultPtr = disconnectFromQUIC();
-        string result = Marshal.PtrToStringAuto(resultPtr);
-        _statusconnectionpro.text = "StatusPRO: " + result; 
+        string result = Marshal.PtrToStringAnsi(disconnectFromQUIC());
+        _statusconnectionpro.text = "StatusPRO: " + result;
         _statusconnection.text = "Status: " + result;
 #else
         DisconnectFromUnityQUIC();
@@ -51,12 +54,15 @@ public class QUICClient : MonoBehaviour
     {
 #if UNITY_IOS
         IntPtr resultPtr = getRequestToServer();
-        string result = Marshal.PtrToStringAuto(resultPtr);
-        _request.text = "Response" + result;
+        string result = Marshal.PtrToStringAnsi(resultPtr); // Converte o ponteiro para string
+        Marshal.FreeHGlobal(resultPtr); // Libera a memória alocada no lado nativo
+
+        _request.text = "Response: " + result;
 #else
         Request();
 #endif
     }
+
 
 
 #if UNITY_IOS

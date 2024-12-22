@@ -1,16 +1,31 @@
 import SwiftUI
 
 struct quicView: View {
-    @State private var result: String = "Press the button to fetch data"
+    @State private var result: String = ""
     let quicClient = FrameworkQUICClient.shared
 
     var body: some View {
         VStack {
-            Button("Fetch Data") {
-                quicClient.getRequestToServer { response in
-                    DispatchQueue.main.async {
-                        self.result = response as String
-                    }
+            Button("Connect") {
+                DispatchQueue.main.async {
+                    // Chamada síncrona do connectToQUIC
+                    self.result = quicClient.connectToQUIC()
+                }
+            }
+            .padding()
+            
+            Button("Request Data") {
+                DispatchQueue.main.async {
+                    // Chamada síncrona do getRequestToServer
+                    self.result = quicClient.getRequestToServer()
+                }
+            }
+            .padding()
+
+            Button("Disconnect") {
+                DispatchQueue.main.async {
+                    // Chamada síncrona do disconnectFromQUIC
+                    self.result = quicClient.disconnectFromQUIC()
                 }
             }
             .padding()

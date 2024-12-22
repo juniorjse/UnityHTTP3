@@ -1,8 +1,3 @@
-//  QUICClient.swift
-//  QUICClient
-//
-//  Created by Junior Silva (EXT) on 29/11/24.
-//
 import Foundation
 import Network
 
@@ -14,95 +9,75 @@ import Network
     @objc public override init() {
         super.init()
     }
-    
-    @objc public func connectToQUIC(completion: @escaping (NSString) -> Void) {
+
+    // Método para conectar ao QUIC com callback compatível com Objective-C
+    @objc public func connectToQUIC() -> String {
+        let semaphore = DispatchSemaphore(value: 0)
+        var result = "Unknown state"
+
         let host = "www.google.com"
         let port = 443
-        
         let quicOptions = NWProtocolQUIC.Options()
         let secOptions = quicOptions.securityProtocolOptions
         sec_protocol_options_add_tls_application_protocol(secOptions, "h3")
         let parameters = NWParameters(quic: quicOptions)
-        
         let endpoint = NWEndpoint.hostPort(host: NWEndpoint.Host(host), port: NWEndpoint.Port(rawValue: UInt16(port))!)
         connection = NWConnection(to: endpoint, using: parameters)
-        
+
         connection?.stateUpdateHandler = { state in
             DispatchQueue.main.async {
-                var stateMessage: String
                 switch state {
                 case .ready:
-                    stateMessage = "Connected to \(host):\(port)"
-                    print(stateMessage)
+                    result = "Connected to \(host):\(port)"
                 case .failed(let error):
-                    stateMessage = "Connection failed: \(error.localizedDescription)"
-                    print(stateMessage)
+                    result = "Connection failed: \(error.localizedDescription)"
                 case .waiting(let error):
-                    stateMessage = "Waiting: \(error.localizedDescription)"
-                    print(stateMessage)
+                    result = "Waiting: \(error.localizedDescription)"
                 case .preparing:
-                    stateMessage = "Preparing to connect..."
-                    print(stateMessage)
+                    result = "Preparing to connect..."
                 default:
-                    stateMessage = "Unknown state"
+                    result = "Unknown state"
                 }
-                // Passa o estado atualizado pelo callback
-                completion(stateMessage as NSString)
+                semaphore.signal()
             }
         }
+
         connection?.start(queue: .main)
+        semaphore.wait()
+        return result
     }
-    
-    @objc public func getRequestToServer(completion: @escaping (NSString) -> Void) {
+
+    @objc public func getRequestToServer() -> String {
+        let semaphore = DispatchSemaphore(value: 0)
+        var result = "Unknown result"
+
         let url = "https://www.google.com/search?q=WildlifeStudios&tbm=nws"
         guard let requestUrl = URL(string: url) else {
-            let errorMessage = "❌ Invalid URL"
-            print(errorMessage)
-            completion(errorMessage as NSString)
-            return
+            return "❌ Invalid URL"
         }
-        
+
         var request = URLRequest(url: requestUrl)
         request.httpMethod = "GET"
-        
+
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
-                DispatchQueue.main.async {
-                    let resultMessage = "❌ Request failed: \(error.localizedDescription)"
-                    print(resultMessage)
-                    completion(resultMessage as NSString)
-                }
-                return
-            }
-            
-            guard let data = data else {
-                DispatchQueue.main.async {
-                    let resultMessage = "❌ No data received"
-                    print(resultMessage)
-                    completion(resultMessage as NSString)
-                }
-                return
-            }
-            
-            if let htmlString = String(data: data, encoding: .utf8) ?? String(data: data, encoding: .isoLatin1) {
-                DispatchQueue.main.async {
-                    let resultMessage = "✅ Response: \(htmlString.prefix(300))..."
-                    print(resultMessage)
-                    completion(resultMessage as NSString)
-                }
+                result = "❌ Request failed: \(error.localizedDescription)"
+            } else if let data = data,
+                      let htmlString = String(data: data, encoding: .utf8) ?? String(data: data, encoding: .isoLatin1) {
+                result = "✅ Response: \(htmlString.prefix(300))..."
             } else {
-                DispatchQueue.main.async {
-                    let resultMessage = "❌ Unable to decode response"
-                    print(resultMessage)
-                    completion(resultMessage as NSString)
-                }
+                result = "❌ No data received"
             }
+            semaphore.signal()
         }
-        
+
         task.resume()
+        semaphore.wait()
+        return result
     }
 
 
+    // Método para desconectar do QUIC
     @objc public func disconnectFromQUIC() -> String {
         connection?.cancel()
         connection = nil

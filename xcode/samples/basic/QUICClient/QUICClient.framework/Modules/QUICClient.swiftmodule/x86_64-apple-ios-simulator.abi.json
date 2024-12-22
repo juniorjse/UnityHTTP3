@@ -9,10 +9,7 @@
         "name": "Foundation",
         "printedName": "Foundation",
         "declKind": "Import",
-        "moduleName": "QUICClient",
-        "declAttributes": [
-          "RawDocComment"
-        ]
+        "moduleName": "QUICClient"
       },
       {
         "kind": "Import",
@@ -124,30 +121,8 @@
             "isOpen": true,
             "declAttributes": [
               "AccessControl",
-              "ObjC"
-            ],
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
-            "name": "disconnectFromQUIC",
-            "printedName": "disconnectFromQUIC()",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "String",
-                "printedName": "Swift.String",
-                "usr": "s:SS"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@M@QUICClient@objc(cs)FrameworkQUICClient(im)disconnectFromQUIC",
-            "mangledName": "$s10QUICClient09FrameworkA0C18disconnectFromQUICSSyF",
-            "moduleName": "QUICClient",
-            "isOpen": true,
-            "declAttributes": [
-              "AccessControl",
-              "ObjC"
+              "ObjC",
+              "RawDocComment"
             ],
             "funcSelfKind": "NonMutating"
           },
@@ -171,6 +146,30 @@
             "declAttributes": [
               "AccessControl",
               "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "disconnectFromQUIC",
+            "printedName": "disconnectFromQUIC()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@QUICClient@objc(cs)FrameworkQUICClient(im)disconnectFromQUIC",
+            "mangledName": "$s10QUICClient09FrameworkA0C18disconnectFromQUICSSyF",
+            "moduleName": "QUICClient",
+            "isOpen": true,
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
             ],
             "funcSelfKind": "NonMutating"
           }
