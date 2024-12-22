@@ -6,13 +6,13 @@ plugins {
 
 android {
     namespace = "com.example.quicconnectionwrapper"
-    compileSdk = 34
 
     defaultConfig {
 
-        minSdk = 22
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+        minSdk = 23
+        targetSdk = 34
     }
 
     buildTypes {
@@ -28,7 +28,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    buildToolsVersion = "36.0.0 rc1"
+    compileSdk = 34
 }
 
 dependencies {

@@ -29,23 +29,17 @@ public class QUICClient : MonoBehaviour
     {
         if (Application.platform == RuntimePlatform.Android) 
         {
-            AndroidJavaObject pluginObject = new AndroidJavaObject("com.example.quicconnectionwrapper.QuicInstructions");
-            AndroidJavaClass unityPlayerClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
-            AndroidJavaObject unityActivity = unityPlayerClass.GetStatic<AndroidJavaObject>("currentActivity");
+            using (AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+        {
+            AndroidJavaObject currentActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
 
-            if (pluginObject != null)
+            // Chama o método Java para configurar QUIC
+            using (AndroidJavaObject pluginClass = new AndroidJavaObject("com.example.quicconnectionwrapper.QuicInstructions"))
             {
-                _statusconnection.text = "Preste a fazer conexao";
-
-                _statusconnection.text = pluginObject.Call<string>("QuicAndroidConnect", unityActivity);
-                Debug.Log("Instância do plugin criada com sucesso.");
-            }
-            else
-            {
-                _statusconnection.text = ("Falha ao carregar o objeto");
+                _statusconnection.text = pluginClass.Call<string>("setUpQuicConnection", currentActivity);
             }
         }
-        
+        }
     }
 
     public void ConnectToQUICUnity()
