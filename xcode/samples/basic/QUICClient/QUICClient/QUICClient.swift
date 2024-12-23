@@ -10,7 +10,6 @@ import Network
         super.init()
     }
 
-    // Método para conectar ao QUIC com callback compatível com Objective-C
     @objc public func connectToQUIC() -> String {
         let semaphore = DispatchSemaphore(value: 0)
         var result = "Unknown state"
@@ -25,25 +24,31 @@ import Network
         connection = NWConnection(to: endpoint, using: parameters)
 
         connection?.stateUpdateHandler = { state in
-            DispatchQueue.main.async {
-                switch state {
-                case .ready:
-                    result = "Connected to \(host):\(port)"
-                case .failed(let error):
-                    result = "Connection failed: \(error.localizedDescription)"
-                case .waiting(let error):
-                    result = "Waiting: \(error.localizedDescription)"
-                case .preparing:
-                    result = "Preparing to connect..."
-                default:
-                    result = "Unknown state"
-                }
-                semaphore.signal()
+            switch state {
+            case .ready:
+                result = "Connected to \(host):\(port)"
+                print("Connection ready")
+                semaphore.signal() // Sinaliza apenas quando está pronto
+            case .failed(let error):
+                result = "Connection failed: \(error.localizedDescription)"
+                print("Connection failed: \(error.localizedDescription)")
+                semaphore.signal() // Sinaliza também no caso de falha
+            case .waiting(let error):
+                result = "Waiting: \(error.localizedDescription)"
+                print("Waiting: \(error.localizedDescription)")
+            case .preparing:
+                print("Preparing to connect...")
+            default:
+                print("Unknown state")
             }
         }
 
-        connection?.start(queue: .main)
-        semaphore.wait()
+        connection?.start(queue: .global()) // Usa fila global para evitar travamentos
+        let timeoutResult = semaphore.wait(timeout: .now() + 10) // Timeout de 10 segundos
+        if timeoutResult == .timedOut {
+            return "Connection timed out"
+        }
+
         return result
     }
 
