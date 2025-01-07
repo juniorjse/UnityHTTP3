@@ -14,11 +14,14 @@ import java.nio.charset.StandardCharsets;
 public class URLRequestCallBack implements UrlRequest.Callback {
 
     public  static String requestStatus;
+
+    public static boolean isFinish;
     private final StringBuilder responseBody = new StringBuilder();
 
     public URLRequestCallBack()
     {
         requestStatus = "VAZIO";
+        isFinish = false;
     }
 
 
@@ -56,6 +59,7 @@ public class URLRequestCallBack implements UrlRequest.Callback {
                     "PROTOCOL: " + urlResponseInfo.getNegotiatedProtocol() + "\n" +
                                     "RESPONSE BODY: " + responseBody
                     );
+                    isFinish = true;
     }
 
     @Override
@@ -73,6 +77,10 @@ public class URLRequestCallBack implements UrlRequest.Callback {
     public String getResponse()
     {
         return this.requestStatus;
+    }
+    public boolean getIsfinish()
+    {
+        return isFinish;
     }
 
 

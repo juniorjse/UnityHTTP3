@@ -55,7 +55,8 @@ public class QuicInstructions
                 this.request = httpEngine.newUrlRequestBuilder("https://www.google.com", executor, urlRequestCB).build();
                 Log.i("Request", "Inicio do Request");
                 request.start();
-                while (!request.isDone() || urlRequestCB.getResponse().length() < 15) {}
+                
+                while (this.urlRequestCB.getIsfinish() == false) {}
                 output = this.urlRequestCB.getResponse();
             }
             catch (Exception ex)
