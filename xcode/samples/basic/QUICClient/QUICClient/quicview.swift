@@ -24,7 +24,6 @@ struct quicView: View {
             
             Button("Request Data") {
                 DispatchQueue.main.async {
-                    // Chamada síncrona do getRequestToServer
                     self.result = quicClient.getRequestToServer()
                 }
             }
