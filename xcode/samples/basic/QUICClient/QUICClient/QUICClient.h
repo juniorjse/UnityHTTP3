@@ -10,9 +10,10 @@
 @interface FrameworkQUICClient : NSObject
 
 + (instancetype)shared;
-- (void)connectToQUICWithCompletion:(void (^)(NSString *stateMessage))completion;
-- (void)getRequestToServerWithCompletion:(void (^)(NSString *response))completion;
 - (NSString *)disconnectFromQUIC;
+extern void connectToQUIC(void (*completionHandler)(const char *));
+//- (void)connectToQUICWithCompletion:(void (^)(const char *result))completionHandler;
+
 
 @end
 

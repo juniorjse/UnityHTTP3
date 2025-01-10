@@ -1,3 +1,10 @@
+//
+//  quicview.swift
+//  QUICClient
+//
+//  Created by Junior Silva (EXT) on 25/11/24.
+//
+
 import SwiftUI
 
 struct quicView: View {
@@ -7,9 +14,10 @@ struct quicView: View {
     var body: some View {
         VStack {
             Button("Connect") {
-                DispatchQueue.main.async {
-                    // Chamada síncrona do connectToQUIC
-                    self.result = quicClient.connectToQUIC()
+                quicClient.connectToQUIC { connectionResult in
+                    DispatchQueue.main.async {
+                        self.result = connectionResult
+                    }
                 }
             }
             .padding()
@@ -24,7 +32,6 @@ struct quicView: View {
 
             Button("Disconnect") {
                 DispatchQueue.main.async {
-                    // Chamada síncrona do disconnectFromQUIC
                     self.result = quicClient.disconnectFromQUIC()
                 }
             }
@@ -39,7 +46,6 @@ struct quicView: View {
     }
 }
 
-// Preview para testar a visualização no SwiftUI Canvas
 #Preview {
     quicView()
 }

@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/QUICClient.h</key>
 		<data>
-		LwIse4ItXxfhMdN4GyIYnlFILik=
+		ZcGli5bJlBUM/LgsWvTJj7ZRJ5w=
 		</data>
 		<key>Info.plist</key>
 		<data>
@@ -14,19 +14,19 @@
 		</data>
 		<key>Modules/QUICClient.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		KDJyaxAJaWzOMMJrFkVN6SKbi74=
+		jG+f7zxkTjqgYzW+pDvXaXaQyXQ=
 		</data>
 		<key>Modules/QUICClient.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		YbnaL295npQD9N9PX3X7kRlK5Oo=
+		WeDTadG2kuagD3ea8tJHzs0mhP0=
 		</data>
 		<key>Modules/QUICClient.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		ZN6Q2+aeZ4lTMTvhh7EGpUy25Eo=
+		12ewxqir0R5KvISxS3gZD456ZZk=
 		</data>
 		<key>Modules/QUICClient.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		3hZUN9OMlkW0NdawDQyiVYleees=
+		eE/sfGyf7wOkrsYrbzANl9drZHs=
 		</data>
 		<key>Modules/QUICClient.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -34,19 +34,19 @@
 		</data>
 		<key>Modules/QUICClient.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		3hZUN9OMlkW0NdawDQyiVYleees=
+		eE/sfGyf7wOkrsYrbzANl9drZHs=
 		</data>
 		<key>Modules/QUICClient.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		FC5h/7CFKV7BXgeFZbIscX0lLbw=
+		G2cj+6fAGt0Gd6RU0QjJIbdPs08=
 		</data>
 		<key>Modules/QUICClient.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		ZN6Q2+aeZ4lTMTvhh7EGpUy25Eo=
+		12ewxqir0R5KvISxS3gZD456ZZk=
 		</data>
 		<key>Modules/QUICClient.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		tFbPRRPO30HdIU0vBQzj7z0l9Ws=
+		pULqXWe+8qeMkIGxooVUGMtkUKM=
 		</data>
 		<key>Modules/QUICClient.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -54,11 +54,11 @@
 		</data>
 		<key>Modules/QUICClient.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		tFbPRRPO30HdIU0vBQzj7z0l9Ws=
+		pULqXWe+8qeMkIGxooVUGMtkUKM=
 		</data>
 		<key>Modules/QUICClient.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		Br4jybnaTzR1A9lFhERe9Wa9+78=
+		xfJKBS2n1jUR/OI9Bfg/zAKh654=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -71,35 +71,35 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			OMC+hir62Q47wGK73GWSMw8fYysDuGYQca3GAoaAOts=
+			hwwEb+BrvZgODPUvDmsgxUSLyc/UdNfFIzuQPGTA7C8=
 			</data>
 		</dict>
 		<key>Modules/QUICClient.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			yIyU8RGRsuCItfvD/k+0vC8Uzg60CyGKqez9GyOwMKY=
+			6amak2fbSKFd8/bo4pRYuXJDB51uLNTaTVkMOfEKKq4=
 			</data>
 		</dict>
 		<key>Modules/QUICClient.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			XgCielqq8/vR265dCPzuHl1l2fMQuI3zzccH/HTJksI=
+			4M8oz6PE9TLJ5Tr1ThyvC57jU7xqB5swobFmY4BvKGQ=
 			</data>
 		</dict>
 		<key>Modules/QUICClient.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			FHd5ObU+5lNgo8HrSKrhhFsU7ypSIRIVwhrCWTLbTt0=
+			PrJtP8a5lDE2JdyZqC3xGs5743I9Cp49w+dsA9RI2/0=
 			</data>
 		</dict>
 		<key>Modules/QUICClient.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			X2nMtta7dAmWSCZYwf46/AV3DpHBxX4+3fVUfw0y0Bw=
+			gE3c0QYA45UiDT/7lPTzdzM6D47vrlb8JGzPi00cXHY=
 			</data>
 		</dict>
 		<key>Modules/QUICClient.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
@@ -113,28 +113,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			X2nMtta7dAmWSCZYwf46/AV3DpHBxX4+3fVUfw0y0Bw=
+			gE3c0QYA45UiDT/7lPTzdzM6D47vrlb8JGzPi00cXHY=
 			</data>
 		</dict>
 		<key>Modules/QUICClient.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			ybIDf/pYk3CBAPV6UnnC+sXLY/td5rjYz/jTCz7aTKw=
+			zDUjX1ARqht7wqrCxDT/d+ZvxZqtIyZFVHV/g3+71gQ=
 			</data>
 		</dict>
 		<key>Modules/QUICClient.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			FHd5ObU+5lNgo8HrSKrhhFsU7ypSIRIVwhrCWTLbTt0=
+			PrJtP8a5lDE2JdyZqC3xGs5743I9Cp49w+dsA9RI2/0=
 			</data>
 		</dict>
 		<key>Modules/QUICClient.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			E/gGJcWSUzsBJdofENFmWQiEUvJ4ZK46K2YWvzJboTw=
+			Et2SqEkACBNdR75VahCmxc1bp5Jqkh9VoZojNELjnJU=
 			</data>
 		</dict>
 		<key>Modules/QUICClient.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
@@ -148,14 +148,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			E/gGJcWSUzsBJdofENFmWQiEUvJ4ZK46K2YWvzJboTw=
+			Et2SqEkACBNdR75VahCmxc1bp5Jqkh9VoZojNELjnJU=
 			</data>
 		</dict>
 		<key>Modules/QUICClient.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			m25jg704e86yYpXcBvO3SnNGHInl9sukBItfWNU3KfM=
+			Al2aCY80M2Gl9fF8LkieGg/eP3v2AxBmnxH51QSt74A=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

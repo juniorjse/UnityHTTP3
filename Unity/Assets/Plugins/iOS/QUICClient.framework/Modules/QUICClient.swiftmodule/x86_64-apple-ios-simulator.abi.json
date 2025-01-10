@@ -9,7 +9,10 @@
         "name": "Foundation",
         "printedName": "Foundation",
         "declKind": "Import",
-        "moduleName": "QUICClient"
+        "moduleName": "QUICClient",
+        "declAttributes": [
+          "RawDocComment"
+        ]
       },
       {
         "kind": "Import",
@@ -105,20 +108,38 @@
           {
             "kind": "Function",
             "name": "connectToQUIC",
-            "printedName": "connectToQUIC()",
+            "printedName": "connectToQUIC(completionHandler:)",
             "children": [
               {
                 "kind": "TypeNominal",
-                "name": "String",
-                "printedName": "Swift.String",
-                "usr": "s:SS"
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.String) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ]
               }
             ],
             "declKind": "Func",
-            "usr": "c:@M@QUICClient@objc(cs)FrameworkQUICClient(im)connectToQUIC",
-            "mangledName": "$s10QUICClient09FrameworkA0C13connectToQUICSSyF",
+            "usr": "c:@M@QUICClient@objc(cs)FrameworkQUICClient(im)connectToQUICWithCompletionHandler:",
+            "mangledName": "$s10QUICClient09FrameworkA0C13connectToQUIC17completionHandleryySSc_tF",
             "moduleName": "QUICClient",
             "isOpen": true,
+            "objc_name": "connectToQUICWithCompletionHandler:",
             "declAttributes": [
               "AccessControl",
               "ObjC"
@@ -167,8 +188,7 @@
             "isOpen": true,
             "declAttributes": [
               "AccessControl",
-              "ObjC",
-              "RawDocComment"
+              "ObjC"
             ],
             "funcSelfKind": "NonMutating"
           }
@@ -258,7 +278,10 @@
         "name": "SwiftUI",
         "printedName": "SwiftUI",
         "declKind": "Import",
-        "moduleName": "QUICClient"
+        "moduleName": "QUICClient",
+        "declAttributes": [
+          "RawDocComment"
+        ]
       },
       {
         "kind": "TypeDecl",
@@ -497,7 +520,7 @@
     {
       "filePath": "\/Users\/junior.silva\/Documents\/GitHub\/QUIC\/quic-client\/xcode\/samples\/basic\/QUICClient\/QUICClient\/quicview.swift",
       "kind": "StringLiteral",
-      "offset": 80,
+      "offset": 171,
       "length": 2,
       "value": "\"\""
     }

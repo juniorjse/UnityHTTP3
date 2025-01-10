@@ -12,7 +12,7 @@ import _SwiftConcurrencyShims
 @_inheritsConvenienceInitializers @objc public class FrameworkQUICClient : ObjectiveC.NSObject {
   @objc public static let shared: QUICClient.FrameworkQUICClient
   @objc override dynamic public init()
-  @objc public func connectToQUIC() -> Swift.String
+  @objc public func connectToQUIC(completionHandler: @escaping (Swift.String) -> Swift.Void)
   @objc public func getRequestToServer() -> Swift.String
   @objc public func disconnectFromQUIC() -> Swift.String
   @objc deinit

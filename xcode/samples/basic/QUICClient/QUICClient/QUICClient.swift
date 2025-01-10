@@ -1,3 +1,10 @@
+//
+//  QUICClient.swift
+//  QUICClient
+//
+//  Created by Junior Silva (EXT) on 25/11/24.
+//
+
 import Foundation
 import Network
 
@@ -10,9 +17,11 @@ import Network
         super.init()
     }
 
-    @objc public func connectToQUIC() -> String {
-        let semaphore = DispatchSemaphore(value: 0)
-        var result = "Unknown state"
+    @objc public func connectToQUIC(completionHandler: @escaping (String) -> Void) {
+        if let connection = connection, connection.state == .ready {
+            completionHandler("Already connected.")
+            return
+        }
 
         let host = "www.google.com"
         let port = 443
@@ -24,33 +33,27 @@ import Network
         connection = NWConnection(to: endpoint, using: parameters)
 
         connection?.stateUpdateHandler = { state in
+            let result: String
             switch state {
             case .ready:
                 result = "Connected to \(host):\(port)"
-                print("Connection ready")
-                semaphore.signal() // Sinaliza apenas quando está pronto
             case .failed(let error):
                 result = "Connection failed: \(error.localizedDescription)"
-                print("Connection failed: \(error.localizedDescription)")
-                semaphore.signal() // Sinaliza também no caso de falha
             case .waiting(let error):
                 result = "Waiting: \(error.localizedDescription)"
-                print("Waiting: \(error.localizedDescription)")
             case .preparing:
-                print("Preparing to connect...")
+                result = "Preparing to connect..."
             default:
-                print("Unknown state")
+                result = "Unknown state"
+            }
+            DispatchQueue.main.async {
+                completionHandler(result)
             }
         }
 
-        connection?.start(queue: .global()) // Usa fila global para evitar travamentos
-        let timeoutResult = semaphore.wait(timeout: .now() + 10) // Timeout de 10 segundos
-        if timeoutResult == .timedOut {
-            return "Connection timed out"
-        }
-
-        return result
+        connection?.start(queue: .global())
     }
+
 
     @objc public func getRequestToServer() -> String {
         let semaphore = DispatchSemaphore(value: 0)
@@ -81,13 +84,20 @@ import Network
         return result
     }
 
-
-    // Método para desconectar do QUIC
     @objc public func disconnectFromQUIC() -> String {
-        connection?.cancel()
-        connection = nil
-        let message = "Disconnected"
+        guard let connection = connection else {
+            return "No active connection to disconnect."
+        }
+
+        if connection.state != .ready {
+            return "Connection is not active. Cannot disconnect."
+        }
+
+        connection.cancel()
+        self.connection = nil
+        let message = "Disconnected successfully."
         print(message)
         return message
     }
+
 }

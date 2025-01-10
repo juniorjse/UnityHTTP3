@@ -1,19 +1,29 @@
+//
+//  QUICClientBridge.m
+//  QUICClient
+//
+//  Created by Junior Silva (EXT) on 19/12/24.
+//
+
 #include "QUICClient-Swift.h"
 #include <stdlib.h>
 
-// Método síncrono para connectToQUIC
-char* connectToQUIC(void) {
-    NSString *result = [[FrameworkQUICClient shared] connectToQUIC];
-    return result ? strdup([result UTF8String]) : NULL;
+void connectToQUIC(void (*completionHandler)(const char *)) {
+    FrameworkQUICClient *client = [FrameworkQUICClient shared];
+    
+    [client connectToQUICWithCompletionHandler:^(NSString *result) {
+        if (completionHandler) {
+            const char *cResult = [result UTF8String];
+            completionHandler(cResult);
+        }
+    }];
 }
 
-// Método síncrono para getRequestToServer
 char* getRequestToServer(void) {
     NSString *result = [[FrameworkQUICClient shared] getRequestToServer];
     return result ? strdup([result UTF8String]) : NULL;
 }
 
-// Método síncrono para disconnectFromQUIC
 char* disconnectFromQUIC(void) {
     NSString *result = [[FrameworkQUICClient shared] disconnectFromQUIC];
     return result ? strdup([result UTF8String]) : NULL;
