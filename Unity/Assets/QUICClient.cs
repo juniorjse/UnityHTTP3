@@ -5,16 +5,29 @@ using UnityEngine.UI;
 using Microsoft.Quic;
 using System.Text;
 using System.Threading;
-using TMPro;
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 public unsafe delegate int NativeCallbackDelegate(QUIC_HANDLE* handle, void* context, QUIC_CONNECTION_EVENT* evnt);
 public unsafe delegate int StreamCallbackDelegate(QUIC_HANDLE* streamHandle, void* context, QUIC_STREAM_EVENT* streamEvent);
+
+[AttributeUsage(AttributeTargets.Method)]
+public class MonoPInvokeCallbackAttribute : Attribute
+{
+    public Type DelegateType { get; }
+
+    public MonoPInvokeCallbackAttribute(Type type)
+    {
+        DelegateType = type;
+    }
+}
+
 public class QUICClient : MonoBehaviour
 {
     public Text _statusconnection;
     public Text _request;
-    public TMP_Text _statusconnectionpro;
+    public delegate void StringCallback(string arg);
+    private static QUICClient instance;
+    private Action<string> currentCallback;
     private GCHandle _callbackHandle;
     private unsafe QUIC_HANDLE* _connection = null;
     private unsafe QUIC_HANDLE* _registration = null;
@@ -22,29 +35,81 @@ public class QUICClient : MonoBehaviour
     private unsafe QUIC_HANDLE* _stream = null;
     private unsafe QUIC_API_TABLE* ApiTable;
     // ushort _port = 443;
+    private void Awake()
+    {
+        instance = this;
+    }
+    [MonoPInvokeCallback(typeof(StringCallback))]
+    static void HandleResult(string arg)
+    {
+        try
+        {
+            Debug.Log("HandleResult received: " + arg);
+
+            if (instance == null)
+            {
+                Debug.LogError("Instance of QUICClientteste is null. Ensure the script is attached and initialized.");
+                return;
+            }
+
+            if (instance.currentCallback != null)
+            {
+                instance.currentCallback(arg);
+            }
+            else
+            {
+                Debug.LogError("currentCallback is not set in HandleResult. Ensure a callback is assigned before calling native methods.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError("Error in HandleResult: " + ex.Message);
+        }
+    }
+
+    private void UpdateStatus(string arg)
+    {
+        Debug.Log("Status result: " + arg);
+
+        if (_statusconnection != null)
+        {
+            _statusconnection.text = "Status: " + arg;
+        }
+        else
+        {
+            Debug.LogError("The _statusconnection field is null.");
+        }
+    }
+
+    private void UpdateRequest(string arg)
+    {
+        Debug.Log("Request result: " + arg);
+
+        if (_request != null)
+        {
+            _request.text = "Response: " + arg;
+        }
+        else
+        {
+            Debug.LogError("The _request field is null.");
+        }
+    }
 
     public void ConnectVerify()
     {
 #if UNITY_IOS
-        IntPtr resultPtr = connectToQUIC();
-        string result = Marshal.PtrToStringAnsi(resultPtr); // Converte o ponteiro para string
-        Marshal.FreeHGlobal(resultPtr); // Libera a memória alocada no lado nativo
-
-        _statusconnectionpro.text = "StatusPRO: " + result;
-        _statusconnection.text = "Status: " + result;
+        currentCallback = UpdateStatus;
+        connectToQUIC(HandleResult);
 #else
         ConnectToQUICUnity();
 #endif
     }
 
-
-
     public void DisconnectVerify()
     {
 #if UNITY_IOS
         string result = Marshal.PtrToStringAnsi(disconnectFromQUIC());
-        _statusconnectionpro.text = "StatusPRO: " + result;
-        _statusconnection.text = "Status: " + result;
+        UpdateStatus(result);
 #else
         DisconnectFromUnityQUIC();
 #endif
@@ -53,27 +118,22 @@ public class QUICClient : MonoBehaviour
     public void RequestVerify()
     {
 #if UNITY_IOS
-        IntPtr resultPtr = getRequestToServer();
-        string result = Marshal.PtrToStringAnsi(resultPtr); // Converte o ponteiro para string
-        Marshal.FreeHGlobal(resultPtr); // Libera a memória alocada no lado nativo
-
-        _request.text = "Response: " + result;
+        currentCallback = UpdateRequest;
+        getRequestToServer(HandleResult);
 #else
         Request();
 #endif
     }
 
-
-
 #if UNITY_IOS
     [DllImport("__Internal")]
-    private static extern IntPtr connectToQUIC();
+    private static extern void connectToQUIC(StringCallback completionHandler);
 
     [DllImport("__Internal")]
     private static extern IntPtr disconnectFromQUIC();
 
     [DllImport("__Internal")]
-    private static extern IntPtr getRequestToServer();
+    private static extern void getRequestToServer(StringCallback completionHandler);
 #else
 
     unsafe void LoadConfiguration(bool isUnsecureConnection)

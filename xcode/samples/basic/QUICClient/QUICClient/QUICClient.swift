@@ -54,8 +54,12 @@ import Network
         connection?.start(queue: .global())
     }
 
-
     @objc public func getRequestToServer(completionHandler: @escaping (String) -> Void) {
+        guard let connection = connection, connection.state == .ready else {
+            completionHandler("No active connection. Please connect first.")
+            return
+        }
+
         let url = "https://www.google.com/search?q=WildlifeStudios&tbm=nws"
         guard let requestUrl = URL(string: url) else {
             DispatchQueue.main.async {
