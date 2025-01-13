@@ -149,20 +149,38 @@
           {
             "kind": "Function",
             "name": "getRequestToServer",
-            "printedName": "getRequestToServer()",
+            "printedName": "getRequestToServer(completionHandler:)",
             "children": [
               {
                 "kind": "TypeNominal",
-                "name": "String",
-                "printedName": "Swift.String",
-                "usr": "s:SS"
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.String) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ]
               }
             ],
             "declKind": "Func",
-            "usr": "c:@M@QUICClient@objc(cs)FrameworkQUICClient(im)getRequestToServer",
-            "mangledName": "$s10QUICClient09FrameworkA0C18getRequestToServerSSyF",
+            "usr": "c:@M@QUICClient@objc(cs)FrameworkQUICClient(im)getRequestToServerWithCompletionHandler:",
+            "mangledName": "$s10QUICClient09FrameworkA0C18getRequestToServer17completionHandleryySSc_tF",
             "moduleName": "QUICClient",
             "isOpen": true,
+            "objc_name": "getRequestToServerWithCompletionHandler:",
             "declAttributes": [
               "AccessControl",
               "ObjC"

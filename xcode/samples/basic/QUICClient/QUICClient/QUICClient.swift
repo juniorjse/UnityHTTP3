@@ -44,7 +44,7 @@ import Network
             case .preparing:
                 result = "Preparing to connect..."
             default:
-                result = "Unknown state"
+                result = "Disconnected"
             }
             DispatchQueue.main.async {
                 completionHandler(result)
@@ -55,33 +55,35 @@ import Network
     }
 
 
-    @objc public func getRequestToServer() -> String {
-        let semaphore = DispatchSemaphore(value: 0)
-        var result = "Unknown result"
-
+    @objc public func getRequestToServer(completionHandler: @escaping (String) -> Void) {
         let url = "https://www.google.com/search?q=WildlifeStudios&tbm=nws"
         guard let requestUrl = URL(string: url) else {
-            return "❌ Invalid URL"
+            DispatchQueue.main.async {
+                completionHandler("Invalid URL")
+            }
+            return
         }
 
         var request = URLRequest(url: requestUrl)
         request.httpMethod = "GET"
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            let result: String
             if let error = error {
-                result = "❌ Request failed: \(error.localizedDescription)"
+                result = "Request failed: \(error.localizedDescription)"
             } else if let data = data,
                       let htmlString = String(data: data, encoding: .utf8) ?? String(data: data, encoding: .isoLatin1) {
-                result = "✅ Response: \(htmlString.prefix(300))..."
+                result = "Response: \(htmlString.prefix(300))..."
             } else {
-                result = "❌ No data received"
+                result = "No data received"
             }
-            semaphore.signal()
+
+            DispatchQueue.main.async {
+                completionHandler(result)
+            }
         }
 
         task.resume()
-        semaphore.wait()
-        return result
     }
 
     @objc public func disconnectFromQUIC() -> String {

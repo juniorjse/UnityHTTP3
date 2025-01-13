@@ -12,16 +12,10 @@
 + (instancetype)shared;
 - (NSString *)disconnectFromQUIC;
 extern void connectToQUIC(void (*completionHandler)(const char *));
-//- (void)connectToQUICWithCompletion:(void (^)(const char *result))completionHandler;
-
+extern void getRequestToServer(void (*completionHandler)(const char *));
 
 @end
 
-//! Project version number for QUICClient.
 FOUNDATION_EXPORT double QUICClientVersionNumber;
 
-//! Project version string for QUICClient.
 FOUNDATION_EXPORT const unsigned char QUICClientVersionString[];
-
-
-

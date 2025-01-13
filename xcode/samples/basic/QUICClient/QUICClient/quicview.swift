@@ -22,9 +22,11 @@ struct quicView: View {
             }
             .padding()
             
-            Button("Request Data") {
-                DispatchQueue.main.async {
-                    self.result = quicClient.getRequestToServer()
+            Button("Request") {
+                quicClient.getRequestToServer { connectionResult in
+                    DispatchQueue.main.async {
+                        self.result = connectionResult
+                    }
                 }
             }
             .padding()

@@ -19,9 +19,15 @@ void connectToQUIC(void (*completionHandler)(const char *)) {
     }];
 }
 
-char* getRequestToServer(void) {
-    NSString *result = [[FrameworkQUICClient shared] getRequestToServer];
-    return result ? strdup([result UTF8String]) : NULL;
+void getRequestToServer(void (*completionHandler)(const char *)) {
+    FrameworkQUICClient *client = [FrameworkQUICClient shared];
+
+    [client getRequestToServerWithCompletionHandler:^(NSString *result) {
+        if (completionHandler) {
+            const char *cResult = [result UTF8String];
+            completionHandler(cResult);
+        }
+    }];
 }
 
 char* disconnectFromQUIC(void) {

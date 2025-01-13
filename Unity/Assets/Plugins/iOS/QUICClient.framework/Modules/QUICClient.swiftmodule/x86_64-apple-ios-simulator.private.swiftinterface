@@ -13,7 +13,7 @@ import _SwiftConcurrencyShims
   @objc public static let shared: QUICClient.FrameworkQUICClient
   @objc override dynamic public init()
   @objc public func connectToQUIC(completionHandler: @escaping (Swift.String) -> Swift.Void)
-  @objc public func getRequestToServer() -> Swift.String
+  @objc public func getRequestToServer(completionHandler: @escaping (Swift.String) -> Swift.Void)
   @objc public func disconnectFromQUIC() -> Swift.String
   @objc deinit
 }
