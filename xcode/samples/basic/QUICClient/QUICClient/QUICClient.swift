@@ -12,84 +12,113 @@ import Network
 
     @objc public static let shared = FrameworkQUICClient()
     private var connection: NWConnection?
+    private let connectionQueue = DispatchQueue(label: "com.framework.quic.connection", qos: .userInitiated)
+    private var isConnected = false
 
     @objc public override init() {
         super.init()
     }
 
-    @objc public func connectToQUIC(completionHandler: @escaping (String) -> Void) {
-        if let connection = connection, connection.state == .ready {
-            completionHandler("Already connected.")
-            return
-        }
-
-        let host = "www.google.com"
-        let port = 443
-        let quicOptions = NWProtocolQUIC.Options()
-        let secOptions = quicOptions.securityProtocolOptions
-        sec_protocol_options_add_tls_application_protocol(secOptions, "h3")
-        let parameters = NWParameters(quic: quicOptions)
-        let endpoint = NWEndpoint.hostPort(host: NWEndpoint.Host(host), port: NWEndpoint.Port(rawValue: UInt16(port))!)
-        connection = NWConnection(to: endpoint, using: parameters)
-
-        connection?.stateUpdateHandler = { state in
-            let result: String
-            switch state {
-            case .ready:
-                result = "Connected to \(host):\(port)"
-            case .failed(let error):
-                result = "Connection failed: \(error.localizedDescription)"
-            case .waiting(let error):
-                result = "Waiting: \(error.localizedDescription)"
-            case .preparing:
-                result = "Preparing to connect..."
-            default:
-                result = "Disconnected"
+    /// Connects to a QUIC server.
+    @objc public func connectToQUIC(host: String = "www.google.com", port: UInt16 = 443, completionHandler: @escaping (String) -> Void) {
+        connectionQueue.async { [weak self] in
+            guard let self = self else { return }
+            
+            if self.isConnected {
+                DispatchQueue.main.async {
+                    completionHandler("Already connected.")
+                }
+                return
             }
-            DispatchQueue.main.async {
-                completionHandler(result)
+            
+            let quicOptions = NWProtocolQUIC.Options()
+            let secOptions = quicOptions.securityProtocolOptions
+            sec_protocol_options_add_tls_application_protocol(secOptions, "h3")
+            
+            let parameters = NWParameters(quic: quicOptions)
+            let endpoint = NWEndpoint.hostPort(host: NWEndpoint.Host(host), port: NWEndpoint.Port(rawValue: port)!)
+            
+            self.connection = NWConnection(to: endpoint, using: parameters)
+            self.connection?.stateUpdateHandler = { state in
+                let result: String
+                switch state {
+                case .ready:
+                    self.isConnected = true
+                    result = "Connected to \(host):\(port)"
+                case .failed(let error):
+                    self.isConnected = false
+                    result = "Connection failed: \(error.localizedDescription)"
+                case .waiting(let error):
+                    self.isConnected = false
+                    result = "Waiting: \(error.localizedDescription)"
+                case .preparing:
+                    result = "Preparing to connect..."
+                default:
+                    self.isConnected = false
+                    result = "Disconnected"
+                }
+                DispatchQueue.main.async {
+                    completionHandler(result)
+                }
             }
+            
+            self.connection?.start(queue: self.connectionQueue)
         }
-
-        connection?.start(queue: .global())
     }
 
-    @objc public func getRequestToServer(completionHandler: @escaping (String) -> Void) {
-        guard let connection = connection, connection.state == .ready else {
-            completionHandler("No active connection. Please connect first.")
-            return
-        }
-
-        let url = "https://www.google.com/search?q=WildlifeStudios&tbm=nws"
-        guard let requestUrl = URL(string: url) else {
-            DispatchQueue.main.async {
-                completionHandler("Invalid URL")
-            }
-            return
-        }
-
-        var request = URLRequest(url: requestUrl)
-        request.httpMethod = "GET"
-
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            let result: String
-            if let error = error {
-                result = "Request failed: \(error.localizedDescription)"
-            } else if let data = data,
-                      let htmlString = String(data: data, encoding: .utf8) ?? String(data: data, encoding: .isoLatin1) {
-                result = "Response: \(htmlString.prefix(300))..."
-            } else {
-                result = "No data received"
+    /// Sends a GET request to the server.
+    @objc public func sendGetRequest(route: String = "/search?q=WildlifeStudios&tbm=nws", completionHandler: @escaping (String) -> Void) {
+        connectionQueue.async { [weak self] in
+            guard let self = self, self.isConnected, let connection = self.connection, connection.state == .ready else {
+                DispatchQueue.main.async {
+                    completionHandler("No active connection. Please connect first.")
+                }
+                return
             }
 
-            DispatchQueue.main.async {
-                completionHandler(result)
+            let url = "https://www.google.com\(route)"
+            guard let requestUrl = URL(string: url) else {
+                DispatchQueue.main.async {
+                    completionHandler("Invalid URL")
+                }
+                return
             }
-        }
 
-        task.resume()
+            var request = URLRequest(url: requestUrl)
+            request.httpMethod = "GET"
+
+            // Adicionar cabeçalhos, como User-Agent
+            request.addValue("QUICClient/1.0", forHTTPHeaderField: "User-Agent")
+
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                var result: String
+
+                if let error = error {
+                    result = "Request failed: \(error.localizedDescription)"
+                } else if let httpResponse = response as? HTTPURLResponse {
+                    if let data = data, !data.isEmpty {
+                        if let responseString = String(data: data, encoding: .utf8) ?? String(data: data, encoding: .isoLatin1) {
+                            result = "Response (\(httpResponse.statusCode)): \(responseString.prefix(300))..."
+                        } else {
+                            result = "Response (\(httpResponse.statusCode)): Unable to decode data."
+                        }
+                    } else {
+                        result = "Response (\(httpResponse.statusCode)): No data received."
+                    }
+                } else {
+                    result = "Unknown response format."
+                }
+
+                DispatchQueue.main.async {
+                    completionHandler(result)
+                }
+            }
+
+            task.resume()
+        }
     }
 
+    /// Disconnects from the QUIC server.
     @objc public func disconnectFromQUIC() -> String {
         guard let connection = connection else {
             return "No active connection to disconnect."
@@ -101,9 +130,9 @@ import Network
 
         connection.cancel()
         self.connection = nil
+        self.isConnected = false
         let message = "Disconnected successfully."
         print(message)
         return message
     }
-
 }

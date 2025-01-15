@@ -23,11 +23,20 @@ public class MonoPInvokeCallbackAttribute : Attribute
 
 public class QUICClient : MonoBehaviour
 {
+    [Header("Connection Settings")]
+    public string host = "www.google.com";
+    public ushort port = 443;
+
+    [Header("Request Settings")]
+    public string route = "/search?q=WildlifeStudios&tbm=nws";
+
     public Text _statusconnection;
     public Text _request;
+
     public delegate void StringCallback(string arg);
     private static QUICClient instance;
     private Action<string> currentCallback;
+    
     private GCHandle _callbackHandle;
     private unsafe QUIC_HANDLE* _connection = null;
     private unsafe QUIC_HANDLE* _registration = null;
@@ -99,9 +108,9 @@ public class QUICClient : MonoBehaviour
     {
 #if UNITY_IOS
         currentCallback = UpdateStatus;
-        connectToQUIC(HandleResult);
+        connectToQUIC(host, port, HandleResult);
 #else
-        ConnectToQUICUnity();
+        ConnectToQUICUnity(host, port);
 #endif
     }
 
@@ -119,21 +128,21 @@ public class QUICClient : MonoBehaviour
     {
 #if UNITY_IOS
         currentCallback = UpdateRequest;
-        getRequestToServer(HandleResult);
+        getRequestToServer(route, HandleResult);
 #else
-        Request();
+        Request(route);
 #endif
     }
 
 #if UNITY_IOS
     [DllImport("__Internal")]
-    private static extern void connectToQUIC(StringCallback completionHandler);
+    private static extern void connectToQUIC(string host, ushort port, StringCallback completionHandler);
 
     [DllImport("__Internal")]
     private static extern IntPtr disconnectFromQUIC();
 
     [DllImport("__Internal")]
-    private static extern void getRequestToServer(StringCallback completionHandler);
+    private static extern void getRequestToServer(string route, StringCallback completionHandler);
 #else
 
     unsafe void LoadConfiguration(bool isUnsecureConnection)

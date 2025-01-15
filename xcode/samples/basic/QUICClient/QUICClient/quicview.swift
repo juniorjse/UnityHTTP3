@@ -7,28 +7,54 @@
 
 import SwiftUI
 
-struct quicView: View {
+struct QuicView: View {
     @State private var result: String = ""
+    @State private var host: String = "www.google.com"
+    @State private var port: UInt16 = 443
+    @State private var route: String = "/search?q=WildlifeStudios&tbm=nws"
     let quicClient = FrameworkQUICClient.shared
 
     var body: some View {
-        VStack {
-            Button("Connect") {
-                quicClient.connectToQUIC { connectionResult in
-                    DispatchQueue.main.async {
-                        self.result = connectionResult
-                    }
-                }
+        VStack(spacing: 20) {
+            Text("QUIC Client Test")
+                .font(.headline)
+                .padding()
+
+            VStack(alignment: .leading) {
+                Text("Host:")
+                TextField("Host", text: $host)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding(.bottom, 10)
+
+                Text("Port:")
+                TextField("Port", value: $port, formatter: NumberFormatter())
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding(.bottom, 10)
+
+                Text("Route:")
+                TextField("Route", text: $route)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
             }
             .padding()
-            
-            Button("Request") {
-                quicClient.getRequestToServer { connectionResult in
+
+            Button("Connect") {
+                quicClient.connectToQUIC(host: host, port: port) { connectionResult in
                     DispatchQueue.main.async {
                         self.result = connectionResult
                     }
                 }
             }
+            .buttonStyle(.borderedProminent)
+            .padding()
+
+            Button("Request") {
+                quicClient.sendGetRequest(route: route) { requestResult in
+                    DispatchQueue.main.async {
+                        self.result = requestResult
+                    }
+                }
+            }
+            .buttonStyle(.borderedProminent)
             .padding()
 
             Button("Disconnect") {
@@ -36,17 +62,25 @@ struct quicView: View {
                     self.result = quicClient.disconnectFromQUIC()
                 }
             }
+            .buttonStyle(.borderedProminent)
             .padding()
 
-            Text(result)
-                .padding()
-                .foregroundColor(.blue)
-                .multilineTextAlignment(.center)
+            Text("Result:")
+                .font(.subheadline)
+                .padding(.top)
+
+            ScrollView {
+                Text(result)
+                    .padding()
+                    .foregroundColor(.blue)
+                    .multilineTextAlignment(.leading)
+            }
+            .frame(maxHeight: 200)
         }
         .padding()
     }
 }
 
 #Preview {
-    quicView()
+    QuicView()
 }
