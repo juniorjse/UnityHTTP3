@@ -85,7 +85,6 @@ import Network
             var request = URLRequest(url: requestUrl)
             request.httpMethod = "GET"
 
-            // Adicionar cabeçalhos, como User-Agent
             request.addValue("QUICClient/1.0", forHTTPHeaderField: "User-Agent")
 
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
