@@ -10,9 +10,7 @@
 @interface FrameworkQUICClient : NSObject
 
 + (instancetype)shared;
-- (NSString *)disconnectFromQUIC;
-extern void connectToQUIC(void (*completionHandler)(const char *));
-extern void getRequestToServer(void (*completionHandler)(const char *));
+- (NSString *)disconnect;
 
 @end
 

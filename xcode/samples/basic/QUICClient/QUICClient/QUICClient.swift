@@ -19,8 +19,7 @@ import Network
         super.init()
     }
 
-    /// Connects to a QUIC server.
-    @objc public func connectToQUIC(host: String = "www.google.com", port: UInt16 = 443, completionHandler: @escaping (String) -> Void) {
+    @objc public func connectQUIC(host: String = "www.google.com", port: UInt16 = 443, handshakeOpts: String, completionHandler: @escaping (String) -> Void) {
         connectionQueue.async { [weak self] in
             guard let self = self else { return }
             
@@ -66,8 +65,7 @@ import Network
         }
     }
 
-    /// Sends a GET request to the server.
-    @objc public func sendGetRequest(route: String = "/search?q=WildlifeStudios&tbm=nws", completionHandler: @escaping (String) -> Void) {
+    @objc public func sendQUIC(messageType: Int, route: String = "/search?q=WildlifeStudios&tbm=nws", sequenceNumber: UInt = 1, data: Data? = nil, requestUid: UInt = 1, timeout: Int = 60, completionHandler: @escaping (String) -> Void) {
         connectionQueue.async { [weak self] in
             guard let self = self, self.isConnected, let connection = self.connection, connection.state == .ready else {
                 DispatchQueue.main.async {
@@ -118,8 +116,7 @@ import Network
         }
     }
 
-    /// Disconnects from the QUIC server.
-    @objc public func disconnectFromQUIC() -> String {
+    @objc public func disconnect() -> String {
         guard let connection = connection else {
             return "No active connection to disconnect."
         }

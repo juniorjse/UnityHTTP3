@@ -5,16 +5,40 @@ import Foundation
 import Network
 @_exported import QUICClient
 import Swift
-import SwiftUI
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
+@objc public enum MessageType : Swift.Int {
+  case request = 0
+  case notify = 1
+  case response = 2
+  case push = 3
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public protocol ITransporter {
+  @objc func connectQUIC(host: Swift.String, port: Swift.UInt16, handshakeOpts: Swift.String, completionHandler: @escaping (Swift.String) -> Swift.Void)
+  @objc func sendQUIC(messageType: QUICClient.MessageType, route: Swift.String, sequenceNumber: Swift.UInt, data: Foundation.Data?, requestUid: Swift.UInt, timeout: Swift.Int, completionHandler: @escaping (Swift.String) -> Swift.Void)
+  @objc func disconnect() -> Swift.String
+}
+@_inheritsConvenienceInitializers @objc public class Transporter : ObjectiveC.NSObject, QUICClient.ITransporter {
+  @objc public func connectQUIC(host: Swift.String, port: Swift.UInt16, handshakeOpts: Swift.String, completionHandler: @escaping (Swift.String) -> Swift.Void)
+  @objc public func sendQUIC(messageType: QUICClient.MessageType, route: Swift.String, sequenceNumber: Swift.UInt, data: Foundation.Data?, requestUid: Swift.UInt, timeout: Swift.Int, completionHandler: @escaping (Swift.String) -> Swift.Void)
+  @objc public func disconnect() -> Swift.String
+  @objc override dynamic public init()
+  @objc deinit
+}
 @_inheritsConvenienceInitializers @objc public class FrameworkQUICClient : ObjectiveC.NSObject {
   @objc public static let shared: QUICClient.FrameworkQUICClient
   @objc override dynamic public init()
-  @objc public func connectToQUIC(host: Swift.String = "www.google.com", port: Swift.UInt16 = 443, completionHandler: @escaping (Swift.String) -> Swift.Void)
-  @objc public func sendGetRequest(route: Swift.String = "/search?q=WildlifeStudios&tbm=nws", completionHandler: @escaping (Swift.String) -> Swift.Void)
-  @objc public func disconnectFromQUIC() -> Swift.String
+  @objc public func connectQUIC(host: Swift.String = "www.google.com", port: Swift.UInt16 = 443, handshakeOpts: Swift.String, completionHandler: @escaping (Swift.String) -> Swift.Void)
+  @objc public func sendQUIC(messageType: Swift.Int, route: Swift.String = "/search?q=WildlifeStudios&tbm=nws", sequenceNumber: Swift.UInt = 1, data: Foundation.Data? = nil, requestUid: Swift.UInt = 1, timeout: Swift.Int = 60, completionHandler: @escaping (Swift.String) -> Swift.Void)
+  @objc public func disconnect() -> Swift.String
   @objc deinit
 }
-
+extension QUICClient.MessageType : Swift.Equatable {}
+extension QUICClient.MessageType : Swift.Hashable {}
+extension QUICClient.MessageType : Swift.RawRepresentable {}

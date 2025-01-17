@@ -285,8 +285,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 521718696}
-        m_TargetAssemblyTypeName: QUICClient, Assembly-CSharp
+      - m_Target: {fileID: 521718695}
+        m_TargetAssemblyTypeName: QUICClientteste, Assembly-CSharp
         m_MethodName: DisconnectVerify
         m_Mode: 1
         m_Arguments:
@@ -516,7 +516,6 @@ GameObject:
   m_Component:
   - component: {fileID: 521718694}
   - component: {fileID: 521718695}
-  - component: {fileID: 521718696}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -548,19 +547,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 521718692}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 047189c9c7a354d6f8a700b892766768, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &521718696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 521718692}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a064d3bcac04493b8f63d126bc541b1, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b4f22708cce7420d861698365096da9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   host: www.google.com
@@ -837,8 +824,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 521718696}
-        m_TargetAssemblyTypeName: QUICClient, Assembly-CSharp
+      - m_Target: {fileID: 521718695}
+        m_TargetAssemblyTypeName: QUICClientteste, Assembly-CSharp
         m_MethodName: ConnectVerify
         m_Mode: 1
         m_Arguments:
@@ -1049,8 +1036,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 521718696}
-        m_TargetAssemblyTypeName: QUICClient, Assembly-CSharp
+      - m_Target: {fileID: 521718695}
+        m_TargetAssemblyTypeName: QUICClientteste, Assembly-CSharp
         m_MethodName: RequestVerify
         m_Mode: 1
         m_Arguments:

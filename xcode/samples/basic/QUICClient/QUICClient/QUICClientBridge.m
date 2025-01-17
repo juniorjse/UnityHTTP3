@@ -8,19 +8,19 @@
 #include "QUICClient-Swift.h"
 #include <stdlib.h>
 
-// Função auxiliar para lidar com NSString para C string (UTF-8)
 static char* copyNSStringToCString(NSString *string) {
     return string ? strdup([string UTF8String]) : NULL;
 }
 
-// Conecta ao servidor QUIC
-void connectToQUIC(const char *host, unsigned short port, void (*completionHandler)(const char *)) {
+void connectQUIC(const char *host, unsigned short port, const char *handshakeOpts, void (*completionHandler)(const char *)) {
     FrameworkQUICClient *client = [FrameworkQUICClient shared];
     NSString *hostString = host ? [NSString stringWithUTF8String:host] : @"www.google.com";
+    NSString *handshakeOptsString = handshakeOpts ? [NSString stringWithUTF8String:handshakeOpts] : @"";
 
-    [client connectToQUICWithHost:hostString
-                             port:port
-                completionHandler:^(NSString *result) {
+    [client connectQUICWithHost:hostString
+                          port:port
+                 handshakeOpts:handshakeOptsString
+             completionHandler:^(NSString *result) {
         if (completionHandler) {
             const char *cResult = [result UTF8String];
             completionHandler(cResult);
@@ -28,13 +28,18 @@ void connectToQUIC(const char *host, unsigned short port, void (*completionHandl
     }];
 }
 
-// Faz uma requisição GET para o servidor QUIC
-void getRequestToServer(const char *route, void (*completionHandler)(const char *)) {
+void sendQUIC(const char *route, int messageType, unsigned int sequenceNumber, const void *data, unsigned int requestUid, int timeout, void (*completionHandler)(const char *)) {
+    
     FrameworkQUICClient *client = [FrameworkQUICClient shared];
     NSString *routeString = route ? [NSString stringWithUTF8String:route] : @"/search?q=WildlifeStudios&tbm=nws";
-
-    [client sendGetRequestWithRoute:routeString
-                  completionHandler:^(NSString *result) {
+    
+    [client sendQUICWithMessageType:messageType
+                             route:routeString
+                      sequenceNumber:sequenceNumber
+                                data:data ? [NSData dataWithBytes:data length:strlen(data)] : nil
+                           requestUid:requestUid
+                               timeout:timeout
+                   completionHandler:^(NSString *result) {
         if (completionHandler) {
             const char *cResult = [result UTF8String];
             completionHandler(cResult);
@@ -42,9 +47,8 @@ void getRequestToServer(const char *route, void (*completionHandler)(const char 
     }];
 }
 
-// Desconecta do servidor QUIC
-char* disconnectFromQUIC(void) {
+char* disconnect(void) {
     FrameworkQUICClient *client = [FrameworkQUICClient shared];
-    NSString *result = [client disconnectFromQUIC];
+    NSString *result = [client disconnect];
     return result ? strdup([result UTF8String]) : NULL;
 }
