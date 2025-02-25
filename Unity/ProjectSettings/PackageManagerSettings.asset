@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!114 &1
 MonoBehaviour:
-  m_ObjectHideFlags: 53
+  m_ObjectHideFlags: 61
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EnablePreReleasePackages: 0
+  m_EnablePackageDependencies: 0
   m_AdvancedSettingsExpanded: 1
   m_ScopedRegistriesSettingsExpanded: 1
   m_SeeAllPackageVersions: 0
-  m_DismissPreviewPackagesInUse: 0
   oneTimeWarningShown: 0
   m_Registries:
   - m_Id: main
@@ -26,11 +26,54 @@ MonoBehaviour:
     m_IsDefault: 1
     m_Capabilities: 7
     m_ConfigSource: 0
-  m_UserSelectedRegistryName: 
+  - m_Id: scoped:project:Wildlife Studios
+    m_Name: Wildlife Studios
+    m_Url: https://artifactory.tfgco.com/artifactory/api/npm/npm-local
+    m_Scopes:
+    - com.google
+    - com.wildlifestudios
+    - com.wildlifestudios.a
+    - com.wildlifestudios.b
+    - com.wildlifestudios.c
+    - com.wildlifestudios.d
+    - com.wildlifestudios.e
+    - com.wildlifestudios.f
+    - com.wildlifestudios.g
+    - com.wildlifestudios.h
+    - com.wildlifestudios.i
+    - com.wildlifestudios.j
+    - com.wildlifestudios.k
+    - com.wildlifestudios.l
+    - com.wildlifestudios.m
+    - com.wildlifestudios.n
+    - com.wildlifestudios.o
+    - com.wildlifestudios.p
+    - com.wildlifestudios.q
+    - com.wildlifestudios.r
+    - com.wildlifestudios.s
+    - com.wildlifestudios.t
+    - com.wildlifestudios.u
+    - com.wildlifestudios.v
+    - com.wildlifestudios.x
+    - com.wildlifestudios.w
+    - com.wildlifestudios.y
+    - com.wildlifestudios.z
+    m_IsDefault: 0
+    m_Capabilities: 0
+    m_ConfigSource: 4
+  - m_Id: scoped:project:OpenUPM
+    m_Name: OpenUPM
+    m_Url: https://package.openupm.com
+    m_Scopes:
+    - com.cysharp.unitask
+    m_IsDefault: 0
+    m_Capabilities: 0
+    m_ConfigSource: 4
+  m_UserSelectedRegistryName: Wildlife Studios
   m_UserAddingNewScopedRegistry: 0
   m_RegistryInfoDraft:
     m_Modified: 0
     m_ErrorMessage: 
-    m_UserModificationsInstanceId: -860
-    m_OriginalInstanceId: -862
+    m_UserModificationsInstanceId: -850
+    m_OriginalInstanceId: -854
   m_LoadAssets: 0

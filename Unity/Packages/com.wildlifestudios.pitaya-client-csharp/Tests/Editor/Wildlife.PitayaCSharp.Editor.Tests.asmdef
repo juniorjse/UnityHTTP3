@@ -1,0 +1,8 @@
+{
+    "name": "Wildlife.PitayaCSharp.Editor.Tests",
+    "references": [],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}

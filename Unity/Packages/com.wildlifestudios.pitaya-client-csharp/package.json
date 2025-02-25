@@ -1,0 +1,25 @@
+{
+    "name": "com.wildlifestudios.pitaya-client-csharp",
+    "displayName": "Pitaya Client C#",
+    "version": "0.2.0",
+    "description": "C# client for the pitaya server",
+    "unity": "2021.3",
+    "documentationUrl": "https://docs.wildlifestudios.com/pitaya-client-csharp/",
+    "changelogUrl": "https://git.topfreegames.com/ufcg/pitaya-client-csharp/-/blob/main/CHANGELOG.md",  
+    "license": "Copyright",
+    "author": {
+        "name": "Wildlife Studios"
+    },
+    "dependencies": {
+        "com.wildlifestudios.nuget.google.protobuf": "3.23.1",
+        "com.unity.nuget.newtonsoft-json": "3.0.2"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://git.topfreegames.com/ufcg/pitaya-client-csharp"
+    },
+    "publishConfig": {
+        "registry": "https://artifactory.tfgco.com/artifactory/api/npm/npm-local/"
+    },
+    "samples": []
+}

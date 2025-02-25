@@ -1,0 +1,20 @@
+<package>
+   <metadata>
+      <id>Wildlife.PitayaCSharp</id>
+      <version>0.2.0</version>
+      <authors>Wildlife Studios</authors>
+      <owners>Wildlife Studios</owners>
+      <projectUrl>https://git.topfreegames.com/ufcg/pitaya-client-csharp</projectUrl>
+      <requireLicenseAcceptance>false</requireLicenseAcceptance>
+      <description>C# client for the pitaya server</description>
+      <copyright>Copyright</copyright>
+      <tags>dev unity wildlife</tags>
+      <repository type="git" url="https://git.topfreegames.com/ufcg/pitaya-client-csharp" />
+   </metadata>
+   <files>
+      <file src="Assets/link.xml" target="" />
+      <file src="Packages/com.wildlifestudios.pitaya-client-csharp/Runtime/**/*" target="Runtime" />
+      <file src="Packages/com.wildlifestudios.pitaya-client-csharp/Editor/**/*" target="Editor" />
+      <file src="Assets/Pitaya/Native/iOS/**/*.*" target="Native/iOS" />
+   </files>
+</package>

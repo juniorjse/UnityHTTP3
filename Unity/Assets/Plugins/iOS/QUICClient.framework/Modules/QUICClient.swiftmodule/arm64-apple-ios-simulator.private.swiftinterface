@@ -1,0 +1,20 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.13 clang-1500.3.9.4)
+// swift-module-flags: -target arm64-apple-ios17.5-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name QUICClient
+import Foundation
+import Network
+@_exported import QUICClient
+import Swift
+import SwiftUI
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc public class FrameworkQUICClient : ObjectiveC.NSObject {
+  @objc public static let shared: QUICClient.FrameworkQUICClient
+  @objc public func connectQUIC(host: Swift.String, port: Swift.UInt16, certificateData: Foundation.Data, completionHandler: @escaping (Swift.String) -> Swift.Void)
+  @objc public func sendQUIC(_ packetBuffer: Foundation.Data, completionHandler: @escaping (Swift.Bool) -> Swift.Void)
+  @objc(readQUICWithOnRead:) public func readQUIC(onRead: @escaping (Foundation.Data, Swift.Int) -> Swift.Void)
+  @objc public func disconnectQUIC()
+  @objc deinit
+}
+

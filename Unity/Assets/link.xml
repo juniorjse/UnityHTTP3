@@ -1,0 +1,10 @@
+<!--
+link.xml file sets all assemblies that should be preserved during builds, avoiding code stripping.
+If you have code that might not be detected as reachable during the build, consider adding the assembly to this file.
+-->
+
+<linker>
+    <assembly fullname="Wildlife.PitayaCSharp" preserve="all"/>
+
+    <assembly fullname="Google.Protobuf" preserve="all"/>
+</linker>

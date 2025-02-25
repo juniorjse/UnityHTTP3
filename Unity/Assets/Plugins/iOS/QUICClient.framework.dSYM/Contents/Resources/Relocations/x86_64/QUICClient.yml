@@ -1,0 +1,61 @@
+---
+triple:          'x86_64-apple-darwin'
+binary-path:     '/Users/victor/Documents/pitaya-client-csharp/unity/Assets/Plugins/iOS/QUICClient.framework/QUICClient'
+relocations:
+  - { offsetInCU: 0x34, offset: 0x87BD2, size: 0x8, addend: 0x0, symName: _QUICClientVersionString, symObjAddr: 0x0, symBinAddr: 0x4670, symSize: 0x0 }
+  - { offsetInCU: 0x69, offset: 0x87C07, size: 0x8, addend: 0x0, symName: _QUICClientVersionNumber, symObjAddr: 0x30, symBinAddr: 0x46A0, symSize: 0x0 }
+  - { offsetInCU: 0x27, offset: 0x87C44, size: 0x8, addend: 0x0, symName: _connectQUIC, symObjAddr: 0x0, symBinAddr: 0x1680, symSize: 0xF0 }
+  - { offsetInCU: 0x6C, offset: 0x87C89, size: 0x8, addend: 0x0, symName: _connectQUIC, symObjAddr: 0x0, symBinAddr: 0x1680, symSize: 0xF0 }
+  - { offsetInCU: 0x17E, offset: 0x87D9B, size: 0x8, addend: 0x0, symName: ___connectQUIC_block_invoke, symObjAddr: 0xF0, symBinAddr: 0x1770, symSize: 0x30 }
+  - { offsetInCU: 0x1E1, offset: 0x87DFE, size: 0x8, addend: 0x0, symName: _sendQUIC, symObjAddr: 0x120, symBinAddr: 0x17A0, symSize: 0xB8 }
+  - { offsetInCU: 0x297, offset: 0x87EB4, size: 0x8, addend: 0x0, symName: ___sendQUIC_block_invoke, symObjAddr: 0x1D8, symBinAddr: 0x1858, symSize: 0xD }
+  - { offsetInCU: 0x301, offset: 0x87F1E, size: 0x8, addend: 0x0, symName: _readQUIC, symObjAddr: 0x1E5, symBinAddr: 0x1865, symSize: 0x85 }
+  - { offsetInCU: 0x363, offset: 0x87F80, size: 0x8, addend: 0x0, symName: ___readQUIC_block_invoke, symObjAddr: 0x26A, symBinAddr: 0x18EA, symSize: 0x7F }
+  - { offsetInCU: 0x42D, offset: 0x8804A, size: 0x8, addend: 0x0, symName: _disconnectQUIC, symObjAddr: 0x2E9, symBinAddr: 0x1969, symSize: 0x44 }
+  - { offsetInCU: 0x4F, offset: 0x8829F, size: 0x8, addend: 0x0, symName: '_$s10QUICClient09FrameworkA0C6sharedACvpZ', symObjAddr: 0x2A58, symBinAddr: 0x6258, symSize: 0x0 }
+  - { offsetInCU: 0x97, offset: 0x882E7, size: 0x8, addend: 0x0, symName: '_$s10QUICClient09FrameworkA0C6sharedACvgZTo', symObjAddr: 0x70, symBinAddr: 0x1A20, symSize: 0x30 }
+  - { offsetInCU: 0xEC, offset: 0x8833C, size: 0x8, addend: 0x0, symName: '_$s10QUICClient09FrameworkA0CACyc33_C1629A2FC8BCC1DD5F6997EACAF73A89LlfcTo', symObjAddr: 0x260, symBinAddr: 0x1C10, symSize: 0x20 }
+  - { offsetInCU: 0x1B2, offset: 0x88402, size: 0x8, addend: 0x0, symName: '_$s10QUICClient09FrameworkA0C11connectQUIC4host4port15certificateData17completionHandlerySS_s6UInt16V10Foundation0H0VySSctFTo', symObjAddr: 0xCD0, symBinAddr: 0x2680, symSize: 0xF0 }
+  - { offsetInCU: 0x1EE, offset: 0x8843E, size: 0x8, addend: 0x0, symName: '_$s10QUICClient09FrameworkA0C8sendQUIC_17completionHandlery10Foundation4DataV_ySbctFTo', symObjAddr: 0x1260, symBinAddr: 0x2C10, symSize: 0xB0 }
+  - { offsetInCU: 0x225, offset: 0x88475, size: 0x8, addend: 0x0, symName: '_$s10QUICClient09FrameworkA0C8readQUIC6onReadyy10Foundation4DataV_Sitc_tFTo', symObjAddr: 0x19B0, symBinAddr: 0x3360, symSize: 0x70 }
+  - { offsetInCU: 0x272, offset: 0x884C2, size: 0x8, addend: 0x0, symName: '_$s10QUICClient09FrameworkA0C14disconnectQUICyyFTo', symObjAddr: 0x1A80, symBinAddr: 0x3430, symSize: 0x30 }
+  - { offsetInCU: 0x28E, offset: 0x884DE, size: 0x8, addend: 0x0, symName: '_$s10QUICClient09FrameworkA0C30createQUICConnectionParameters33_C1629A2FC8BCC1DD5F6997EACAF73A89LL15certificateData5alpns7Network12NWParametersC10Foundation0O0VSg_SaySSGtFySo24OS_sec_protocol_metadata_p_So0t1_U6_trust_pySbctcfU_', symObjAddr: 0x1AB0, symBinAddr: 0x3460, symSize: 0xD0 }
+  - { offsetInCU: 0x2E9, offset: 0x88539, size: 0x8, addend: 0x0, symName: '_$s10QUICClient09FrameworkA0C23onConnectionStateUpdate33_C1629A2FC8BCC1DD5F6997EACAF73A89LL17completionHandlery7Network12NWConnectionC0E0OcySSc_tFyAKcfU_', symObjAddr: 0x1CB0, symBinAddr: 0x3660, symSize: 0x3C0 }
+  - { offsetInCU: 0x568, offset: 0x887B8, size: 0x8, addend: 0x0, symName: '_$s10QUICClient09FrameworkA0C30createQUICConnectionParameters33_C1629A2FC8BCC1DD5F6997EACAF73A89LL15certificateData5alpns7Network12NWParametersC10Foundation0O0VSg_SaySSGtFTf4nnd_n', symObjAddr: 0x2380, symBinAddr: 0x3D30, symSize: 0x480 }
+  - { offsetInCU: 0x800, offset: 0x88A50, size: 0x8, addend: 0x0, symName: '_$s10QUICClient09FrameworkA0C6shared_WZ', symObjAddr: 0x0, symBinAddr: 0x19B0, symSize: 0x30 }
+  - { offsetInCU: 0x841, offset: 0x88A91, size: 0x8, addend: 0x0, symName: '_$s10Foundation4DataV15_RepresentationOWOe', symObjAddr: 0xA60, symBinAddr: 0x2410, symSize: 0x40 }
+  - { offsetInCU: 0x855, offset: 0x88AA5, size: 0x8, addend: 0x0, symName: '_$s10QUICClient09FrameworkA0C11connectQUIC4host4port15certificateData17completionHandlerySS_s6UInt16V10Foundation0H0VySSctFyyYbcfU_TA', symObjAddr: 0xAA0, symBinAddr: 0x2450, symSize: 0x30 }
+  - { offsetInCU: 0x899, offset: 0x88AE9, size: 0x8, addend: 0x0, symName: _block_copy_helper, symObjAddr: 0xBE0, symBinAddr: 0x2590, symSize: 0x20 }
+  - { offsetInCU: 0x8AD, offset: 0x88AFD, size: 0x8, addend: 0x0, symName: _block_destroy_helper, symObjAddr: 0xC00, symBinAddr: 0x25B0, symSize: 0x10 }
+  - { offsetInCU: 0x8C1, offset: 0x88B11, size: 0x8, addend: 0x0, symName: '_$s10Foundation4DataV15_RepresentationOWOy', symObjAddr: 0xC10, symBinAddr: 0x25C0, symSize: 0x40 }
+  - { offsetInCU: 0x8D5, offset: 0x88B25, size: 0x8, addend: 0x0, symName: ___swift_instantiateConcreteTypeFromMangledName, symObjAddr: 0xC50, symBinAddr: 0x2600, symSize: 0x40 }
+  - { offsetInCU: 0x8E9, offset: 0x88B39, size: 0x8, addend: 0x0, symName: ___swift_instantiateConcreteTypeFromMangledNameAbstract, symObjAddr: 0xC90, symBinAddr: 0x2640, symSize: 0x40 }
+  - { offsetInCU: 0x8FD, offset: 0x88B4D, size: 0x8, addend: 0x0, symName: '_$s10QUICClient09FrameworkA0C8sendQUIC_17completionHandlery10Foundation4DataV_ySbctFyyYbcfU_TA', symObjAddr: 0x11A0, symBinAddr: 0x2B50, symSize: 0x20 }
+  - { offsetInCU: 0x9A7, offset: 0x88BF7, size: 0x8, addend: 0x0, symName: '_$s10QUICClient09FrameworkA0C8readQUIC6onReadyy10Foundation4DataV_Sitc_tFyAHSg_7Network12NWConnectionC14ContentContextCSgSbAJ7NWErrorOSgtYbcfU_TA', symObjAddr: 0x1990, symBinAddr: 0x3340, symSize: 0x20 }
+  - { offsetInCU: 0x9BB, offset: 0x88C0B, size: 0x8, addend: 0x0, symName: '_$sSo11SecTrustRefaSbSo07CFErrorC0aSgIeggyg_ABSbAEIeyByyy_TR', symObjAddr: 0x1B80, symBinAddr: 0x3530, symSize: 0x80 }
+  - { offsetInCU: 0x9D3, offset: 0x88C23, size: 0x8, addend: 0x0, symName: '_$sSo24OS_sec_protocol_metadata_pSo0a1_B6_trust_pSbIegy_Iegggg_SoAA_pSoAB_pSbIeyBy_IeyByyy_TR', symObjAddr: 0x1C00, symBinAddr: 0x35B0, symSize: 0xB0 }
+  - { offsetInCU: 0x9EB, offset: 0x88C3B, size: 0x8, addend: 0x0, symName: '_$s10QUICClient09FrameworkA0CMa', symObjAddr: 0x20A0, symBinAddr: 0x3A50, symSize: 0x20 }
+  - { offsetInCU: 0x9FF, offset: 0x88C4F, size: 0x8, addend: 0x0, symName: '_$s10QUICClient09FrameworkA0CfETo', symObjAddr: 0x20C0, symBinAddr: 0x3A70, symSize: 0x30 }
+  - { offsetInCU: 0xA39, offset: 0x88C89, size: 0x8, addend: 0x0, symName: '_$sSo6NSDataCSiIeyByy_10Foundation4DataVSiIeggy_TRTA', symObjAddr: 0x21B0, symBinAddr: 0x3B60, symSize: 0x40 }
+  - { offsetInCU: 0xA6D, offset: 0x88CBD, size: 0x8, addend: 0x0, symName: '_$s10ObjectiveC8ObjCBoolVIeyBy_SbIegy_TRTA', symObjAddr: 0x21F0, symBinAddr: 0x3BA0, symSize: 0x20 }
+  - { offsetInCU: 0xAA1, offset: 0x88CF1, size: 0x8, addend: 0x0, symName: '_$sSo8NSStringCIeyBy_SSIegg_TRTA', symObjAddr: 0x2210, symBinAddr: 0x3BC0, symSize: 0x30 }
+  - { offsetInCU: 0xACA, offset: 0x88D1A, size: 0x8, addend: 0x0, symName: '_$sSo17OS_dispatch_queueCMa', symObjAddr: 0x2240, symBinAddr: 0x3BF0, symSize: 0x30 }
+  - { offsetInCU: 0xADE, offset: 0x88D2E, size: 0x8, addend: 0x0, symName: '_$s10QUICClient09FrameworkA0C8sendQUIC_17completionHandlery10Foundation4DataV_ySbctFyyYbcfU_y7Network7NWErrorOSgYbcfU_TA', symObjAddr: 0x2360, symBinAddr: 0x3D10, symSize: 0x20 }
+  - { offsetInCU: 0xB22, offset: 0x88D72, size: 0x8, addend: 0x0, symName: '_$s10QUICClient09FrameworkA0C23onConnectionStateUpdate33_C1629A2FC8BCC1DD5F6997EACAF73A89LL17completionHandlery7Network12NWConnectionC0E0OcySSc_tFyAKcfU_TA', symObjAddr: 0x2840, symBinAddr: 0x41F0, symSize: 0x20 }
+  - { offsetInCU: 0xB36, offset: 0x88D86, size: 0x8, addend: 0x0, symName: '_$s7Network12NWConnectionC5StateOIeghn_SgWOy', symObjAddr: 0x2860, symBinAddr: 0x4210, symSize: 0x20 }
+  - { offsetInCU: 0xB4A, offset: 0x88D9A, size: 0x8, addend: 0x0, symName: '_$s10QUICClient09FrameworkA0C11connectQUIC4host4port15certificateData17completionHandlerySS_s6UInt16V10Foundation0H0VySSctFyyYbcfU_yyScMYccfU_TA', symObjAddr: 0x2880, symBinAddr: 0x4230, symSize: 0x20 }
+  - { offsetInCU: 0xB5E, offset: 0x88DAE, size: 0x8, addend: 0x0, symName: '_$s10QUICClient09FrameworkA0C30createQUICConnectionParameters33_C1629A2FC8BCC1DD5F6997EACAF73A89LL15certificateData5alpns7Network12NWParametersC10Foundation0O0VSg_SaySSGtFySo24OS_sec_protocol_metadata_p_So0t1_U6_trust_pySbctcfU_TA', symObjAddr: 0x28F0, symBinAddr: 0x42A0, symSize: 0x10 }
+  - { offsetInCU: 0xB72, offset: 0x88DC2, size: 0x8, addend: 0x0, symName: '_$s10QUICClient09FrameworkA0C30createQUICConnectionParameters33_C1629A2FC8BCC1DD5F6997EACAF73A89LL15certificateData5alpns7Network12NWParametersC10Foundation0O0VSg_SaySSGtFySo24OS_sec_protocol_metadata_p_So0t1_U6_trust_pySbctcfU_ySo11SecTrustRefa_SbSo10CFErrorRefaSgtcfU_TA', symObjAddr: 0x2900, symBinAddr: 0x42B0, symSize: 0x20 }
+  - { offsetInCU: 0xEF7, offset: 0x89147, size: 0x8, addend: 0x0, symName: '_$s10QUICClient09FrameworkA0C6sharedACvgZ', symObjAddr: 0x30, symBinAddr: 0x19E0, symSize: 0x40 }
+  - { offsetInCU: 0xF96, offset: 0x891E6, size: 0x8, addend: 0x0, symName: '_$s10QUICClient09FrameworkA0CACyc33_C1629A2FC8BCC1DD5F6997EACAF73A89Llfc', symObjAddr: 0xA0, symBinAddr: 0x1A50, symSize: 0x1C0 }
+  - { offsetInCU: 0x1007, offset: 0x89257, size: 0x8, addend: 0x0, symName: '_$s10QUICClient09FrameworkA0C11connectQUIC4host4port15certificateData17completionHandlerySS_s6UInt16V10Foundation0H0VySSctF', symObjAddr: 0x280, symBinAddr: 0x1C30, symSize: 0x270 }
+  - { offsetInCU: 0x1095, offset: 0x892E5, size: 0x8, addend: 0x0, symName: '_$s10QUICClient09FrameworkA0C11connectQUIC4host4port15certificateData17completionHandlerySS_s6UInt16V10Foundation0H0VySSctFyyYbcfU_', symObjAddr: 0x510, symBinAddr: 0x1EC0, symSize: 0x510 }
+  - { offsetInCU: 0x1261, offset: 0x894B1, size: 0x8, addend: 0x0, symName: '_$s10QUICClient09FrameworkA0C11connectQUIC4host4port15certificateData17completionHandlerySS_s6UInt16V10Foundation0H0VySSctFyyYbcfU_yyScMYccfU_', symObjAddr: 0xAD0, symBinAddr: 0x2480, symSize: 0xC0 }
+  - { offsetInCU: 0x1399, offset: 0x895E9, size: 0x8, addend: 0x0, symName: '_$s10QUICClient09FrameworkA0C8sendQUIC_17completionHandlery10Foundation4DataV_ySbctF', symObjAddr: 0xDC0, symBinAddr: 0x2770, symSize: 0x230 }
+  - { offsetInCU: 0x1407, offset: 0x89657, size: 0x8, addend: 0x0, symName: '_$s10QUICClient09FrameworkA0C8sendQUIC_17completionHandlery10Foundation4DataV_ySbctFyyYbcfU_', symObjAddr: 0xFF0, symBinAddr: 0x29A0, symSize: 0x170 }
+  - { offsetInCU: 0x14C9, offset: 0x89719, size: 0x8, addend: 0x0, symName: '_$s10QUICClient09FrameworkA0C8sendQUIC_17completionHandlery10Foundation4DataV_ySbctFyyYbcfU_y7Network7NWErrorOSgYbcfU_', symObjAddr: 0x11C0, symBinAddr: 0x2B70, symSize: 0xA0 }
+  - { offsetInCU: 0x1511, offset: 0x89761, size: 0x8, addend: 0x0, symName: '_$s10QUICClient09FrameworkA0C8readQUIC6onReadyy10Foundation4DataV_Sitc_tF', symObjAddr: 0x1310, symBinAddr: 0x2CC0, symSize: 0xF0 }
+  - { offsetInCU: 0x1563, offset: 0x897B3, size: 0x8, addend: 0x0, symName: '_$s10QUICClient09FrameworkA0C8readQUIC6onReadyy10Foundation4DataV_Sitc_tFyAHSg_7Network12NWConnectionC14ContentContextCSgSbAJ7NWErrorOSgtYbcfU_', symObjAddr: 0x1400, symBinAddr: 0x2DB0, symSize: 0x580 }
+  - { offsetInCU: 0x1818, offset: 0x89A68, size: 0x8, addend: 0x0, symName: '_$s10QUICClient09FrameworkA0C14disconnectQUICyyF', symObjAddr: 0x1A20, symBinAddr: 0x33D0, symSize: 0x60 }
+  - { offsetInCU: 0x18AA, offset: 0x89AFA, size: 0x8, addend: 0x0, symName: '_$s10QUICClient09FrameworkA0CfD', symObjAddr: 0x2070, symBinAddr: 0x3A20, symSize: 0x30 }
+...
