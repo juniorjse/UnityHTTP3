@@ -423,14 +423,6 @@
       <HintPath>Library/PackageCache/com.unity.nuget.newtonsoft-json@3.2.1/Runtime/Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
-      <HintPath>/Applications/Unity/Hub/Editor/2022.3.23f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Common">
-      <HintPath>/Applications/Unity/Hub/Editor/2022.3.23f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Common.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.Android.Types">
       <HintPath>/Applications/Unity/Hub/Editor/2022.3.23f1/PlaybackEngines/AndroidPlayer/Unity.Android.Types.dll</HintPath>
       <Private>False</Private>

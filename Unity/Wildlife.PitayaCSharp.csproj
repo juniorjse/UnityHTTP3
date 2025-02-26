@@ -488,10 +488,6 @@
       <HintPath>/Applications/Unity/Hub/Editor/2022.3.23f1/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions">
-      <HintPath>/Applications/Unity/Hub/Editor/2022.3.23f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Google.PackageManagerResolver">
       <HintPath>Library/PackageCache/com.google.external-dependency-manager@1.2.177/ExternalDependencyManager/Editor/1.2.177/Google.PackageManagerResolver.dll</HintPath>
       <Private>False</Private>
@@ -538,14 +534,6 @@
     </Reference>
     <Reference Include="Google.JarResolver">
       <HintPath>Library/PackageCache/com.google.external-dependency-manager@1.2.177/ExternalDependencyManager/Editor/1.2.177/Google.JarResolver.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
-      <HintPath>/Applications/Unity/Hub/Editor/2022.3.23f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Common">
-      <HintPath>/Applications/Unity/Hub/Editor/2022.3.23f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Android.Types">
